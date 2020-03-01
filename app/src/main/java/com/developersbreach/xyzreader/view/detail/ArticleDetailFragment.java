@@ -17,22 +17,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.developersbreach.xyzreader.R;
-import com.developersbreach.xyzreader.databinding.FragmentBookDetailBinding;
-import com.developersbreach.xyzreader.model.Book;
-import com.developersbreach.xyzreader.viewModel.BookDetailViewModel;
-import com.developersbreach.xyzreader.viewModel.factory.BookDetailViewModelFactory;
+import com.developersbreach.xyzreader.databinding.FragmentArticleDetailBinding;
+import com.developersbreach.xyzreader.model.Article;
+import com.developersbreach.xyzreader.viewModel.ArticleDetailViewModel;
+import com.developersbreach.xyzreader.viewModel.factory.ArticleDetailViewModelFactory;
 
 import java.util.Objects;
 
-public class BookDetailFragment extends Fragment {
+public class ArticleDetailFragment extends Fragment {
 
-    private FragmentBookDetailBinding mBinding;
+    private FragmentArticleDetailBinding mBinding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater,
-                R.layout.fragment_book_detail, container, false);
+                R.layout.fragment_article_detail, container, false);
 
         mBinding.setLifecycleOwner(this);
 
@@ -52,19 +52,19 @@ public class BookDetailFragment extends Fragment {
         // perform a gradle build for android studio to auto-generate all required classes and
         // objects for this class using NavigationComponent library.
         // get arguments with name and receive arguments from bundle.
-        Book bookArgs = BookDetailFragmentArgs.fromBundle(args).getDetailFragmentArgs();
+        Article articleArgs = ArticleDetailFragmentArgs.fromBundle(args).getDetailFragmentArgs();
         // Call factory for creating new instance of ViewModel for this fragment to observe data.
         // Pass application context and recipe object to the factory.
-        BookDetailViewModelFactory factory =
-                new BookDetailViewModelFactory(application, bookArgs);
+        ArticleDetailViewModelFactory factory =
+                new ArticleDetailViewModelFactory(application, articleArgs);
         // Assign and get class ViewModel and pass fragment owner and factory to create instance
         // by calling ViewModelProviders.
 
-        BookDetailViewModel viewModel = new ViewModelProvider(this, factory).get(BookDetailViewModel.class);
-        viewModel.selectedBook().observe(getViewLifecycleOwner(), new Observer<Book>() {
+        ArticleDetailViewModel viewModel = new ViewModelProvider(this, factory).get(ArticleDetailViewModel.class);
+        viewModel.selectedArticle().observe(getViewLifecycleOwner(), new Observer<Article>() {
             @Override
-            public void onChanged(Book book) {
-                mBinding.setBookDetail(book);
+            public void onChanged(Article article) {
+                mBinding.setArticleDetail(article);
                 // Force binding to execute immediately all views.
                 mBinding.executePendingBindings();
             }

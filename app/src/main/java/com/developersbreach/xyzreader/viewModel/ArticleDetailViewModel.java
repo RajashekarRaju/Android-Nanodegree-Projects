@@ -7,46 +7,46 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.developersbreach.xyzreader.model.Book;
-import com.developersbreach.xyzreader.view.list.BookListFragment;
+import com.developersbreach.xyzreader.model.Article;
+import com.developersbreach.xyzreader.view.list.ArticleListFragment;
 
-public class BookDetailViewModel extends AndroidViewModel {
+public class ArticleDetailViewModel extends AndroidViewModel {
 
     /**
      * This field is encapsulated, we used {@link MutableLiveData} because when the data is being
      * changed we will be updating StepsDetail with new values. And any externally exposed LiveData
      * can observe this changes.
      */
-    private MutableLiveData<Book> _mMutableBook;
+    private MutableLiveData<Article> _mMutableArticle;
 
     /**
      * fragment to observe changes. Data is observed once changes will be done internally.
      */
-    public LiveData<Book> selectedBook() {
-        return _mMutableBook;
+    public LiveData<Article> selectedArticle() {
+        return _mMutableArticle;
     }
 
     /**
      * @param application provides application context for ViewModel.
-     * @param book      parcel Recipe object with data for user selected recipe from
-     *                    {@link BookListFragment}
+     * @param article      parcel Recipe object with data for user selected recipe from
+     *                    {@link ArticleListFragment}
      */
-    public BookDetailViewModel(@NonNull Application application, Book book) {
+    public ArticleDetailViewModel(@NonNull Application application, Article article) {
         super(application);
-        getMutableBookDetailsData(book);
+        getMutableArticleDetailsData(article);
     }
 
     /**
      * Create a new {@link MutableLiveData} after checking if is is empty, otherwise no need make
      * changes by adding new values.
      *
-     * @param book has data for user selected Recipe with id.
+     * @param article has data for user selected Recipe with id.
      */
-    private void getMutableBookDetailsData(Book book) {
-        if (_mMutableBook == null) {
-            _mMutableBook = new MutableLiveData<>();
+    private void getMutableArticleDetailsData(Article article) {
+        if (_mMutableArticle == null) {
+            _mMutableArticle = new MutableLiveData<>();
             // Add list to internally exposed data of RecipeDetails by calling postValue.
-            _mMutableBook.postValue(book);
+            _mMutableArticle.postValue(article);
         }
     }
 }

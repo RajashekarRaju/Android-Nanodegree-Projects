@@ -37,24 +37,6 @@ public class AppExecutors {
                 Executors.newSingleThreadExecutor());
     }
 
-    /**
-     * Get single instance for executors and check for any current running tasks or executor in
-     * background or main thread.
-     * <p>
-     * We call new executor only once.
-     */
-//    public static AppExecutors getInstance() {
-//        if (sINSTANCE == null) {
-//            synchronized (LOCK) {
-//                sINSTANCE = new AppExecutors(
-//                        new MainThreadExecutor(),
-//                        Executors.newFixedThreadPool(3),
-//                        Executors.newSingleThreadExecutor());
-//            }
-//        }
-//        return sINSTANCE;
-//    }
-
     // This executor runs on main thread, we call this executor with handler
     private static class MainThreadExecutor implements Executor {
         private final Handler mainThreadHandler = new Handler(Looper.getMainLooper());
@@ -75,7 +57,7 @@ public class AppExecutors {
         return mBackgroundThread;
     }
 
-    // This excutoe does database operations.
+    // This execute does database operations.
     public Executor databaseThread() {
         return mDatabaseThread;
     }

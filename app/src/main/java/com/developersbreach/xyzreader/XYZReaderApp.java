@@ -3,8 +3,8 @@ package com.developersbreach.xyzreader;
 import android.app.Application;
 
 import com.developersbreach.xyzreader.repository.AppExecutors;
-import com.developersbreach.xyzreader.repository.BooksRepository;
-import com.developersbreach.xyzreader.repository.database.BookDatabase;
+import com.developersbreach.xyzreader.repository.ArticleRepository;
+import com.developersbreach.xyzreader.repository.database.ArticleDatabase;
 
 public class XYZReaderApp extends Application {
 
@@ -16,11 +16,11 @@ public class XYZReaderApp extends Application {
         mAppExecutors = new AppExecutors();
     }
 
-    public BookDatabase getDatabase() {
-        return BookDatabase.getDatabaseInstance(this, mAppExecutors);
+    public ArticleDatabase getDatabase() {
+        return ArticleDatabase.getDatabaseInstance(this, mAppExecutors);
     }
 
-    public BooksRepository getRepository() {
-        return BooksRepository.getRepositoryInstance(getDatabase());
+    public ArticleRepository getRepository() {
+        return ArticleRepository.getRepositoryInstance(getDatabase());
     }
 }

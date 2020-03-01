@@ -1,6 +1,6 @@
 package com.developersbreach.xyzreader.view.detail;
 
-public class BookViewPagerAdapter {
+public class ArticleViewPagerAdapter {
         //extends FragmentStatePagerAdapter {
 
 //    private List<Book> mBookList;

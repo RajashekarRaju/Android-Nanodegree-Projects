@@ -11,36 +11,36 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.developersbreach.xyzreader.R;
-import com.developersbreach.xyzreader.databinding.ItemBookBinding;
-import com.developersbreach.xyzreader.model.Book;
+import com.developersbreach.xyzreader.databinding.ItemArticleBinding;
+import com.developersbreach.xyzreader.model.Article;
 
 import java.util.List;
 
-import static com.developersbreach.xyzreader.view.list.BookAdapter.*;
+import static com.developersbreach.xyzreader.view.list.ArticleAdapter.*;
 
 
 /**
  * This class implements a {@link RecyclerView} {@link ListAdapter} which uses Data Binding to
  * present list data, including computing diffs between lists.
  * <p>
- * {@link BookViewHolder} class that extends ViewHolder that will be used by the adapter.
+ * {@link ArticleViewHolder} class that extends ViewHolder that will be used by the adapter.
  */
-public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
+public class ArticleAdapter extends RecyclerView.Adapter<ArticleViewHolder> {
 
     /**
      * Declare a new list of recipes to return with data.
      */
-    private List<? extends Book> mBookList;
+    private List<? extends Article> mArticleList;
 
     /**
      * The interface that receives onClick listener.
      */
-    private final BookAdapterListener mListener;
+    private final ArticleAdapterListener mListener;
 
     /**
      * @param listener   create click listener on itemView.
      */
-    BookAdapter(BookAdapterListener listener) {
+    ArticleAdapter(ArticleAdapterListener listener) {
         this.mListener = listener;
         setHasStableIds(true);
     }
@@ -48,34 +48,34 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
     /**
      * The interface that receives onClick listener.
      */
-    public interface BookAdapterListener {
+    public interface ArticleAdapterListener {
         /**
-         * @param book get recipes from selected list of recipes.
+         * @param article get recipes from selected list of recipes.
          * @param view   used to create navigation with controller, which needs view.
          */
-        void onBookSelected(Book book, View view);
+        void onArticleSelected(Article article, View view);
     }
 
     /**
      * RecipeViewHolder class creates child view Recipe properties.
      */
-    static class BookViewHolder extends RecyclerView.ViewHolder {
+    static class ArticleViewHolder extends RecyclerView.ViewHolder {
 
         // Get access to binding the views in layout
-        private final ItemBookBinding mBinding;
+        private final ItemArticleBinding mBinding;
 
 
-        private BookViewHolder(final ItemBookBinding binding) {
+        private ArticleViewHolder(final ItemArticleBinding binding) {
             super(binding.getRoot());
             this.mBinding = binding;
         }
 
         /**
-         * @param book pass object to set recipe for binding. This binding is accessed from layout
-         *               xml {@link com.developersbreach.xyzreader.R.layout#item_book}
+         * @param article pass object to set recipe for binding. This binding is accessed from layout
+         *               xml {@link com.developersbreach.xyzreader.R.layout#item_article}
          */
-        void bind(final Book book) {
-            mBinding.setBook(book);
+        void bind(final Article article) {
+            mBinding.setArticle(article);
             // Force DataBinding to execute binding views immediately.
             mBinding.executePendingBindings();
         }
@@ -83,7 +83,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
 
     /**
      * Called by RecyclerView to display the data at the specified position. DataBinding should
-     * update the contents of the {@link BookViewHolder#itemView} to reflect the item at the given
+     * update the contents of the {@link ArticleViewHolder#itemView} to reflect the item at the given
      * position.
      *
      * @param holder   The ViewHolder which should be updated to represent the contents of the
@@ -91,22 +91,22 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(@NonNull final BookViewHolder holder, final int position) {
-        final Book book = mBookList.get(position);
-        holder.bind(book);
+    public void onBindViewHolder(@NonNull final ArticleViewHolder holder, final int position) {
+        final Article article = mArticleList.get(position);
+        holder.bind(article);
 
         // Set click listener on itemView and pass arguments recipe, view for selected recipe.
         holder.itemView.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mListener.onBookSelected(book, view);
+                        mListener.onArticleSelected(article, view);
                     }
                 });
     }
 
     /**
-     * Called when RecyclerView needs a new {@link BookViewHolder} of the given type to represent
+     * Called when RecyclerView needs a new {@link ArticleViewHolder} of the given type to represent
      * an item.
      *
      * @param parent   The ViewGroup into which the new View will be added after it is bound to
@@ -116,12 +116,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
      */
     @NonNull
     @Override
-    public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ArticleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         // Allow DataBinding to inflate the layout.
-        ItemBookBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_book, parent,
+        ItemArticleBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_article, parent,
                 false);
-        return new BookViewHolder(binding);
+        return new ArticleViewHolder(binding);
     }
 
     /**
@@ -131,39 +131,39 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
      */
     @Override
     public int getItemCount() {
-        return mBookList.size();
+        return mArticleList.size();
     }
 
-    void setBookList(final List<? extends Book> bookList) {
-        if (mBookList == null) {
-            mBookList = bookList;
-            notifyItemRangeInserted(0, bookList.size());
+    void setArticleList(final List<? extends Article> articleList) {
+        if (mArticleList == null) {
+            mArticleList = articleList;
+            notifyItemRangeInserted(0, articleList.size());
         } else {
             DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
                 @Override
                 public int getOldListSize() {
-                    return mBookList.size();
+                    return mArticleList.size();
                 }
 
                 @Override
                 public int getNewListSize() {
-                    return bookList.size();
+                    return articleList.size();
                 }
 
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-                    return mBookList.get(oldItemPosition).getBookId() == (bookList.get(newItemPosition).getBookId());
+                    return mArticleList.get(oldItemPosition).getArticleId() == (articleList.get(newItemPosition).getArticleId());
                 }
 
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    Book newProduct = bookList.get(newItemPosition);
-                    Book oldProduct = bookList.get(oldItemPosition);
-                    return newProduct.getBookId() == oldProduct.getBookId();
+                    Article newProduct = articleList.get(newItemPosition);
+                    Article oldProduct = articleList.get(oldItemPosition);
+                    return newProduct.getArticleId() == oldProduct.getArticleId();
                 }
             });
 
-            mBookList = bookList;
+            mArticleList = articleList;
             result.dispatchUpdatesTo(this);
         }
     }

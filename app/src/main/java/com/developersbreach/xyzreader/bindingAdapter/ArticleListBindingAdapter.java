@@ -4,7 +4,7 @@ import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 
-public class BookListBindingAdapter {
+public class ArticleListBindingAdapter {
 
     /**
      * When recipeName is used on TextView, the method bindRecipeName is called.

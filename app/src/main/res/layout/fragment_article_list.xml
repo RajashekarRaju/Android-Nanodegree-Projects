@@ -7,16 +7,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.list.BookListFragment">
+        tools:context=".view.list.ArticleListFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/books_recycler_view"
+            android:id="@+id/articles_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"
             android:scrollbars="none"
-            tools:listitem="@layout/item_book"
+            tools:listitem="@layout/item_article"
             tools:itemCount="6" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

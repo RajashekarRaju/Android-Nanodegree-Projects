@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="book"
-            type="com.developersbreach.xyzreader.model.Book" />
+            name="article"
+            type="com.developersbreach.xyzreader.model.Article" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,8 +15,8 @@
         android:layout_height="wrap_content">
 
         <TextView
-            authorName="@{book.authorName}"
-            android:id="@+id/book_author"
+            authorName="@{article.articleAuthorName}"
+            android:id="@+id/article_author_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

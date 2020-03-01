@@ -9,54 +9,54 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 
-@Entity(tableName = "books_table")
-public class BookEntity implements Parcelable {
+@Entity(tableName = "articles_table")
+public class ArticleEntity implements Parcelable {
 
     @PrimaryKey
-    @ColumnInfo(name = "column_id")
-    private int mBookId;
+    @ColumnInfo(name = "column_article_id")
+    private int mArticleId;
 
-    @ColumnInfo(name = "column_authorName")
-    private String mAuthorName;
+    @ColumnInfo(name = "column_article_author_name")
+    private String mArticleAuthorName;
 
-    public int getBookId() {
-        return mBookId;
+    public int getArticleId() {
+        return mArticleId;
     }
 
-    public String getAuthorName() {
-        return mAuthorName;
+    public String getArticleAuthorName() {
+        return mArticleAuthorName;
     }
 
-    void setBookId(int mBookId) {
-        this.mBookId = mBookId;
+    void setArticleId(int id) {
+        this.mArticleId = id;
     }
 
-    void setAuthorName(String mAuthorName) {
-        this.mAuthorName = mAuthorName;
+    void setArticleAuthorName(String authorName) {
+        this.mArticleAuthorName = authorName;
     }
 
-    BookEntity() {}
+    ArticleEntity() {}
 
     @Ignore
-    public BookEntity(int id, String authorName) {
-        this.mBookId = id;
-        this.mAuthorName = authorName;
+    public ArticleEntity(int id, String authorName) {
+        this.mArticleId = id;
+        this.mArticleAuthorName = authorName;
     }
 
-    private BookEntity(Parcel in) {
-        mBookId = in.readInt();
-        mAuthorName = in.readString();
+    private ArticleEntity(Parcel in) {
+        mArticleId = in.readInt();
+        mArticleAuthorName = in.readString();
     }
 
-    public static final Creator<BookEntity> CREATOR = new Creator<BookEntity>() {
+    public static final Creator<ArticleEntity> CREATOR = new Creator<ArticleEntity>() {
         @Override
-        public BookEntity createFromParcel(Parcel in) {
-            return new BookEntity(in);
+        public ArticleEntity createFromParcel(Parcel in) {
+            return new ArticleEntity(in);
         }
 
         @Override
-        public BookEntity[] newArray(int size) {
-            return new BookEntity[size];
+        public ArticleEntity[] newArray(int size) {
+            return new ArticleEntity[size];
         }
     };
 
@@ -84,7 +84,7 @@ public class BookEntity implements Parcelable {
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(mBookId);
-        dest.writeString(mAuthorName);
+        dest.writeInt(mArticleId);
+        dest.writeString(mArticleAuthorName);
     }
 }
