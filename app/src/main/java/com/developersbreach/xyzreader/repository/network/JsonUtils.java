@@ -28,12 +28,38 @@ public class JsonUtils {
                     id = baseJsonObject.getInt("id");
                 }
 
+                String title = "";
+                if (baseJsonObject.has("title")) {
+                    title = baseJsonObject.getString("title");
+                }
+
                 String authorName = "";
                 if (baseJsonObject.has("author")) {
                     authorName = baseJsonObject.getString("author");
                 }
 
-                ArticleEntity articleEntity = new ArticleEntity(id, authorName);
+                String body = "";
+                if (baseJsonObject.has("body")) {
+                    body = baseJsonObject.getString("body");
+                }
+
+                String thumbnail = "";
+                if (baseJsonObject.has("thumb")) {
+                    thumbnail = baseJsonObject.getString("thumb");
+                }
+
+                double aspectRatio = 0;
+                if (baseJsonObject.has("aspect_ratio")) {
+                    aspectRatio = baseJsonObject.getDouble("aspect_ratio");
+                }
+
+                String publishedDate = "";
+                if (baseJsonObject.has("published_date")) {
+                    publishedDate = baseJsonObject.getString("published_date");
+                }
+
+                ArticleEntity articleEntity = new ArticleEntity(id, title, authorName, body, thumbnail,
+                        aspectRatio, publishedDate);
                 articleList.add(articleEntity);
             }
 

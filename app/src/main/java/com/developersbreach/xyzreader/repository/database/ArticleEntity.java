@@ -16,36 +16,105 @@ public class ArticleEntity implements Parcelable {
     @ColumnInfo(name = "column_article_id")
     private int mArticleId;
 
+    @ColumnInfo(name = "column_article_title")
+    private String mArticleTitle;
+
     @ColumnInfo(name = "column_article_author_name")
     private String mArticleAuthorName;
 
+    @ColumnInfo(name = "column_article_body")
+    private String mArticleBody;
+
+    @ColumnInfo(name = "column_article_thumbnail")
+    private String mArticleThumbnail;
+
+    @ColumnInfo(name = "column_article_aspect_ratio")
+    private double mArticleAspectRatio;
+
+    @ColumnInfo(name = "column_article_published_date")
+    private String mArticlePublishedDate;
+
+    /////////////////// Getters /////////////////////
+
     public int getArticleId() {
         return mArticleId;
+    }
+
+    public String getArticleTitle() {
+        return mArticleTitle;
     }
 
     public String getArticleAuthorName() {
         return mArticleAuthorName;
     }
 
+    public String getArticleBody() {
+        return mArticleBody;
+    }
+
+    public String getArticleThumbnail() {
+        return mArticleThumbnail;
+    }
+
+    public double getArticleAspectRatio() {
+        return mArticleAspectRatio;
+    }
+
+    public String getArticlePublishedDate() {
+        return mArticlePublishedDate;
+    }
+
+    ////////////////////// Setters ///////////////////////////////////////
+
     void setArticleId(int id) {
         this.mArticleId = id;
+    }
+
+    void setArticleTitle(String articleTitle) {
+        this.mArticleTitle = articleTitle;
     }
 
     void setArticleAuthorName(String authorName) {
         this.mArticleAuthorName = authorName;
     }
 
-    ArticleEntity() {}
+    void setArticleBody(String articleBody) {
+        this.mArticleBody = articleBody;
+    }
+
+    void setArticleThumbnail(String articleThumbnail) {
+        this.mArticleThumbnail = articleThumbnail;
+    }
+
+    void setArticleAspectRatio(double articleAspectRatio) { this.mArticleAspectRatio = articleAspectRatio; }
+
+    void setArticlePublishedDate(String articlePublishedDate) {
+        this.mArticlePublishedDate = articlePublishedDate;
+    }
+
+    ArticleEntity() {
+    }
 
     @Ignore
-    public ArticleEntity(int id, String authorName) {
+    public ArticleEntity(int id, String title, String authorName, String body, String thumbnail,
+                         double aspectRatio, String publishedDate) {
         this.mArticleId = id;
+        this.mArticleTitle = title;
         this.mArticleAuthorName = authorName;
+        this.mArticleBody = body;
+        this.mArticleThumbnail = thumbnail;
+        this.mArticleAspectRatio = aspectRatio;
+        this.mArticlePublishedDate = publishedDate;
     }
 
     private ArticleEntity(Parcel in) {
         mArticleId = in.readInt();
+        mArticleTitle = in.readString();
         mArticleAuthorName = in.readString();
+        mArticleBody = in.readString();
+        mArticleThumbnail = in.readString();
+        mArticleAspectRatio = in.readDouble();
+        mArticlePublishedDate = in.readString();
     }
 
     public static final Creator<ArticleEntity> CREATOR = new Creator<ArticleEntity>() {
@@ -85,6 +154,11 @@ public class ArticleEntity implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(mArticleId);
+        dest.writeString(mArticleTitle);
         dest.writeString(mArticleAuthorName);
+        dest.writeString(mArticleBody);
+        dest.writeString(mArticleThumbnail);
+        dest.writeDouble(mArticleAspectRatio);
+        dest.writeString(mArticlePublishedDate);
     }
 }

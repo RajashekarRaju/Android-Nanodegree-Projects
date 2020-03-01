@@ -1,6 +1,7 @@
 package com.developersbreach.xyzreader.viewModel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.arch.core.util.Function;
@@ -32,8 +33,16 @@ public class ArticleListViewModel extends AndroidViewModel {
             public LiveData<List<Article>> apply(List<ArticleEntity> input) {
                 MutableLiveData<List<Article>> listLiveData = new MutableLiveData<>();
                 List<Article> articleList = new ArrayList<>();
-                for (ArticleEntity articleEntity : input) {
-                    articleList.add(new Article(articleEntity.getArticleId(), articleEntity.getArticleAuthorName()));
+                for (ArticleEntity article : input) {
+                    articleList.add(new Article(
+                            article.getArticleId(),
+                            article.getArticleTitle(),
+                            article.getArticleAuthorName(),
+                            article.getArticleBody(),
+                            article.getArticleThumbnail(),
+                            article.getArticleAspectRatio(),
+                            article.getArticlePublishedDate()
+                    ));
                 }
                 listLiveData.postValue(articleList);
                 return listLiveData;
