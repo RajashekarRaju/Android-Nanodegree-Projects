@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.FragmentBookListBinding;
 import com.developersbreach.xyzreader.model.Book;
-import com.developersbreach.xyzreader.repository.database.BookEntity;
 import com.developersbreach.xyzreader.viewModel.BookListViewModel;
 
 import java.util.List;
@@ -45,9 +44,9 @@ public class BookListFragment extends Fragment {
 
         viewModel.getBookList().observe(getViewLifecycleOwner(), new Observer<List<Book>>() {
             @Override
-            public void onChanged(List<Book> bookList) {
+            public void onChanged(List<Book> books) {
                 BookAdapter adapter = new BookAdapter(new BoolItemListener());
-                adapter.setBookList(bookList);
+                adapter.setBookList(books);
                 mBookRecyclerView.setAdapter(adapter);
             }
         });

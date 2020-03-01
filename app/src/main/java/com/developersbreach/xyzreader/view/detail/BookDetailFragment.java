@@ -28,15 +28,6 @@ public class BookDetailFragment extends Fragment {
 
     private FragmentBookDetailBinding mBinding;
 
-    static BookDetailFragment newInstance(Book book) {
-
-        Bundle args = new Bundle();
-
-        BookDetailFragment fragment = new BookDetailFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {

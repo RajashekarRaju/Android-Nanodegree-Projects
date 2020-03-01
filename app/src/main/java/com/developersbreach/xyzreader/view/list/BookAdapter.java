@@ -23,7 +23,6 @@ import static com.developersbreach.xyzreader.view.list.BookAdapter.*;
  * This class implements a {@link RecyclerView} {@link ListAdapter} which uses Data Binding to
  * present list data, including computing diffs between lists.
  * <p>
- * {@link Book} type of list this adapter will receive.
  * {@link BookViewHolder} class that extends ViewHolder that will be used by the adapter.
  */
 public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
@@ -65,9 +64,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
         // Get access to binding the views in layout
         private final ItemBookBinding mBinding;
 
-        /**
-         * @param binding binds each properties in {@link Book} list
-         */
+
         private BookViewHolder(final ItemBookBinding binding) {
             super(binding.getRoot());
             this.mBinding = binding;
@@ -155,14 +152,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
 
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-                    return mBookList.get(oldItemPosition).getName().equals(bookList.get(newItemPosition).getName());
+                    return mBookList.get(oldItemPosition).getBookId() == (bookList.get(newItemPosition).getBookId());
                 }
 
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
                     Book newProduct = bookList.get(newItemPosition);
                     Book oldProduct = bookList.get(oldItemPosition);
-                    return newProduct.getName().equals(oldProduct.getName());
+                    return newProduct.getBookId() == oldProduct.getBookId();
                 }
             });
 

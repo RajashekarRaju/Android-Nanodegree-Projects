@@ -16,4 +16,7 @@ public interface BookDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<BookEntity> bookEntityList);
+
+    @Query("SELECT * FROM books_table WHERE column_id = :bookId")
+    LiveData<BookEntity> getBookById(int bookId);
 }

@@ -23,12 +23,17 @@ public class JsonUtils {
 
                 JSONObject baseJsonObject = baseJsonArray.getJSONObject(i);
 
+                int id = 0;
+                if (baseJsonObject.has("id")) {
+                    id = baseJsonObject.getInt("id");
+                }
+
                 String name = "";
                 if (baseJsonObject.has("author")) {
                     name = baseJsonObject.getString("author");
                 }
 
-                BookEntity book = new BookEntity(name);
+                BookEntity book = new BookEntity(id, name);
                 bookList.add(book);
             }
 

@@ -44,4 +44,8 @@ public class BooksRepository {
     public LiveData<List<BookEntity>> getBooks() {
         return mObservableBooks;
     }
+
+    public LiveData<BookEntity> getBookById(final int productId) {
+        return mDatabase.bookDao().getBookById(productId);
+    }
 }

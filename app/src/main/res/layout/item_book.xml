@@ -15,7 +15,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            authorName="@{book.name}"
+            authorName="@{book.authorName}"
             android:id="@+id/book_author"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -28,4 +28,5 @@
             android:layout_height="wrap_content" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

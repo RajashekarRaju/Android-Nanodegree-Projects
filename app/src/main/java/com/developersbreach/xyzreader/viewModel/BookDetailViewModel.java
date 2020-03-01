@@ -20,7 +20,6 @@ public class BookDetailViewModel extends AndroidViewModel {
     private MutableLiveData<Book> _mMutableBook;
 
     /**
-     * @return Exposed {@link LiveData} object of RecipeDetails of {@link Book} externally allowing
      * fragment to observe changes. Data is observed once changes will be done internally.
      */
     public LiveData<Book> selectedBook() {
