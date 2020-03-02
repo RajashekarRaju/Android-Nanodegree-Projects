@@ -11,8 +11,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
-
 
 /**
  * This class builds standard response by building a URI for starting a response. Build URI is

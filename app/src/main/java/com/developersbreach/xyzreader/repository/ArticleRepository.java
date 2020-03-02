@@ -2,7 +2,6 @@ package com.developersbreach.xyzreader.repository;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
-import androidx.lifecycle.Observer;
 
 import com.developersbreach.xyzreader.repository.database.ArticleDatabase;
 import com.developersbreach.xyzreader.repository.database.ArticleEntity;
@@ -13,18 +12,14 @@ public class ArticleRepository {
 
     private static ArticleRepository sINSTANCE;
     private final ArticleDatabase mDatabase;
-    private MediatorLiveData<List<ArticleEntity>> mObservableArticles;
+    private final MediatorLiveData<List<ArticleEntity>> mObservableArticles;
 
-    public ArticleRepository(ArticleDatabase database) {
+    private ArticleRepository(ArticleDatabase database) {
         this.mDatabase = database;
         mObservableArticles = new MediatorLiveData<>();
 
-        mObservableArticles.addSource(mDatabase.articleDao().loadAllArticles(), new Observer<List<ArticleEntity>>() {
-            @Override
-            public void onChanged(List<ArticleEntity> articleEntityList) {
-                mObservableArticles.postValue(articleEntityList);
-            }
-        });
+        mObservableArticles.addSource(mDatabase.articleDao().loadAllArticles(),
+                mObservableArticles::postValue);
     }
 
     public static ArticleRepository getRepositoryInstance(final ArticleDatabase database) {
@@ -45,7 +40,7 @@ public class ArticleRepository {
         return mObservableArticles;
     }
 
-    public LiveData<ArticleEntity> getArticleById(final int articleId) {
-        return mDatabase.articleDao().getArticleById(articleId);
-    }
+//    public LiveData<ArticleEntity> getArticleById(final int articleId) {
+//        return mDatabase.articleDao().getArticleById(articleId);
+//    }
 }

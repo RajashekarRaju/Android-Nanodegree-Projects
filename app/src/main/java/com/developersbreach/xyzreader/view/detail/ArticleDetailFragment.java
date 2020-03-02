@@ -1,7 +1,6 @@
 package com.developersbreach.xyzreader.view.detail;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
@@ -61,13 +60,10 @@ public class ArticleDetailFragment extends Fragment {
         // by calling ViewModelProviders.
 
         ArticleDetailViewModel viewModel = new ViewModelProvider(this, factory).get(ArticleDetailViewModel.class);
-        viewModel.selectedArticle().observe(getViewLifecycleOwner(), new Observer<Article>() {
-            @Override
-            public void onChanged(Article article) {
-                mBinding.setArticleDetail(article);
-                // Force binding to execute immediately all views.
-                mBinding.executePendingBindings();
-            }
+        viewModel.selectedArticle().observe(getViewLifecycleOwner(), article -> {
+            mBinding.setArticleDetail(article);
+            // Force binding to execute immediately all views.
+            mBinding.executePendingBindings();
         });
     }
 

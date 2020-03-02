@@ -4,13 +4,13 @@ import com.developersbreach.xyzreader.repository.database.ArticleEntity;
 
 public class Article extends ArticleEntity {
 
-    private int mArticleId;
-    private String mArticleTitle;
-    private String mArticleAuthorName;
-    private String mArticleBody;
-    private String mArticleThumbnail;
-    private double mArticleAspectRatio;
-    private String mArticlePublishedDate;
+    private final int mArticleId;
+    private final String mArticleTitle;
+    private final String mArticleAuthorName;
+    private final String mArticleBody;
+    private final String mArticleThumbnail;
+    private final double mArticleAspectRatio;
+    private final String mArticlePublishedDate;
 
     public Article(int id, String title, String authorName, String body, String thumbnail,
                    double aspectRatio, String publishedDate) {

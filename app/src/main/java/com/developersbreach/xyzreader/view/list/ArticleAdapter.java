@@ -97,12 +97,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleViewHolder> {
 
         // Set click listener on itemView and pass arguments recipe, view for selected recipe.
         holder.itemView.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mListener.onArticleSelected(article, view);
-                    }
-                });
+                view -> mListener.onArticleSelected(article, view));
     }
 
     /**

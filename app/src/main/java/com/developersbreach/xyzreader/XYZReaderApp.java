@@ -16,7 +16,7 @@ public class XYZReaderApp extends Application {
         mAppExecutors = new AppExecutors();
     }
 
-    public ArticleDatabase getDatabase() {
+    private ArticleDatabase getDatabase() {
         return ArticleDatabase.getDatabaseInstance(this, mAppExecutors);
     }
 

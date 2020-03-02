@@ -42,13 +42,10 @@ public class ArticleListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         ArticleListViewModel viewModel = new ViewModelProvider(this).get(ArticleListViewModel.class);
 
-        viewModel.getArticleList().observe(getViewLifecycleOwner(), new Observer<List<Article>>() {
-            @Override
-            public void onChanged(List<Article> articles) {
-                ArticleAdapter adapter = new ArticleAdapter(new BoolItemListener());
-                adapter.setArticleList(articles);
-                mArticleRecyclerView.setAdapter(adapter);
-            }
+        viewModel.getArticleList().observe(getViewLifecycleOwner(), articles -> {
+            ArticleAdapter adapter = new ArticleAdapter(new BoolItemListener());
+            adapter.setArticleList(articles);
+            mArticleRecyclerView.setAdapter(adapter);
         });
     }
 

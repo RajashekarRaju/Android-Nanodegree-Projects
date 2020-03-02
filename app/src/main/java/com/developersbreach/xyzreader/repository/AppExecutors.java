@@ -26,7 +26,7 @@ public class AppExecutors {
     // Create an object which executes task to work with database in thread.
     private final Executor mDatabaseThread;
 
-    public AppExecutors(Executor mainThread, Executor backgroundThread, Executor databaseThread) {
+    private AppExecutors(Executor mainThread, Executor backgroundThread, Executor databaseThread) {
         this.mMainThread = mainThread;
         this.mBackgroundThread = backgroundThread;
         this.mDatabaseThread = databaseThread;
