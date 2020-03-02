@@ -1,19 +1,18 @@
 package com.developersbreach.xyzreader.view.detail;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.FragmentArticleDetailBinding;
@@ -25,17 +24,16 @@ import java.util.Objects;
 
 public class ArticleDetailFragment extends Fragment {
 
-    private FragmentArticleDetailBinding mBinding;
+    private ViewPager2 mDetailViewPager;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater,
+        FragmentArticleDetailBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_article_detail, container, false);
-
-        mBinding.setLifecycleOwner(this);
-
-        return mBinding.getRoot();
+        mDetailViewPager = binding.detailViewPager;
+        binding.setLifecycleOwner(this);
+        return binding.getRoot();
     }
 
     @Override
@@ -60,10 +58,14 @@ public class ArticleDetailFragment extends Fragment {
         // by calling ViewModelProviders.
 
         ArticleDetailViewModel viewModel = new ViewModelProvider(this, factory).get(ArticleDetailViewModel.class);
-        viewModel.selectedArticle().observe(getViewLifecycleOwner(), article -> {
-            mBinding.setArticleDetail(article);
-            // Force binding to execute immediately all views.
-            mBinding.executePendingBindings();
+
+        viewModel.getMutableArticleList().observe(getViewLifecycleOwner(), articleList -> {
+            DetailViewPagerAdapter adapter = new DetailViewPagerAdapter();
+            adapter.submitList(articleList);
+            mDetailViewPager.setAdapter(adapter);
+
+            viewModel.selectedArticle().observe(getViewLifecycleOwner(), article ->
+                    mDetailViewPager.setCurrentItem(article.getArticleId() - 1, false));
         });
     }
 

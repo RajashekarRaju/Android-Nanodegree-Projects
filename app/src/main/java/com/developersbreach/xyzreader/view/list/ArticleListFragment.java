@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -19,8 +18,6 @@ import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.FragmentArticleListBinding;
 import com.developersbreach.xyzreader.model.Article;
 import com.developersbreach.xyzreader.viewModel.ArticleListViewModel;
-
-import java.util.List;
 
 
 public class ArticleListFragment extends Fragment {
@@ -44,7 +41,7 @@ public class ArticleListFragment extends Fragment {
 
         viewModel.getArticleList().observe(getViewLifecycleOwner(), articles -> {
             ArticleAdapter adapter = new ArticleAdapter(new BoolItemListener());
-            adapter.setArticleList(articles);
+            adapter.submitList(articles);
             mArticleRecyclerView.setAdapter(adapter);
         });
     }

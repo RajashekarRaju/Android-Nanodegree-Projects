@@ -6,9 +6,17 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 
+import com.developersbreach.xyzreader.XYZReaderApp;
 import com.developersbreach.xyzreader.model.Article;
+import com.developersbreach.xyzreader.repository.ArticleRepository;
+import com.developersbreach.xyzreader.repository.database.ArticleEntity;
+import com.developersbreach.xyzreader.utils.DataFormatting;
 import com.developersbreach.xyzreader.view.list.ArticleListFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArticleDetailViewModel extends AndroidViewModel {
 
@@ -18,6 +26,7 @@ public class ArticleDetailViewModel extends AndroidViewModel {
      * can observe this changes.
      */
     private MutableLiveData<Article> _mMutableArticle;
+    private LiveData<List<Article>> _mMutableArticleList;
 
     /**
      * fragment to observe changes. Data is observed once changes will be done internally.
@@ -26,14 +35,44 @@ public class ArticleDetailViewModel extends AndroidViewModel {
         return _mMutableArticle;
     }
 
+    public LiveData<List<Article>> getMutableArticleList() {
+        return _mMutableArticleList;
+    }
+
     /**
      * @param application provides application context for ViewModel.
-     * @param article      parcel Recipe object with data for user selected recipe from
+     * @param article     parcel Recipe object with data for user selected recipe from
      *                    {@link ArticleListFragment}
      */
     public ArticleDetailViewModel(@NonNull Application application, Article article) {
         super(application);
+        final ArticleRepository repository = ((XYZReaderApp) application).getRepository();
+
         getMutableArticleDetailsData(article);
+        getMutableArticleDetailListData(repository);
+    }
+
+    private void getMutableArticleDetailListData(ArticleRepository repository) {
+        _mMutableArticleList = Transformations.switchMap(repository.getArticles(), input -> {
+            MutableLiveData<List<Article>> listLiveData = new MutableLiveData<>();
+            List<Article> articleList = new ArrayList<>();
+            for (ArticleEntity articleEntity : input) {
+                articleList.add(new Article(
+                        articleEntity.getArticleId(),
+                        articleEntity.getArticleTitle(),
+                        articleEntity.getArticleAuthorName(),
+                        articleEntity.getArticleBody(),
+                        articleEntity.getArticleThumbnail(),
+                        articleEntity.getArticleAspectRatio(),
+                        articleEntity.getArticlePublishedDate()
+                ));
+
+                DataFormatting.formatDate(articleEntity.getArticlePublishedDate());
+            }
+
+            listLiveData.postValue(articleList);
+            return listLiveData;
+        });
     }
 
     /**

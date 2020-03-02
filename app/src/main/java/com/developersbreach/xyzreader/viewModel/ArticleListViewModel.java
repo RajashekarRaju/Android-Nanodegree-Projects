@@ -42,6 +42,7 @@ public class ArticleListViewModel extends AndroidViewModel {
 
                 DataFormatting.formatDate(article.getArticlePublishedDate());
             }
+
             listLiveData.postValue(articleList);
 
             return listLiveData;

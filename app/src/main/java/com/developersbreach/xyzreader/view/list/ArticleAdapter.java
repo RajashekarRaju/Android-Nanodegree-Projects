@@ -14,7 +14,6 @@ import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.ItemArticleBinding;
 import com.developersbreach.xyzreader.model.Article;
 
-import java.util.List;
 
 import static com.developersbreach.xyzreader.view.list.ArticleAdapter.*;
 
@@ -25,12 +24,7 @@ import static com.developersbreach.xyzreader.view.list.ArticleAdapter.*;
  * <p>
  * {@link ArticleViewHolder} class that extends ViewHolder that will be used by the adapter.
  */
-public class ArticleAdapter extends RecyclerView.Adapter<ArticleViewHolder> {
-
-    /**
-     * Declare a new list of recipes to return with data.
-     */
-    private List<? extends Article> mArticleList;
+public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
 
     /**
      * The interface that receives onClick listener.
@@ -41,8 +35,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleViewHolder> {
      * @param listener   create click listener on itemView.
      */
     ArticleAdapter(ArticleAdapterListener listener) {
+        super(DIFF_ITEM_CALLBACK);
         this.mListener = listener;
-        setHasStableIds(true);
     }
 
     /**
@@ -92,7 +86,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleViewHolder> {
      */
     @Override
     public void onBindViewHolder(@NonNull final ArticleViewHolder holder, final int position) {
-        final Article article = mArticleList.get(position);
+        final Article article = getItem(position);
         holder.bind(article);
 
         // Set click listener on itemView and pass arguments recipe, view for selected recipe.
@@ -119,47 +113,16 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleViewHolder> {
         return new ArticleViewHolder(binding);
     }
 
-    /**
-     * Returns the total number of items in the data set held by the adapter.
-     *
-     * @return The total number of items in this adapter.
-     */
-    @Override
-    public int getItemCount() {
-        return mArticleList.size();
-    }
+    private static final DiffUtil.ItemCallback<Article> DIFF_ITEM_CALLBACK = new DiffUtil.ItemCallback<Article>() {
 
-    void setArticleList(final List<? extends Article> articleList) {
-        if (mArticleList == null) {
-            mArticleList = articleList;
-            notifyItemRangeInserted(0, articleList.size());
-        } else {
-            DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
-                @Override
-                public int getOldListSize() {
-                    return mArticleList.size();
-                }
-
-                @Override
-                public int getNewListSize() {
-                    return articleList.size();
-                }
-
-                @Override
-                public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-                    return mArticleList.get(oldItemPosition).getArticleId() == (articleList.get(newItemPosition).getArticleId());
-                }
-
-                @Override
-                public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    Article newProduct = articleList.get(newItemPosition);
-                    Article oldProduct = articleList.get(oldItemPosition);
-                    return newProduct.getArticleId() == oldProduct.getArticleId();
-                }
-            });
-
-            mArticleList = articleList;
-            result.dispatchUpdatesTo(this);
+        @Override
+        public boolean areItemsTheSame(@NonNull Article oldItem, @NonNull Article newItem) {
+            return oldItem == newItem;
         }
-    }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Article oldItem, @NonNull Article newItem) {
+            return oldItem.getArticleId() == newItem.getArticleId();
+        }
+    };
 }
