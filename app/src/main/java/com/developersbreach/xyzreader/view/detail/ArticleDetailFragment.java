@@ -29,9 +29,11 @@ public class ArticleDetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         FragmentArticleDetailBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_article_detail, container, false);
         mDetailViewPager = binding.detailViewPager;
+
         binding.setLifecycleOwner(this);
         return binding.getRoot();
     }

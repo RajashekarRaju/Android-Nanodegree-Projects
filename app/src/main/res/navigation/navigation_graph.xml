@@ -10,7 +10,7 @@
         android:id="@+id/articleListFragment"
         android:name="com.developersbreach.xyzreader.view.list.ArticleListFragment"
         android:label="Articles"
-        tools:layout="@layout/fragment_article_list" >
+        tools:layout="@layout/fragment_article_list">
         <action
             android:id="@+id/action_articleListFragment_to_articleDetailFragment"
             app:destination="@id/articleDetailFragment" />
@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/articleDetailFragment"
         android:name="com.developersbreach.xyzreader.view.detail.ArticleDetailFragment"
-        android:label="Article Detail" >
+        android:label="Article Detail">
         <argument
             android:name="detailFragmentArgs"
             app:argType="com.developersbreach.xyzreader.model.Article" />

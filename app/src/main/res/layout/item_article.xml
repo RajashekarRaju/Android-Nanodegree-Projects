@@ -16,7 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="4dp"
-        app:cardBackgroundColor="#FFFFFF"
         app:cardCornerRadius="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,7 +42,6 @@
                 android:fontFamily="@font/rubik_light"
                 android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:textColor="@color/primaryColor"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@id/article_title_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +60,6 @@
                 android:fontFamily="@font/rubik_medium"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                android:textColor="#000000"
                 app:layout_constraintBottom_toTopOf="@id/article_by_author"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +74,6 @@
                 android:fontFamily="@font/rubik_light"
                 android:gravity="center"
                 android:text="@string/by_author"
-                android:textColor="#000000"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@id/article_author_item_image_view"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +90,6 @@
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/rubik_light"
                 android:gravity="center"
-                android:textColor="#000000"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

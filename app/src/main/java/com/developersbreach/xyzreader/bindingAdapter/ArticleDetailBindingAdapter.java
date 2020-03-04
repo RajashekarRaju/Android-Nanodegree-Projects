@@ -21,6 +21,16 @@ public class ArticleDetailBindingAdapter {
         textView.setText(authorDetailName);
     }
 
+    @BindingAdapter("titleDetailName")
+    public static void bindTitleDetailName(TextView textView, String titleDetailName) {
+        textView.setText(titleDetailName);
+    }
+
+    @BindingAdapter("articleBodyTitle")
+    public static void bindBodyDetailName(TextView textView, String articleBodyTitle) {
+        textView.setText(articleBodyTitle);
+    }
+
     @BindingAdapter("detailThumbnail")
     public static void bindDetailThumbnail(ImageView imageView, String thumbnail) {
 

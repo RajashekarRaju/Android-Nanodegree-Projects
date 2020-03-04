@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Base.Theme.Article" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/article_green_900</item>
+        <item name="colorOnPrimary">@color/article_yellow_300</item>
+        <item name="colorPrimaryDark">@color/article_gray_50_a600</item>
+        <item name="colorOnSurface">@color/article_white</item>
+        <item name="colorAccent">@color/article_green_300</item>
+        <item name="colorSurface">@color/article_green_900</item>
+        <item name="colorSecondary">@color/article_yellow_300</item>
+        <item name="android:colorBackground">@color/article_green_900</item>
+    </style>
+
+    <style name="Theme.Article" parent="Base.Theme.Article">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="Theme.Article.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Article.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+
+    <style name="TextAppearance.Article.Toolbar.Text" parent="TextAppearance.MaterialComponents.Headline5" >
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+</resources>

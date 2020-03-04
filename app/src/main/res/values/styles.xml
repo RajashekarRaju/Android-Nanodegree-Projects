@@ -1,11 +1,39 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="android:windowBackground">@color/primaryColor</item>
+    <style name="Base.Theme.Article" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!--   The color displayed most frequently across your app’s screens and components. This
+        color should pass accessibility guidelines for text / iconography when drawn on top of the
+        surface or background color.     -->
+        <item name="colorPrimary">@color/article_green_500</item>
+        <!--    A color that passes accessibility guidelines for text/iconography when drawn on top
+         of the primary color.    -->
+        <item name="colorOnPrimary">@color/article_yellow_500</item>
+        <item name="colorPrimaryDark">@color/article_green_700</item>
+        <!--  A color that passes accessibility guidelines for text/iconography when drawn on top
+        of the surface color.-->
+        <item name="colorOnSurface">@color/article_black</item>
+        <item name="colorAccent">@color/article_green_700</item>
+        <!--  Surface colors affect surfaces of components, such as cards, sheets, and menus.-->
+        <item name="colorSurface">@color/article_gray_50</item>
+        <!--  A tonal variation of the secondary color.-->
+        <item name="colorSecondary">@color/article_yellow_500</item>
+        <!--        The background color appears behind scrollable content.-->
+        <item name="android:colorBackground">@color/article_green_500</item>
+
+    </style>
+
+    <style name="Theme.Article" parent="Base.Theme.Article"/>
+
+    <style name="Theme.Article.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Article.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+
+    <style name="TextAppearance.Article.Toolbar.Text" parent="TextAppearance.MaterialComponents.Headline5" >
+        <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
 
 </resources>
