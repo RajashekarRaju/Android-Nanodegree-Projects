@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">XYZReader</string>
+    <string name="articles_header_title">Articles</string>
+    <string name="by_author">By</string>
 </resources>
