@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.FragmentArticleListBinding;
 import com.developersbreach.xyzreader.model.Article;
+import com.developersbreach.xyzreader.utils.SpaceItemDecoration;
 import com.developersbreach.xyzreader.viewModel.ArticleListViewModel;
 
 
@@ -31,6 +32,9 @@ public class ArticleListFragment extends Fragment {
                 R.layout.fragment_article_list, container, false);
 
         mArticleRecyclerView = binding.articlesRecyclerView;
+        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.rv_dimen);
+        mArticleRecyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
+
         return binding.getRoot();
     }
 

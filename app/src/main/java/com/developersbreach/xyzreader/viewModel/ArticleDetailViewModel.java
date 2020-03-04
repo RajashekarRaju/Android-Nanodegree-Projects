@@ -63,11 +63,8 @@ public class ArticleDetailViewModel extends AndroidViewModel {
                         articleEntity.getArticleAuthorName(),
                         articleEntity.getArticleBody(),
                         articleEntity.getArticleThumbnail(),
-                        articleEntity.getArticleAspectRatio(),
                         articleEntity.getArticlePublishedDate()
                 ));
-
-                DataFormatting.formatDate(articleEntity.getArticlePublishedDate());
             }
 
             listLiveData.postValue(articleList);

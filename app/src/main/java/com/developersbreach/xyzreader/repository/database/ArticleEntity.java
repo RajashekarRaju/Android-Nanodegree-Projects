@@ -28,9 +28,6 @@ public class ArticleEntity implements Parcelable {
     @ColumnInfo(name = "column_article_thumbnail")
     private String mArticleThumbnail;
 
-    @ColumnInfo(name = "column_article_aspect_ratio")
-    private double mArticleAspectRatio;
-
     @ColumnInfo(name = "column_article_published_date")
     private String mArticlePublishedDate;
 
@@ -54,10 +51,6 @@ public class ArticleEntity implements Parcelable {
 
     public String getArticleThumbnail() {
         return mArticleThumbnail;
-    }
-
-    public double getArticleAspectRatio() {
-        return mArticleAspectRatio;
     }
 
     public String getArticlePublishedDate() {
@@ -86,8 +79,6 @@ public class ArticleEntity implements Parcelable {
         this.mArticleThumbnail = articleThumbnail;
     }
 
-    void setArticleAspectRatio(double articleAspectRatio) { this.mArticleAspectRatio = articleAspectRatio; }
-
     void setArticlePublishedDate(String articlePublishedDate) {
         this.mArticlePublishedDate = articlePublishedDate;
     }
@@ -97,13 +88,12 @@ public class ArticleEntity implements Parcelable {
 
     @Ignore
     public ArticleEntity(int id, String title, String authorName, String body, String thumbnail,
-                         double aspectRatio, String publishedDate) {
+                         String publishedDate) {
         this.mArticleId = id;
         this.mArticleTitle = title;
         this.mArticleAuthorName = authorName;
         this.mArticleBody = body;
         this.mArticleThumbnail = thumbnail;
-        this.mArticleAspectRatio = aspectRatio;
         this.mArticlePublishedDate = publishedDate;
     }
 
@@ -113,7 +103,6 @@ public class ArticleEntity implements Parcelable {
         mArticleAuthorName = in.readString();
         mArticleBody = in.readString();
         mArticleThumbnail = in.readString();
-        mArticleAspectRatio = in.readDouble();
         mArticlePublishedDate = in.readString();
     }
 
@@ -158,7 +147,6 @@ public class ArticleEntity implements Parcelable {
         dest.writeString(mArticleAuthorName);
         dest.writeString(mArticleBody);
         dest.writeString(mArticleThumbnail);
-        dest.writeDouble(mArticleAspectRatio);
         dest.writeString(mArticlePublishedDate);
     }
 }

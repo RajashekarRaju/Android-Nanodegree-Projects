@@ -58,7 +58,6 @@ public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
         // Get access to binding the views in layout
         private final ItemArticleBinding mBinding;
 
-
         private ArticleViewHolder(final ItemArticleBinding binding) {
             super(binding.getRoot());
             this.mBinding = binding;

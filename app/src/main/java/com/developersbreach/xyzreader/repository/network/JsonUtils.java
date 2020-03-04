@@ -48,18 +48,13 @@ public class JsonUtils {
                     thumbnail = baseJsonObject.getString("thumb");
                 }
 
-                double aspectRatio = 0;
-                if (baseJsonObject.has("aspect_ratio")) {
-                    aspectRatio = baseJsonObject.getDouble("aspect_ratio");
-                }
-
                 String publishedDate = "";
                 if (baseJsonObject.has("published_date")) {
                     publishedDate = baseJsonObject.getString("published_date");
                 }
 
                 ArticleEntity articleEntity = new ArticleEntity(id, title, authorName, body, thumbnail,
-                        aspectRatio, publishedDate);
+                        publishedDate);
                 articleList.add(articleEntity);
             }
 

@@ -5,28 +5,105 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="article"
             type="com.developersbreach.xyzreader.model.Article" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="0dp">
 
-        <TextView
-            authorName="@{article.articleAuthorName}"
-            android:id="@+id/article_author_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textColor="#000000"
-            tools:text="@string/app_name"
-            android:padding="16dp"
-            android:textSize="40sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/article_thumbnail_item_image_view"
+                thumbnail="@{article.articleThumbnail}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="2:3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                articlePublishedDate="@{article.articlePublishedDate}"
+                android:id="@+id/published_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_light"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:textColor="@color/primaryColor"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/article_title_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/article_thumbnail_item_image_view" />
+
+            <TextView
+                android:id="@+id/article_title_text_view"
+                articleTitle="@{article.articleTitle}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/rubik_medium"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toTopOf="@id/article_by_author"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/published_date"
+                tools:text="@string/app_name" />
+
+            <TextView
+                android:id="@+id/article_by_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:fontFamily="@font/rubik_light"
+                android:gravity="center"
+                android:text="@string/by_author"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/article_author_item_image_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/article_title_text_view" />
+
+            <TextView
+                android:id="@+id/article_author_item_image_view"
+                authorName="@{article.articleAuthorName}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/rubik_light"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/article_by_author"
+                tools:text="@string/app_name" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </layout>
