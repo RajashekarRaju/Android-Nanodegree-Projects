@@ -1,8 +1,12 @@
 package com.developersbreach.xyzreader.bindingAdapter;
 
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
+import com.google.android.material.card.MaterialCardView;
 
 public class ArticleDetailBindingAdapter {
 
@@ -15,5 +19,14 @@ public class ArticleDetailBindingAdapter {
     @BindingAdapter("authorDetailName")
     public static void bindAuthorDetailName(TextView textView, String authorDetailName) {
         textView.setText(authorDetailName);
+    }
+
+    @BindingAdapter("detailThumbnail")
+    public static void bindDetailThumbnail(ImageView imageView, String thumbnail) {
+
+        Glide.with(imageView.getContext())
+                .asBitmap()
+                .load(thumbnail)
+                .into(imageView);
     }
 }
