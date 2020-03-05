@@ -1,8 +1,10 @@
 package com.developersbreach.xyzreader.view.list;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.ItemArticleBinding;
 import com.developersbreach.xyzreader.model.Article;
+import com.google.android.material.snackbar.Snackbar;
 
 
 import static com.developersbreach.xyzreader.view.list.ArticleAdapter.*;
@@ -87,6 +90,10 @@ public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
     public void onBindViewHolder(@NonNull final ArticleViewHolder holder, final int position) {
         final Article article = getItem(position);
         holder.bind(article);
+
+        holder.mBinding.addToFavoriteImageView.setOnClickListener(v -> {
+            Log.e("onBindViewHolder: ", "Checked " + position);
+        });
 
         // Set click listener on itemView and pass arguments recipe, view for selected recipe.
         holder.itemView.setOnClickListener(

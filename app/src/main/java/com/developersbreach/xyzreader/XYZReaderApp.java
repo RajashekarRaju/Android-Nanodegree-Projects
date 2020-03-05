@@ -8,16 +8,13 @@ import com.developersbreach.xyzreader.repository.database.ArticleDatabase;
 
 public class XYZReaderApp extends Application {
 
-    private AppExecutors mAppExecutors;
-
     @Override
     public void onCreate() {
         super.onCreate();
-        mAppExecutors = new AppExecutors();
     }
 
     private ArticleDatabase getDatabase() {
-        return ArticleDatabase.getDatabaseInstance(this, mAppExecutors);
+        return ArticleDatabase.getDatabaseInstance(this);
     }
 
     public ArticleRepository getRepository() {

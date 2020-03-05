@@ -24,27 +24,27 @@ public abstract class ArticleDatabase extends RoomDatabase {
 
     private static ArticleDatabase sINSTANCE;
 
-    public static ArticleDatabase getDatabaseInstance(final Context context, final AppExecutors executors) {
+    public static ArticleDatabase getDatabaseInstance(final Context context) {
         if (sINSTANCE == null) {
             synchronized (ArticleDatabase.class) {
                 if (sINSTANCE == null) {
-                    sINSTANCE = buildDatabase(context.getApplicationContext(), executors);
+                    sINSTANCE = buildDatabase(context.getApplicationContext());
                 }
             }
         }
         return sINSTANCE;
     }
 
-    private static ArticleDatabase buildDatabase(final Context context, final AppExecutors executors) {
+    private static ArticleDatabase buildDatabase(final Context context) {
 
         return Room.databaseBuilder(context, ArticleDatabase.class, DATABASE_NAME)
                 .addCallback(new Callback() {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
-                        executors.databaseThread().execute(() -> {
+                        AppExecutors.getInstance().databaseThread().execute(() -> {
                             try {
-                                ArticleDatabase database = ArticleDatabase.getDatabaseInstance(context, executors);
+                                ArticleDatabase database = ArticleDatabase.getDatabaseInstance(context);
                                 String responseString = ResponseBuilder.startResponse();
                                 List<ArticleEntity> articleEntityList = JsonUtils.fetchArticleJsonData(responseString);
                                 insertData(database, articleEntityList);

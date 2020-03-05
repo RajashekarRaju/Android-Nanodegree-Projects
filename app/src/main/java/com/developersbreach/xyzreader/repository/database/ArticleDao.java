@@ -19,4 +19,7 @@ public interface ArticleDao {
 
     @Query("SELECT * FROM articles_table WHERE column_article_id = :articleId")
     LiveData<ArticleEntity> getArticleById(int articleId);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertFavoriteArticle(ArticleEntity articleEntity);
 }

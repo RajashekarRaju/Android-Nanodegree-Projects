@@ -34,7 +34,6 @@ public class ArticleListFragment extends Fragment {
         mArticleRecyclerView = binding.articlesRecyclerView;
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.rv_dimen);
         mArticleRecyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
-
         return binding.getRoot();
     }
 
@@ -44,13 +43,13 @@ public class ArticleListFragment extends Fragment {
         ArticleListViewModel viewModel = new ViewModelProvider(this).get(ArticleListViewModel.class);
 
         viewModel.getArticleList().observe(getViewLifecycleOwner(), articles -> {
-            ArticleAdapter adapter = new ArticleAdapter(new BoolItemListener());
+            ArticleAdapter adapter = new ArticleAdapter(new ArticleItemListener());
             adapter.submitList(articles);
             mArticleRecyclerView.setAdapter(adapter);
         });
     }
 
-    private static class BoolItemListener implements ArticleAdapter.ArticleAdapterListener {
+    private static class ArticleItemListener implements ArticleAdapter.ArticleAdapterListener {
         /**
          * @param article get recipes from selected list of recipes.
          * @param view used to create navigation with controller, which needs view.
