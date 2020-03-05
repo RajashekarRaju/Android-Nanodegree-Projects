@@ -2,4 +2,10 @@
     <string name="app_name">XYZReader</string>
     <string name="articles_header_title">Articles</string>
     <string name="by_author">By</string>
+    <string name="favorites_menu_title">Favorites</string>
+    <string name="search_menu_item">Search</string>
+    <string name="theme_menu_item">Theme</string>
+    <string name="light_menu_title">Light</string>
+    <string name="dark_menu_title">Dark</string>
+    <string name="default_menu_title">Default</string>
 </resources>
