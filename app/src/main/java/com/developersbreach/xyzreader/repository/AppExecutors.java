@@ -32,9 +32,23 @@ public class AppExecutors {
         this.mDatabaseThread = databaseThread;
     }
 
-    public AppExecutors() {
-        this(new MainThreadExecutor(), Executors.newFixedThreadPool(3),
-                Executors.newSingleThreadExecutor());
+    /**
+     * Get single instance for executors and check for any current running tasks or executor in
+     * background or main thread.
+     * <p>
+     * We call new executor only once.
+     */
+    public static AppExecutors getInstance() {
+        if (sINSTANCE == null) {
+            synchronized (LOCK) {
+                sINSTANCE = new AppExecutors(
+                        new MainThreadExecutor(),
+                        Executors.newFixedThreadPool(3),
+                        Executors.newSingleThreadExecutor()
+                );
+            }
+        }
+        return sINSTANCE;
     }
 
     // This executor runs on main thread, we call this executor with handler
