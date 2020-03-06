@@ -24,7 +24,7 @@
 
             <ImageView
                 android:id="@+id/article_thumbnail_item_image_view"
-                thumbnail="@{article.articleThumbnail}"
+                articleThumbnail="@{article.articleThumbnail}"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
