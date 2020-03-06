@@ -1,4 +1,4 @@
-package com.developersbreach.xyzreader.viewModel;
+package com.developersbreach.xyzreader.view.search;
 
 import android.app.Application;
 
@@ -10,22 +10,27 @@ import androidx.lifecycle.Transformations;
 
 import com.developersbreach.xyzreader.XYZReaderApp;
 import com.developersbreach.xyzreader.model.Article;
+import com.developersbreach.xyzreader.repository.AppExecutors;
 import com.developersbreach.xyzreader.repository.ArticleRepository;
 import com.developersbreach.xyzreader.repository.database.ArticleEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class ArticleListViewModel extends AndroidViewModel {
+public class SearchArticleViewModel extends AndroidViewModel {
 
     private final LiveData<List<Article>> mArticleList;
+    private final MutableLiveData<List<Article>> mSearchList;
+    private List<Article> mList;
 
-    public ArticleListViewModel(@NonNull Application application) {
+    public SearchArticleViewModel(@NonNull Application application) {
         super(application);
-        final ArticleRepository repository = ((XYZReaderApp) application).getRepository();
-        LiveData<List<ArticleEntity>> liveArticleEntityData = repository.getArticles();
+        ArticleRepository repository = ((XYZReaderApp) application).getRepository();
+        mSearchList = new MutableLiveData<>();
+        mList = new ArrayList<>();
 
-        mArticleList = Transformations.switchMap(liveArticleEntityData, input -> {
+        mArticleList = Transformations.switchMap(repository.getArticles(), input -> {
             MutableLiveData<List<Article>> listLiveData = new MutableLiveData<>();
             List<Article> articleList = new ArrayList<>();
             for (ArticleEntity article : input) {
@@ -38,14 +43,30 @@ public class ArticleListViewModel extends AndroidViewModel {
                         article.getArticlePublishedDate()
                 ));
             }
-
+            mList = articleList;
             listLiveData.postValue(articleList);
-
             return listLiveData;
         });
     }
 
-    public LiveData<List<Article>> getArticleList() {
+    LiveData<List<Article>> getArticleList() {
         return mArticleList;
+    }
+
+    private void onQueryChanged(String filterQuery) {
+        AppExecutors.getInstance().backgroundThread().execute(() -> {
+            List<Article> articlesList = new ArrayList<>();
+            for (Article currentArticle : mList) {
+                if (currentArticle.getArticleTitle().toLowerCase(Locale.getDefault()).contains(filterQuery)) {
+                    articlesList.add(currentArticle);
+                }
+            }
+            mSearchList.postValue(articlesList);
+        });
+    }
+
+    MutableLiveData<List<Article>> onFilterChanged(String filterQuery) {
+        onQueryChanged(filterQuery);
+        return mSearchList;
     }
 }

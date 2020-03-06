@@ -1,6 +1,5 @@
-package com.developersbreach.xyzreader.view.list;
+package com.developersbreach.xyzreader.view.search;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,29 +11,20 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.developersbreach.xyzreader.R;
-import com.developersbreach.xyzreader.databinding.ItemArticleBinding;
+import com.developersbreach.xyzreader.databinding.ItemSearchArticleBinding;
 import com.developersbreach.xyzreader.model.Article;
 
-import static com.developersbreach.xyzreader.view.list.ArticleAdapter.ArticleViewHolder;
-
-
-/**
- * This class implements a {@link RecyclerView} {@link ListAdapter} which uses Data Binding to
- * present list data, including computing diffs between lists.
- * <p>
- * {@link ArticleViewHolder} class that extends ViewHolder that will be used by the adapter.
- */
-public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
+public class SearchAdapter extends ListAdapter<Article, SearchAdapter.SearchViewHolder> {
 
     /**
      * The interface that receives onClick listener.
      */
-    private final ArticleAdapterListener mListener;
+    private final SearchAdapter.SearchAdapterListener mListener;
 
     /**
      * @param listener   create click listener on itemView.
      */
-    ArticleAdapter(ArticleAdapterListener listener) {
+    SearchAdapter(SearchAdapter.SearchAdapterListener listener) {
         super(DIFF_ITEM_CALLBACK);
         this.mListener = listener;
     }
@@ -42,23 +32,23 @@ public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
     /**
      * The interface that receives onClick listener.
      */
-    public interface ArticleAdapterListener {
+    public interface SearchAdapterListener {
         /**
          * @param article get recipes from selected list of recipes.
          * @param view   used to create navigation with controller, which needs view.
          */
-        void onArticleSelected(Article article, View view);
+        void onSearchSelected(Article article, View view);
     }
 
     /**
      * RecipeViewHolder class creates child view Recipe properties.
      */
-    static class ArticleViewHolder extends RecyclerView.ViewHolder {
+    static class SearchViewHolder extends RecyclerView.ViewHolder {
 
         // Get access to binding the views in layout
-        private final ItemArticleBinding mBinding;
+        private final ItemSearchArticleBinding mBinding;
 
-        private ArticleViewHolder(final ItemArticleBinding binding) {
+        private SearchViewHolder(final ItemSearchArticleBinding binding) {
             super(binding.getRoot());
             this.mBinding = binding;
         }
@@ -68,7 +58,7 @@ public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
          *               xml {@link com.developersbreach.xyzreader.R.layout#item_article}
          */
         void bind(final Article article) {
-            mBinding.setArticle(article);
+            mBinding.setSearchArticle(article);
             // Force DataBinding to execute binding views immediately.
             mBinding.executePendingBindings();
         }
@@ -76,7 +66,7 @@ public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
 
     /**
      * Called by RecyclerView to display the data at the specified position. DataBinding should
-     * update the contents of the {@link ArticleViewHolder#itemView} to reflect the item at the given
+     * update the contents of the {@link SearchAdapter.SearchViewHolder#itemView} to reflect the item at the given
      * position.
      *
      * @param holder   The ViewHolder which should be updated to represent the contents of the
@@ -84,20 +74,17 @@ public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(@NonNull final ArticleViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final SearchViewHolder holder, final int position) {
         final Article article = getItem(position);
         holder.bind(article);
 
-        holder.mBinding.addToFavoriteImageView.setOnClickListener(v ->
-                Log.e("onBindViewHolder: ", "Checked " + position));
-
         // Set click listener on itemView and pass arguments recipe, view for selected recipe.
         holder.itemView.setOnClickListener(
-                view -> mListener.onArticleSelected(article, view));
+                view -> mListener.onSearchSelected(article, view));
     }
 
     /**
-     * Called when RecyclerView needs a new {@link ArticleViewHolder} of the given type to represent
+     * Called when RecyclerView needs a new {@link SearchViewHolder} of the given type to represent
      * an item.
      *
      * @param parent   The ViewGroup into which the new View will be added after it is bound to
@@ -107,12 +94,12 @@ public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
      */
     @NonNull
     @Override
-    public ArticleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SearchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         // Allow DataBinding to inflate the layout.
-        ItemArticleBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_article, parent,
+        ItemSearchArticleBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_search_article, parent,
                 false);
-        return new ArticleViewHolder(binding);
+        return new SearchViewHolder(binding);
     }
 
     private static final DiffUtil.ItemCallback<Article> DIFF_ITEM_CALLBACK = new DiffUtil.ItemCallback<Article>() {

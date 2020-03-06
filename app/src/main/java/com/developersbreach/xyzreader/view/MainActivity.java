@@ -1,5 +1,7 @@
 package com.developersbreach.xyzreader.view;
 
+import android.app.Activity;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -8,17 +10,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.ActivityMainBinding;
 import com.developersbreach.xyzreader.utils.ThemePreferencesManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private NavController mNavigationController;
     private ThemePreferencesManager mPreferenceManager;
     private ActivityMainBinding mBinding;
+    private Activity mView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +31,19 @@ public class MainActivity extends AppCompatActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mPreferenceManager = new ThemePreferencesManager(this);
         mNavigationController = Navigation.findNavController(this, R.id.nav_host_fragment);
-
-        mBinding.bottomNavigation.setOnNavigationItemSelectedListener(new NavigationListener());
+        mBinding.bottomNavigation.setOnNavigationItemSelectedListener(new NavigationListener(mView));
         mPreferenceManager.applyTheme();
+
+        mBinding.rootView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            Rect r = new Rect();
+            //r will be populated with the coordinates of your view that area still visible.
+            mBinding.rootView.getWindowVisibleDisplayFrame(r);
+
+            int heightDiff = mBinding.rootView.getRootView().getHeight() - (r.bottom - r.top);
+            if (heightDiff > 100) {
+
+            }
+        });
     }
 
     @Override
@@ -37,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class NavigationListener implements BottomNavigationView.OnNavigationItemSelectedListener {
+
+        NavigationListener(Activity view) {
+            mView = view;
+        }
 
         /**
          * Called when an item in the bottom navigation menu is selected.
@@ -49,10 +68,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.favorites_bottom_menu_item:
-                    break;
+                case R.id.articleFavoritesFragment:
 
-                case R.id.search_bottom_menu_item:
+                case R.id.searchArticleFragment:
+                    NavigationUI.onNavDestinationSelected(item, mNavigationController);
                     break;
 
                 case R.id.theme_bottom_menu_item:

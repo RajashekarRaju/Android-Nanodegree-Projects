@@ -8,4 +8,5 @@
     <string name="light_menu_title">Light</string>
     <string name="dark_menu_title">Dark</string>
     <string name="default_menu_title">Default</string>
+    <string name="search_articles_hint">Search Articles</string>
 </resources>

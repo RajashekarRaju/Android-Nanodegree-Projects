@@ -11,14 +11,12 @@ import java.util.List;
 public class ArticleRepository {
 
     private static ArticleRepository sINSTANCE;
-    private final ArticleDatabase mDatabase;
     private final MediatorLiveData<List<ArticleEntity>> mObservableArticles;
 
     private ArticleRepository(ArticleDatabase database) {
-        this.mDatabase = database;
         mObservableArticles = new MediatorLiveData<>();
 
-        mObservableArticles.addSource(mDatabase.articleDao().loadAllArticles(),
+        mObservableArticles.addSource(database.articleDao().loadAllArticles(),
                 mObservableArticles::postValue);
     }
 
@@ -39,8 +37,4 @@ public class ArticleRepository {
     public LiveData<List<ArticleEntity>> getArticles() {
         return mObservableArticles;
     }
-
-//    public LiveData<ArticleEntity> getArticleById(final int articleId) {
-//        return mDatabase.articleDao().getArticleById(articleId);
-//    }
 }

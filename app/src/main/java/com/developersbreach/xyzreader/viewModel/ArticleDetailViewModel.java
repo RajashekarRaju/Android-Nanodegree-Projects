@@ -12,7 +12,6 @@ import com.developersbreach.xyzreader.XYZReaderApp;
 import com.developersbreach.xyzreader.model.Article;
 import com.developersbreach.xyzreader.repository.ArticleRepository;
 import com.developersbreach.xyzreader.repository.database.ArticleEntity;
-import com.developersbreach.xyzreader.utils.DataFormatting;
 import com.developersbreach.xyzreader.view.list.ArticleListFragment;
 
 import java.util.ArrayList;
