@@ -1,7 +1,6 @@
 package com.developersbreach.xyzreader.view.favorite;
 
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 
@@ -17,8 +16,6 @@ import com.developersbreach.xyzreader.R;
 
 public class ArticleFavoritesFragment extends Fragment {
 
-    private ArticleFavoritesViewModel mViewModel;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -28,7 +25,7 @@ public class ArticleFavoritesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ArticleFavoritesViewModel.class);
+        ArticleFavoritesViewModel viewModel = new ViewModelProvider(this).get(ArticleFavoritesViewModel.class);
         // TODO: Use the ViewModel
     }
 

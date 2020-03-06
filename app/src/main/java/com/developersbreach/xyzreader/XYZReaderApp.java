@@ -2,7 +2,6 @@ package com.developersbreach.xyzreader;
 
 import android.app.Application;
 
-import com.developersbreach.xyzreader.repository.AppExecutors;
 import com.developersbreach.xyzreader.repository.ArticleRepository;
 import com.developersbreach.xyzreader.repository.database.ArticleDatabase;
 

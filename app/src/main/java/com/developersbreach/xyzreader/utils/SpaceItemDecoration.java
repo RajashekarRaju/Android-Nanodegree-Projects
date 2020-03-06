@@ -1,23 +1,17 @@
 package com.developersbreach.xyzreader.utils;
 
-import android.content.Context;
 import android.graphics.Rect;
 import android.view.View;
 
-import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
 
-    private int mItemOffset;
+    private final int mItemOffset;
 
     public SpaceItemDecoration(int itemOffset) {
         mItemOffset = itemOffset;
-    }
-
-    public SpaceItemDecoration(@NonNull Context context, @DimenRes int itemOffsetId) {
-        this(context.getResources().getDimensionPixelSize(itemOffsetId));
     }
 
     @Override

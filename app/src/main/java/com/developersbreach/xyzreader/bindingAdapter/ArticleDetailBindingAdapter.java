@@ -2,7 +2,6 @@ package com.developersbreach.xyzreader.bindingAdapter;
 
 import android.text.PrecomputedText;
 import android.text.util.Linkify;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,18 +50,15 @@ public class ArticleDetailBindingAdapter {
 
                 PrecomputedText.Params precomputedText = textView.getTextMetricsParams();
                 PrecomputedText text = PrecomputedText.create(articleBodyTitle, precomputedText);
-                AppExecutors.getInstance().mainThread().execute(() -> {
-                    textView.setText(text);
-                });
+                AppExecutors.getInstance().mainThread().execute(() -> textView.setText(text));
 
             } else {
 
                 PrecomputedTextCompat.Params params = TextViewCompat.getTextMetricsParams(textView);
                 PrecomputedTextCompat precomputedTextCompat =
                         PrecomputedTextCompat.create(articleBodyTitle, params);
-                AppExecutors.getInstance().mainThread().execute(() -> {
-                    textView.setText(precomputedTextCompat);
-                });
+                AppExecutors.getInstance().mainThread().execute(() ->
+                        textView.setText(precomputedTextCompat));
             }
 
             textView.setAutoLinkMask(Linkify.WEB_URLS);

@@ -15,10 +15,10 @@ import com.developersbreach.xyzreader.repository.network.ResponseBuilder;
 import java.io.IOException;
 import java.util.List;
 
-@Database(entities = ArticleEntity.class, version = 1, exportSchema = false)
+@Database(entities = {ArticleEntity.class}, version = 1, exportSchema = false)
 public abstract class ArticleDatabase extends RoomDatabase {
 
-    private static final String DATABASE_NAME = "Book_Database";
+    private static final String DATABASE_NAME = "Article_Database";
 
     public abstract ArticleDao articleDao();
 
