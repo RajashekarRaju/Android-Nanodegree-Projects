@@ -1,9 +1,8 @@
 package com.developersbreach.xyzreader.view;
 
-import android.app.Activity;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,25 +22,21 @@ public class MainActivity extends AppCompatActivity {
     private NavController mNavigationController;
     private ThemePreferencesManager mPreferenceManager;
     private ActivityMainBinding mBinding;
-    private Activity mView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        mPreferenceManager = new ThemePreferencesManager(this);
         mNavigationController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        mBinding.bottomNavigation.setOnNavigationItemSelectedListener(new NavigationListener(mView));
+        mBinding.bottomNavigation.setOnNavigationItemSelectedListener(new NavigationListener());
+        mPreferenceManager = new ThemePreferencesManager(this);
         mPreferenceManager.applyTheme();
 
-        mBinding.rootView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
-            Rect r = new Rect();
-            //r will be populated with the coordinates of your view that area still visible.
-            mBinding.rootView.getWindowVisibleDisplayFrame(r);
-
-            int heightDiff = mBinding.rootView.getRootView().getHeight() - (r.bottom - r.top);
-            if (heightDiff > 100) {
-
+        mNavigationController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (destination.getId() == R.id.articleDetailFragment) {
+                mBinding.bottomNavigation.setVisibility(View.INVISIBLE);
+            } else {
+                mBinding.bottomNavigation.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -52,10 +47,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class NavigationListener implements BottomNavigationView.OnNavigationItemSelectedListener {
-
-        NavigationListener(Activity view) {
-            mView = view;
-        }
 
         /**
          * Called when an item in the bottom navigation menu is selected.
