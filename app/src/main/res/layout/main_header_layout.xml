@@ -19,6 +19,7 @@
             tools:ignore="ContentDescription" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/header_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/header_icon"
@@ -31,6 +32,19 @@
             android:textColor="@color/article_gray_50"
             android:textStyle="bold"
             app:textAllCaps="true" />
+
+        <ImageView
+            android:id="@+id/favorites_home_button_image_view"
+            android:src="@drawable/ic_home"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone"
+            android:tint="#F6EBBC"
+            android:layout_marginEnd="16dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -50,10 +50,8 @@
                     android:id="@+id/detail_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="@android:color/transparent"
                     app:layout_collapseMode="pin"
-                    app:navigationIcon="@drawable/ic_up_button"
-                    app:titleTextColor="?attr/colorOnSurface" />
+                    app:navigationIcon="@drawable/ic_up_button" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

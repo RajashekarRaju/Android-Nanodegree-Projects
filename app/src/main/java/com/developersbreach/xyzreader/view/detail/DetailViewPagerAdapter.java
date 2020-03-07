@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.ItemArticleAdapterBinding;
 import com.developersbreach.xyzreader.model.Article;
+import com.google.android.material.appbar.AppBarLayout;
 
 import static com.developersbreach.xyzreader.view.detail.DetailViewPagerAdapter.ArticlePagerViewHolder;
 
@@ -44,6 +45,7 @@ public class DetailViewPagerAdapter extends ListAdapter<Article, ArticlePagerVie
             mBinding.setArticleDetail(article);
             // Force DataBinding to execute binding views immediately.
             mBinding.executePendingBindings();
+            setAppBarLayout(mBinding, article);
         }
     }
 
@@ -75,4 +77,28 @@ public class DetailViewPagerAdapter extends ListAdapter<Article, ArticlePagerVie
             return oldItem.getArticleId() == newItem.getArticleId();
         }
     };
+
+    private static void setAppBarLayout(ItemArticleAdapterBinding binding, Article article) {
+        // Using a listener to get state of CollapsingToolbar and Toolbar to set properties.
+        binding.detailAppbarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = false;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    // Show title until layout won't collapse.
+                    binding.detailCollapsingToolbarLayout.setTitle(article.getArticleTitle());
+                    isShow = true;
+                } else if (isShow) {
+                    // When completely scrolled remove title.
+                    binding.detailCollapsingToolbarLayout.setTitle("");
+                    isShow = false;
+                }
+            }
+        });
+    }
 }

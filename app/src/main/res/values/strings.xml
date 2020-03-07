@@ -9,4 +9,5 @@
     <string name="dark_menu_title">Dark</string>
     <string name="default_menu_title">Default</string>
     <string name="search_articles_hint">Search Articles</string>
+    <string name="favorites_title">Favorites</string>
 </resources>

@@ -17,7 +17,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.FragmentArticleDetailBinding;
 import com.developersbreach.xyzreader.model.Article;
-import com.developersbreach.xyzreader.repository.database.FavoriteEntity;
 import com.developersbreach.xyzreader.viewModel.ArticleDetailViewModel;
 import com.developersbreach.xyzreader.viewModel.factory.ArticleDetailViewModelFactory;
 
@@ -25,18 +24,19 @@ import java.util.Objects;
 
 public class ArticleDetailFragment extends Fragment {
 
+    private FragmentArticleDetailBinding mBinding;
     private ViewPager2 mDetailViewPager;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        FragmentArticleDetailBinding binding = DataBindingUtil.inflate(inflater,
+        mBinding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_article_detail, container, false);
-        mDetailViewPager = binding.detailViewPager;
+        mDetailViewPager = mBinding.detailViewPager;
 
-        binding.setLifecycleOwner(this);
-        return binding.getRoot();
+        mBinding.setLifecycleOwner(this);
+        return mBinding.getRoot();
     }
 
     @Override
@@ -53,11 +53,11 @@ public class ArticleDetailFragment extends Fragment {
         // objects for this class using NavigationComponent library.
         // get arguments with name and receive arguments from bundle.
         Article articleArgs = ArticleDetailFragmentArgs.fromBundle(args).getDetailFragmentArgs();
-        FavoriteEntity favoriteArgs = ArticleDetailFragmentArgs.fromBundle(args).getDetailFragmentFavoriteArgs();
+
         // Call factory for creating new instance of ViewModel for this fragment to observe data.
         // Pass application context and recipe object to the factory.
         ArticleDetailViewModelFactory factory =
-                new ArticleDetailViewModelFactory(application, articleArgs, favoriteArgs);
+                new ArticleDetailViewModelFactory(application, articleArgs);
         // Assign and get class ViewModel and pass fragment owner and factory to create instance
         // by calling ViewModelProviders.
 
