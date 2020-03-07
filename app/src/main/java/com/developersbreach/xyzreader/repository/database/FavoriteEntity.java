@@ -9,26 +9,26 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 
-@Entity(tableName = "articles_table")
-public class ArticleEntity implements Parcelable {
+@Entity(tableName = "favourite_table")
+public class FavoriteEntity implements Parcelable {
 
     @PrimaryKey
-    @ColumnInfo(name = "column_article_id")
+    @ColumnInfo(name = "column_favorite_id")
     private int mArticleId;
 
-    @ColumnInfo(name = "column_article_title")
+    @ColumnInfo(name = "column_favorite_title")
     private String mArticleTitle;
 
-    @ColumnInfo(name = "column_article_author_name")
+    @ColumnInfo(name = "column_favorite_author_name")
     private String mArticleAuthorName;
 
-    @ColumnInfo(name = "column_article_body")
+    @ColumnInfo(name = "column_favorite_body")
     private String mArticleBody;
 
-    @ColumnInfo(name = "column_article_thumbnail")
+    @ColumnInfo(name = "column_favorite_thumbnail")
     private String mArticleThumbnail;
 
-    @ColumnInfo(name = "column_article_published_date")
+    @ColumnInfo(name = "column_favorite_published_date")
     private String mArticlePublishedDate;
 
     /////////////////// Getters /////////////////////
@@ -83,14 +83,14 @@ public class ArticleEntity implements Parcelable {
         this.mArticlePublishedDate = articlePublishedDate;
     }
 
-    ///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
 
-    public ArticleEntity() {
+    public FavoriteEntity() {
     }
 
     @Ignore
-    public ArticleEntity(int id, String title, String authorName, String body, String thumbnail,
-                         String publishedDate) {
+    public FavoriteEntity(int id, String title, String authorName, String body, String thumbnail,
+                          String publishedDate) {
         this.mArticleId = id;
         this.mArticleTitle = title;
         this.mArticleAuthorName = authorName;
@@ -99,7 +99,9 @@ public class ArticleEntity implements Parcelable {
         this.mArticlePublishedDate = publishedDate;
     }
 
-    private ArticleEntity(Parcel in) {
+    ////////////////////////////////////////////////////////////////////////////
+
+    public FavoriteEntity(Parcel in) {
         mArticleId = in.readInt();
         mArticleTitle = in.readString();
         mArticleAuthorName = in.readString();
@@ -108,15 +110,15 @@ public class ArticleEntity implements Parcelable {
         mArticlePublishedDate = in.readString();
     }
 
-    public static final Creator<ArticleEntity> CREATOR = new Creator<ArticleEntity>() {
+    public static final Creator<FavoriteEntity> CREATOR = new Creator<FavoriteEntity>() {
         @Override
-        public ArticleEntity createFromParcel(Parcel in) {
-            return new ArticleEntity(in);
+        public FavoriteEntity createFromParcel(Parcel in) {
+            return new FavoriteEntity(in);
         }
 
         @Override
-        public ArticleEntity[] newArray(int size) {
-            return new ArticleEntity[size];
+        public FavoriteEntity[] newArray(int size) {
+            return new FavoriteEntity[size];
         }
     };
 
