@@ -7,34 +7,23 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.developersbreach.xyzreader.model.Article;
-import com.developersbreach.xyzreader.repository.database.FavoriteEntity;
-import com.developersbreach.xyzreader.view.detail.ArticleDetailFragment;
+import com.developersbreach.xyzreader.view.favorite.ArticleFavoritesViewModel;
 import com.developersbreach.xyzreader.viewModel.ArticleDetailViewModel;
 
-/**
- * A AndroidViewModelFactory for creating a instance of {@link ArticleDetailViewModel}
- * AndroidViewModel for fragment class {@link ArticleDetailFragment} with a constructor.
- */
-public class ArticleDetailViewModelFactory extends ViewModelProvider.AndroidViewModelFactory {
+public class FavoriteViewModelFactory extends ViewModelProvider.AndroidViewModelFactory {
 
     // Needs to to be passed as parameter for AndroidViewModel class.
     private final Application mApplication;
     // Parcel model class Recipe as argument.
-    private final Article mArticle;
-    private final FavoriteEntity mFavorite;
 
     /**
      * Creates a {@link ViewModelProvider.AndroidViewModelFactory}
      *
      * @param application parameter to pass in {@link AndroidViewModel}
-     * @param article        a user selected Recipe object to pass in {@link AndroidViewModel}
      */
-    public ArticleDetailViewModelFactory(@NonNull Application application, Article article, FavoriteEntity favoriteEntity) {
+    public FavoriteViewModelFactory(@NonNull Application application) {
         super(application);
         this.mApplication = application;
-        this.mArticle = article;
-        this.mFavorite = favoriteEntity;
     }
 
     /**
@@ -45,10 +34,10 @@ public class ArticleDetailViewModelFactory extends ViewModelProvider.AndroidView
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(ArticleDetailViewModel.class)) {
+        if (modelClass.isAssignableFrom(ArticleFavoritesViewModel.class)) {
             //noinspection unchecked
-            return (T) new ArticleDetailViewModel(mApplication, mArticle, mFavorite);
+            return (T) new ArticleFavoritesViewModel(mApplication);
         }
-        throw new IllegalArgumentException("Cannot create Instance for ArticleDetailViewModel class");
+        throw new IllegalArgumentException("Cannot create Instance for FavoriteViewModel class");
     }
 }

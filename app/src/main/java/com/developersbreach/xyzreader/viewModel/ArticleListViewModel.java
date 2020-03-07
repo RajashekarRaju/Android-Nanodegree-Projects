@@ -12,6 +12,7 @@ import com.developersbreach.xyzreader.XYZReaderApp;
 import com.developersbreach.xyzreader.model.Article;
 import com.developersbreach.xyzreader.repository.ArticleRepository;
 import com.developersbreach.xyzreader.repository.database.ArticleEntity;
+import com.developersbreach.xyzreader.repository.database.FavoriteEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +20,12 @@ import java.util.List;
 public class ArticleListViewModel extends AndroidViewModel {
 
     private final LiveData<List<Article>> mArticleList;
+    private ArticleRepository mRepository;
 
     public ArticleListViewModel(@NonNull Application application) {
         super(application);
-        final ArticleRepository repository = ((XYZReaderApp) application).getRepository();
-        LiveData<List<ArticleEntity>> liveArticleEntityData = repository.getArticles();
+        mRepository = ((XYZReaderApp) application).getRepository();
+        LiveData<List<ArticleEntity>> liveArticleEntityData = mRepository.getArticles();
 
         mArticleList = Transformations.switchMap(liveArticleEntityData, input -> {
             MutableLiveData<List<Article>> listLiveData = new MutableLiveData<>();
@@ -47,5 +49,17 @@ public class ArticleListViewModel extends AndroidViewModel {
 
     public LiveData<List<Article>> getArticleList() {
         return mArticleList;
+    }
+
+    public void insertFavoriteData(Article article) {
+        FavoriteEntity entity = new FavoriteEntity(
+                article.getArticleId(),
+                article.getArticleTitle(),
+                article.getArticleAuthorName(),
+                article.getArticleBody(),
+                article.getArticleThumbnail(),
+                article.getArticlePublishedDate()
+        );
+        mRepository.insertFavoriteArticle(entity);
     }
 }

@@ -24,6 +24,7 @@ import com.developersbreach.xyzreader.viewModel.ArticleListViewModel;
 public class ArticleListFragment extends Fragment {
 
     private RecyclerView mArticleRecyclerView;
+    private ArticleListViewModel viewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -40,10 +41,10 @@ public class ArticleListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ArticleListViewModel viewModel = new ViewModelProvider(this).get(ArticleListViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ArticleListViewModel.class);
 
         viewModel.getArticleList().observe(getViewLifecycleOwner(), articles -> {
-            ArticleAdapter adapter = new ArticleAdapter(new ArticleItemListener());
+            ArticleAdapter adapter = new ArticleAdapter(new ArticleItemListener(), new FavoriteItemListener());
             adapter.submitList(articles);
             mArticleRecyclerView.setAdapter(adapter);
         });
@@ -57,9 +58,16 @@ public class ArticleListFragment extends Fragment {
         @Override
         public void onArticleSelected(Article article, View view) {
             NavDirections direction = ArticleListFragmentDirections
-                    .actionArticleListFragmentToArticleDetailFragment(article);
+                    .actionArticleListFragmentToArticleDetailFragment(article, null);
             // Find NavController with view and navigate to destination using directions.
             Navigation.findNavController(view).navigate(direction);
+        }
+    }
+
+    private class FavoriteItemListener implements ArticleAdapter.FavoriteListener {
+        @Override
+        public void onFavouriteSelected(Article article, View view) {
+            viewModel.insertFavoriteData(article);
         }
     }
 }

@@ -17,6 +17,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.FragmentArticleDetailBinding;
 import com.developersbreach.xyzreader.model.Article;
+import com.developersbreach.xyzreader.repository.database.FavoriteEntity;
 import com.developersbreach.xyzreader.viewModel.ArticleDetailViewModel;
 import com.developersbreach.xyzreader.viewModel.factory.ArticleDetailViewModelFactory;
 
@@ -52,10 +53,11 @@ public class ArticleDetailFragment extends Fragment {
         // objects for this class using NavigationComponent library.
         // get arguments with name and receive arguments from bundle.
         Article articleArgs = ArticleDetailFragmentArgs.fromBundle(args).getDetailFragmentArgs();
+        FavoriteEntity favoriteArgs = ArticleDetailFragmentArgs.fromBundle(args).getDetailFragmentFavoriteArgs();
         // Call factory for creating new instance of ViewModel for this fragment to observe data.
         // Pass application context and recipe object to the factory.
         ArticleDetailViewModelFactory factory =
-                new ArticleDetailViewModelFactory(application, articleArgs);
+                new ArticleDetailViewModelFactory(application, articleArgs, favoriteArgs);
         // Assign and get class ViewModel and pass fragment owner and factory to create instance
         // by calling ViewModelProviders.
 
@@ -65,7 +67,6 @@ public class ArticleDetailFragment extends Fragment {
             DetailViewPagerAdapter adapter = new DetailViewPagerAdapter();
             adapter.submitList(articleList);
             mDetailViewPager.setAdapter(adapter);
-
             viewModel.selectedArticle().observe(getViewLifecycleOwner(), article ->
                     mDetailViewPager.setCurrentItem(article.getArticleId() - 1, false));
         });

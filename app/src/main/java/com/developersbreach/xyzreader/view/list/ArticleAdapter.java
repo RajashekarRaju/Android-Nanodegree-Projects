@@ -1,6 +1,5 @@
 package com.developersbreach.xyzreader.view.list;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,13 +29,16 @@ public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
      * The interface that receives onClick listener.
      */
     private final ArticleAdapterListener mListener;
+    private final FavoriteListener mFavoriteListener;
+
 
     /**
      * @param listener   create click listener on itemView.
      */
-    ArticleAdapter(ArticleAdapterListener listener) {
+    ArticleAdapter(ArticleAdapterListener listener, FavoriteListener favoriteListener) {
         super(DIFF_ITEM_CALLBACK);
         this.mListener = listener;
+        this.mFavoriteListener = favoriteListener;
     }
 
     /**
@@ -48,6 +50,10 @@ public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
          * @param view   used to create navigation with controller, which needs view.
          */
         void onArticleSelected(Article article, View view);
+    }
+
+    public interface FavoriteListener {
+        void onFavouriteSelected(Article article, View view);
     }
 
     /**
@@ -88,8 +94,8 @@ public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
         final Article article = getItem(position);
         holder.bind(article);
 
-        holder.mBinding.addToFavoriteImageView.setOnClickListener(v ->
-                Log.e("onBindViewHolder: ", "Checked " + position));
+        holder.mBinding.addToFavoriteImageView.setOnClickListener(view ->
+                mFavoriteListener.onFavouriteSelected(article, view));
 
         // Set click listener on itemView and pass arguments recipe, view for selected recipe.
         holder.itemView.setOnClickListener(

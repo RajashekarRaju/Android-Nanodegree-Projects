@@ -1,14 +1,11 @@
 package com.developersbreach.xyzreader.view.search;
 
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +26,6 @@ import java.util.Locale;
 public class SearchArticleFragment extends Fragment {
 
     private FragmentSearchArticleBinding mBinding;
-
     private SearchArticleViewModel mViewModel;
 
     @Override
@@ -38,7 +34,13 @@ public class SearchArticleFragment extends Fragment {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_article, container,
                 false);
 
+        setHomeNav();
         return mBinding.getRoot();
+    }
+
+    private void setHomeNav() {
+        mBinding.searchHeaderIncluded.homeButtonImageView.setOnClickListener(view ->
+                Navigation.findNavController(view).navigate(R.id.articleListFragment));
     }
 
     @Override
@@ -52,23 +54,7 @@ public class SearchArticleFragment extends Fragment {
             mBinding.searchRecyclerView.setAdapter(adapter);
         });
 
-        mBinding.searchHeaderIncluded.articleSearchEditText.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                filterWithViewModel(mBinding.searchRecyclerView, s.toString().toLowerCase(Locale.getDefault()));
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        mBinding.searchHeaderIncluded.articleSearchEditText.addTextChangedListener(new SearchTextListener());
     }
 
     private void filterWithViewModel(RecyclerView recyclerView, String query) {
@@ -89,9 +75,27 @@ public class SearchArticleFragment extends Fragment {
         @Override
         public void onSearchSelected(Article article, View view) {
             NavDirections direction = SearchArticleFragmentDirections
-                    .actionSearchArticleFragmentToArticleDetailFragment(article);
+                    .actionSearchArticleFragmentToArticleDetailFragment(article, null);
             // Find NavController with view and navigate to destination using directions.
             Navigation.findNavController(view).navigate(direction);
+        }
+    }
+
+    private class SearchTextListener implements TextWatcher {
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            filterWithViewModel(mBinding.searchRecyclerView, s.toString().toLowerCase(Locale.getDefault()));
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
         }
     }
 }
