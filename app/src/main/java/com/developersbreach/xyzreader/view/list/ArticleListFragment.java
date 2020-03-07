@@ -58,7 +58,7 @@ public class ArticleListFragment extends Fragment {
         @Override
         public void onArticleSelected(Article article, View view) {
             NavDirections direction = ArticleListFragmentDirections
-                    .actionArticleListFragmentToArticleDetailFragment(article, null);
+                    .actionArticleListFragmentToArticleDetailFragment(article);
             // Find NavController with view and navigate to destination using directions.
             Navigation.findNavController(view).navigate(direction);
         }

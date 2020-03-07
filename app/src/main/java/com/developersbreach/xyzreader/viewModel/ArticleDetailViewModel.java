@@ -12,7 +12,6 @@ import com.developersbreach.xyzreader.XYZReaderApp;
 import com.developersbreach.xyzreader.model.Article;
 import com.developersbreach.xyzreader.repository.ArticleRepository;
 import com.developersbreach.xyzreader.repository.database.ArticleEntity;
-import com.developersbreach.xyzreader.repository.database.FavoriteEntity;
 import com.developersbreach.xyzreader.view.list.ArticleListFragment;
 
 import java.util.ArrayList;
@@ -44,7 +43,7 @@ public class ArticleDetailViewModel extends AndroidViewModel {
      * @param article     parcel Recipe object with data for user selected recipe from
      *                    {@link ArticleListFragment}
      */
-    public ArticleDetailViewModel(@NonNull Application application, Article article, FavoriteEntity favoriteEntity) {
+    public ArticleDetailViewModel(@NonNull Application application, Article article) {
         super(application);
         final ArticleRepository repository = ((XYZReaderApp) application).getRepository();
 

@@ -24,10 +24,6 @@
             android:name="detailFragmentArgs"
             app:argType="com.developersbreach.xyzreader.model.Article"
             app:nullable="true" />
-        <argument
-            android:name="detailFragmentFavoriteArgs"
-            app:argType="com.developersbreach.xyzreader.repository.database.FavoriteEntity"
-            app:nullable="true" />
     </fragment>
 
     <fragment

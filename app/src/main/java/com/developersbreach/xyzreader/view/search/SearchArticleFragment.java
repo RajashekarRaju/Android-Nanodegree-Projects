@@ -75,7 +75,7 @@ public class SearchArticleFragment extends Fragment {
         @Override
         public void onSearchSelected(Article article, View view) {
             NavDirections direction = SearchArticleFragmentDirections
-                    .actionSearchArticleFragmentToArticleDetailFragment(article, null);
+                    .actionSearchArticleFragmentToArticleDetailFragment(article);
             // Find NavController with view and navigate to destination using directions.
             Navigation.findNavController(view).navigate(direction);
         }

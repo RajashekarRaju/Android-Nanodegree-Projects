@@ -17,7 +17,9 @@ import androidx.navigation.Navigation;
 
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.FragmentArticleFavoritesBinding;
+import com.developersbreach.xyzreader.model.Article;
 import com.developersbreach.xyzreader.repository.database.FavoriteEntity;
+import com.developersbreach.xyzreader.utils.SpaceItemDecoration;
 import com.developersbreach.xyzreader.viewModel.factory.FavoriteViewModelFactory;
 
 import java.util.Objects;
@@ -33,7 +35,20 @@ public class ArticleFavoritesFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_article_favorites, container, false);
+
+        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.rv_dimen);
+        mBinding.favoritesRecyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
+
+        setHomeNav();
+
         return mBinding.getRoot();
+    }
+
+    private void setHomeNav() {
+        mBinding.favoritesHeaderIncluded.headerTitle.setText(R.string.favorites_title);
+        mBinding.favoritesHeaderIncluded.favoritesHomeButtonImageView.setVisibility(View.VISIBLE);
+        mBinding.favoritesHeaderIncluded.favoritesHomeButtonImageView.setOnClickListener(view ->
+                Navigation.findNavController(view).navigate(R.id.articleListFragment));
     }
 
     @Override
@@ -60,8 +75,17 @@ public class ArticleFavoritesFragment extends Fragment {
     private static class DetailFavorite implements FavoriteAdapter.FavoriteDetailAdapterListener {
         @Override
         public void onFavoriteClickedDetail(FavoriteEntity favoriteEntity, View view) {
+
+            Article article = new Article(
+                    favoriteEntity.getArticleId(),
+                    favoriteEntity.getArticleTitle(),
+                    favoriteEntity.getArticleAuthorName(),
+                    favoriteEntity.getArticleBody(),
+                    favoriteEntity.getArticleThumbnail(),
+                    favoriteEntity.getArticlePublishedDate());
+
             NavDirections direction = ArticleFavoritesFragmentDirections
-                    .actionArticleFavoritesFragmentToArticleDetailFragment(null, favoriteEntity);
+                    .actionArticleFavoritesFragmentToArticleDetailFragment(article);
             // Find NavController with view and navigate to destination using directions.
             Navigation.findNavController(view).navigate(direction);
         }
