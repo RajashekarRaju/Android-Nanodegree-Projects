@@ -5,14 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
-            name="article"
-            type="com.developersbreach.xyzreader.model.Article" />
+            name="favoriteArticle"
+            type="com.developersbreach.xyzreader.repository.database.FavoriteEntity" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_view"
+        android:id="@+id/favorite_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="4dp"
@@ -23,8 +22,8 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/article_thumbnail_item_image_view"
-                articleThumbnail="@{article.articleThumbnail}"
+                android:id="@+id/favorite_article_thumbnail_item_image_view"
+                favoriteArticleThumbnail="@{favoriteArticle.articleThumbnail}"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
@@ -35,7 +34,7 @@
                 tools:ignore="ContentDescription" />
 
             <TextView
-                articlePublishedDate="@{article.articlePublishedDate}"
+                favoriteArticlePublishedDate="@{favoriteArticle.articlePublishedDate}"
                 android:id="@+id/published_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,11 +45,11 @@
                 app:layout_constraintBottom_toTopOf="@id/article_title_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/article_thumbnail_item_image_view" />
+                app:layout_constraintTop_toBottomOf="@id/favorite_article_thumbnail_item_image_view" />
 
             <TextView
                 android:id="@+id/article_title_text_view"
-                articleTitle="@{article.articleTitle}"
+                favoriteArticleTitle="@{favoriteArticle.articleTitle}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -82,7 +81,7 @@
 
             <TextView
                 android:id="@+id/article_author_item_image_view"
-                authorName="@{article.articleAuthorName}"
+                favoriteAuthorName="@{favoriteArticle.articleAuthorName}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -98,11 +97,11 @@
                 tools:text="@string/app_name" />
 
             <ImageView
-                android:id="@+id/add_to_favorite_image_view"
+                android:id="@+id/remove_favorite_image_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:padding="16dp"
-                android:src="@drawable/ic_add_favorite"
+                android:src="@drawable/ic_delete_favorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:ignore="ContentDescription" />
