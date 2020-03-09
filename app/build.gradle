@@ -45,8 +45,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.2.1'
     // Material
     implementation 'com.google.android.material:material:1.1.0'
-    // Palette
-    implementation 'androidx.palette:palette:1.0.0'
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     // ViewPager2
