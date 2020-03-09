@@ -24,19 +24,18 @@ import java.util.Objects;
 
 public class ArticleDetailFragment extends Fragment {
 
-    private FragmentArticleDetailBinding mBinding;
     private ViewPager2 mDetailViewPager;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        mBinding = DataBindingUtil.inflate(inflater,
+        FragmentArticleDetailBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_article_detail, container, false);
-        mDetailViewPager = mBinding.detailViewPager;
+        mDetailViewPager = binding.detailViewPager;
 
-        mBinding.setLifecycleOwner(this);
-        return mBinding.getRoot();
+        binding.setLifecycleOwner(this);
+        return binding.getRoot();
     }
 
     @Override

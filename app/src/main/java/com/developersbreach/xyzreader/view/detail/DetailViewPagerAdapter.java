@@ -20,6 +20,7 @@ import static com.developersbreach.xyzreader.view.detail.DetailViewPagerAdapter.
 
 public class DetailViewPagerAdapter extends ListAdapter<Article, ArticlePagerViewHolder> {
 
+
     DetailViewPagerAdapter() {
         super(DIFF_ITEM_CALLBACK);
     }
