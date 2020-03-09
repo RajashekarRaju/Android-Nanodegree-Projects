@@ -10,4 +10,7 @@
     <string name="default_menu_title">Default</string>
     <string name="search_articles_hint">Search Articles</string>
     <string name="favorites_title">Favorites</string>
+    <string name="no_search_results_found">No Results Found</string>
+    <string name="account_menu_item">Account</string>
+    <string name="no_favorites_found">No Favorites Found</string>
 </resources>

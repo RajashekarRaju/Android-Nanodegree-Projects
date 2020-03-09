@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <color name="article_black">#de000000</color>
     <color name="article_gray_50">#fafafa</color>
     <color name="article_gray_50_a600">#99fafafa</color>
@@ -11,5 +10,4 @@
     <color name="article_white">#deffffff</color>
     <color name="article_yellow_300">#f8f99f</color>
     <color name="article_yellow_500">#ffff63</color>
-
 </resources>
