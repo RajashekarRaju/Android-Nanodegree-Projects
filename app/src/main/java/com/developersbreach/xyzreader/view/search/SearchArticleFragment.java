@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.FragmentSearchArticleBinding;
 import com.developersbreach.xyzreader.model.Article;
+import com.developersbreach.xyzreader.viewModel.SearchArticleViewModel;
 
 import java.util.Locale;
 
@@ -74,7 +75,7 @@ public class SearchArticleFragment extends Fragment {
         @Override
         public void onSearchSelected(Article article, View view) {
             NavDirections direction = SearchArticleFragmentDirections
-                    .actionSearchArticleFragmentToArticleDetailFragment(article);
+                    .actionSearchArticleFragmentToArticleDetailFragment(article, SearchArticleFragment.class.getSimpleName());
             // Find NavController with view and navigate to destination using directions.
             Navigation.findNavController(view).navigate(direction);
         }

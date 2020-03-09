@@ -1,6 +1,6 @@
 package com.developersbreach.xyzreader.model;
 
-import com.developersbreach.xyzreader.repository.database.ArticleEntity;
+import com.developersbreach.xyzreader.repository.database.entity.ArticleEntity;
 
 public class Article extends ArticleEntity {
 

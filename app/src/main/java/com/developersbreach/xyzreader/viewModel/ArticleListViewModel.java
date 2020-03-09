@@ -11,8 +11,8 @@ import androidx.lifecycle.Transformations;
 import com.developersbreach.xyzreader.XYZReaderApp;
 import com.developersbreach.xyzreader.model.Article;
 import com.developersbreach.xyzreader.repository.ArticleRepository;
-import com.developersbreach.xyzreader.repository.database.ArticleEntity;
-import com.developersbreach.xyzreader.repository.database.FavoriteEntity;
+import com.developersbreach.xyzreader.repository.database.entity.ArticleEntity;
+import com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity;
 
 import java.util.ArrayList;
 import java.util.List;

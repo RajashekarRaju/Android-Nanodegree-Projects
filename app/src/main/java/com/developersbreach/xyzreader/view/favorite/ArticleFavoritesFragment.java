@@ -18,8 +18,9 @@ import androidx.navigation.Navigation;
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.FragmentArticleFavoritesBinding;
 import com.developersbreach.xyzreader.model.Article;
-import com.developersbreach.xyzreader.repository.database.FavoriteEntity;
+import com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity;
 import com.developersbreach.xyzreader.utils.SpaceItemDecoration;
+import com.developersbreach.xyzreader.viewModel.ArticleFavoritesViewModel;
 import com.developersbreach.xyzreader.viewModel.factory.FavoriteViewModelFactory;
 
 import java.util.Objects;
@@ -54,6 +55,7 @@ public class ArticleFavoritesFragment extends Fragment {
         Application application = activity.getApplication();
         FavoriteViewModelFactory factory = new FavoriteViewModelFactory(application);
         mViewModel = new ViewModelProvider(this, factory).get(ArticleFavoritesViewModel.class);
+
         mViewModel.getFavoriteList().observe(getViewLifecycleOwner(), favoriteList -> {
             FavoriteAdapter adapter = new FavoriteAdapter(new DeleteFavorite(), new DetailFavorite());
             adapter.submitList(favoriteList);
@@ -88,7 +90,7 @@ public class ArticleFavoritesFragment extends Fragment {
                     favoriteEntity.getArticlePublishedDate());
 
             NavDirections direction = ArticleFavoritesFragmentDirections
-                    .actionArticleFavoritesFragmentToArticleDetailFragment(article);
+                    .actionArticleFavoritesFragmentToArticleDetailFragment(article, ArticleFavoritesFragment.class.getSimpleName());
             // Find NavController with view and navigate to destination using directions.
             Navigation.findNavController(view).navigate(direction);
         }

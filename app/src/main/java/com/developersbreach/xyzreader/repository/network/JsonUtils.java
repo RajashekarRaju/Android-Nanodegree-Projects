@@ -2,7 +2,7 @@ package com.developersbreach.xyzreader.repository.network;
 
 import android.util.Log;
 
-import com.developersbreach.xyzreader.repository.database.ArticleEntity;
+import com.developersbreach.xyzreader.repository.database.entity.ArticleEntity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.ItemFavoriteBinding;
-import com.developersbreach.xyzreader.repository.database.FavoriteEntity;
+import com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity;
 
 public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteAdapter.FavoriteViewHolder> {
 
