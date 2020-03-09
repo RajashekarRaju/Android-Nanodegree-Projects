@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.developersbreach.xyzreader.model.Article;
-import com.developersbreach.xyzreader.repository.database.FavoriteEntity;
 import com.developersbreach.xyzreader.view.detail.ArticleDetailFragment;
 import com.developersbreach.xyzreader.viewModel.ArticleDetailViewModel;
 
