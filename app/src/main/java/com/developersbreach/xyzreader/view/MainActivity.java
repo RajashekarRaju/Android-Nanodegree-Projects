@@ -49,11 +49,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-
                 case R.id.articleListFragment:
                 case R.id.searchArticleFragment:
                 case R.id.articleFavoritesFragment:
-                case R.id.accountFragment:
                     NavigationUI.onNavDestinationSelected(item, mNavigationController);
                     break;
             }
