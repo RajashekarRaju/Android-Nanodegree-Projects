@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/theme_bottom_menu_item"
-        android:icon="@drawable/ic_theme"
-        android:title="@string/theme_menu_item" />
+        android:id="@id/articleListFragment"
+        android:icon="@drawable/ic_article_icon"
+        android:title="@string/articles_header_title" />
 
     <item
         android:id="@id/searchArticleFragment"
