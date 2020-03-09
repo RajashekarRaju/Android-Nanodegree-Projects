@@ -38,17 +38,13 @@ public class ArticleFavoritesFragment extends Fragment {
 
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.rv_dimen);
         mBinding.favoritesRecyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
-
-        setHomeNav();
-
+        setFragmentToolbar();
         return mBinding.getRoot();
     }
 
-    private void setHomeNav() {
-        mBinding.favoritesHeaderIncluded.headerTitle.setText(R.string.favorites_title);
-        mBinding.favoritesHeaderIncluded.favoritesHomeButtonImageView.setVisibility(View.VISIBLE);
-        mBinding.favoritesHeaderIncluded.favoritesHomeButtonImageView.setOnClickListener(view ->
-                Navigation.findNavController(view).navigate(R.id.articleListFragment));
+    private void setFragmentToolbar() {
+        mBinding.favoritesToolbarContent.headerTitle.setText(R.string.favorites_title);
+        mBinding.favoritesToolbarContent.themeImageView.setVisibility(View.GONE);
     }
 
     @Override
@@ -58,10 +54,17 @@ public class ArticleFavoritesFragment extends Fragment {
         Application application = activity.getApplication();
         FavoriteViewModelFactory factory = new FavoriteViewModelFactory(application);
         mViewModel = new ViewModelProvider(this, factory).get(ArticleFavoritesViewModel.class);
-        mViewModel.getFavoriteList().observe(getViewLifecycleOwner(), favoriteEntities -> {
+        mViewModel.getFavoriteList().observe(getViewLifecycleOwner(), favoriteList -> {
             FavoriteAdapter adapter = new FavoriteAdapter(new DeleteFavorite(), new DetailFavorite());
-            adapter.submitList(favoriteEntities);
+            adapter.submitList(favoriteList);
             mBinding.favoritesRecyclerView.setAdapter(adapter);
+            if (favoriteList.size() == 0) {
+                mBinding.favoritesRecyclerView.setVisibility(View.INVISIBLE);
+                mBinding.noFavoritesFoundText.setVisibility(View.VISIBLE);
+            } else {
+                mBinding.favoritesRecyclerView.setVisibility(View.VISIBLE);
+                mBinding.noFavoritesFoundText.setVisibility(View.INVISIBLE);
+            }
         });
     }
 

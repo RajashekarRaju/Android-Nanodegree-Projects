@@ -34,13 +34,11 @@
             app:textAllCaps="true" />
 
         <ImageView
-            android:id="@+id/favorites_home_button_image_view"
-            android:src="@drawable/ic_home"
+            android:id="@+id/theme_image_view"
+            android:src="@drawable/ic_theme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:visibility="gone"
-            android:tint="#F6EBBC"
             android:layout_marginEnd="16dp"
             android:layout_width="24dp"
             android:layout_height="24dp"

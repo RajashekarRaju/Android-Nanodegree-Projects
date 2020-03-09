@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.FragmentSearchArticleBinding;
@@ -33,14 +32,7 @@ public class SearchArticleFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_article, container,
                 false);
-
-        setHomeNav();
         return mBinding.getRoot();
-    }
-
-    private void setHomeNav() {
-        mBinding.searchHeaderIncluded.homeButtonImageView.setOnClickListener(view ->
-                Navigation.findNavController(view).navigate(R.id.articleListFragment));
     }
 
     @Override
@@ -57,12 +49,19 @@ public class SearchArticleFragment extends Fragment {
         mBinding.searchHeaderIncluded.articleSearchEditText.addTextChangedListener(new SearchTextListener());
     }
 
-    private void filterWithViewModel(RecyclerView recyclerView, String query) {
+    private void filterWithViewModel(String query) {
         mViewModel.onFilterChanged(query).observe(getViewLifecycleOwner(), articleList -> {
             if (!query.isEmpty()) {
                 SearchAdapter adapter = new SearchAdapter(new SearchItemListener());
                 adapter.submitList(articleList);
-                recyclerView.setAdapter(adapter);
+                mBinding.searchRecyclerView.setAdapter(adapter);
+                if (articleList.size() == 0) {
+                    mBinding.searchRecyclerView.setVisibility(View.INVISIBLE);
+                    mBinding.noSearchResultsFoundText.setVisibility(View.VISIBLE);
+                } else {
+                    mBinding.searchRecyclerView.setVisibility(View.VISIBLE);
+                    mBinding.noSearchResultsFoundText.setVisibility(View.INVISIBLE);
+                }
             }
         });
     }
@@ -90,7 +89,7 @@ public class SearchArticleFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            filterWithViewModel(mBinding.searchRecyclerView, s.toString().toLowerCase(Locale.getDefault()));
+            filterWithViewModel(s.toString().toLowerCase(Locale.getDefault()));
         }
 
         @Override

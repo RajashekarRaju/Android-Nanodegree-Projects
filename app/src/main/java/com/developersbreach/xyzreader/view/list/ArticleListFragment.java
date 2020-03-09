@@ -1,5 +1,6 @@
 package com.developersbreach.xyzreader.view.list;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.FragmentArticleListBinding;
 import com.developersbreach.xyzreader.model.Article;
 import com.developersbreach.xyzreader.utils.SpaceItemDecoration;
+import com.developersbreach.xyzreader.utils.ThemePreferencesManager;
 import com.developersbreach.xyzreader.viewModel.ArticleListViewModel;
 
 
@@ -25,17 +27,28 @@ public class ArticleListFragment extends Fragment {
 
     private RecyclerView mArticleRecyclerView;
     private ArticleListViewModel viewModel;
+    private FragmentArticleListBinding mBinding;
+    private ThemePreferencesManager mPreferenceManager;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        FragmentArticleListBinding binding = DataBindingUtil.inflate(inflater,
+        mBinding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_article_list, container, false);
 
-        mArticleRecyclerView = binding.articlesRecyclerView;
+        mArticleRecyclerView = mBinding.articlesRecyclerView;
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.rv_dimen);
         mArticleRecyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
-        return binding.getRoot();
+        setFragmentToolbar(getContext());
+        return mBinding.getRoot();
+    }
+
+    private void setFragmentToolbar(Context context) {
+        mBinding.articlesToolbarContent.themeImageView.setVisibility(View.VISIBLE);
+        mPreferenceManager = new ThemePreferencesManager(context);
+        mPreferenceManager.applyTheme();
+        mBinding.articlesToolbarContent.themeImageView.setOnClickListener(view ->
+                mPreferenceManager.showThemePopUp(mBinding.articlesToolbarContent.themeImageView));
     }
 
     @Override
