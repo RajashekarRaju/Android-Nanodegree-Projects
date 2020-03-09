@@ -4,9 +4,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
 import com.developersbreach.xyzreader.repository.database.ArticleDatabase;
-import com.developersbreach.xyzreader.repository.database.ArticleEntity;
-import com.developersbreach.xyzreader.repository.database.FavoriteEntity;
+import com.developersbreach.xyzreader.repository.database.entity.ArticleEntity;
+import com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity;
+import com.developersbreach.xyzreader.repository.network.JsonUtils;
+import com.developersbreach.xyzreader.repository.network.ResponseBuilder;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ArticleRepository {
@@ -24,7 +27,7 @@ public class ArticleRepository {
         mObservableArticles.addSource(database.articleDao().loadAllArticles(),
                 mObservableArticles::postValue);
 
-        mObservableFavoriteList.addSource(database.articleDao().loadFavouriteArticles(),
+        mObservableFavoriteList.addSource(database.favoriteDao().loadFavouriteArticles(),
                 mObservableFavoriteList::postValue);
     }
 
@@ -51,10 +54,24 @@ public class ArticleRepository {
     }
 
     public void insertFavoriteArticle(FavoriteEntity article) {
-        AppExecutors.getInstance().databaseThread().execute(() -> mDatabase.articleDao().insertFavorite(article));
+        AppExecutors.getInstance().databaseThread().execute(() -> mDatabase.favoriteDao().insertFavorites(article));
     }
 
     public void deleteFavoriteArticle(FavoriteEntity article) {
-        AppExecutors.getInstance().databaseThread().execute(() -> mDatabase.articleDao().deleteFavorite(article));
+        AppExecutors.getInstance().databaseThread().execute(() -> mDatabase.favoriteDao().deleteFavorite(article));
+    }
+
+    public void refreshArticleData() {
+        AppExecutors.getInstance().databaseThread().execute(() -> {
+            try {
+                String responseString = ResponseBuilder.startResponse();
+                List<ArticleEntity> articleEntityList = JsonUtils.fetchArticleJsonData(responseString);
+                mDatabase.favoriteDao().deleteAllFavorites();
+                mDatabase.articleDao().deleteAllArticles();
+                mDatabase.articleDao().insertArticles(articleEntityList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
