@@ -1,4 +1,4 @@
-package com.developersbreach.xyzreader.view.favorite;
+package com.developersbreach.xyzreader.viewModel;
 
 import android.app.Application;
 
@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.developersbreach.xyzreader.XYZReaderApp;
 import com.developersbreach.xyzreader.repository.ArticleRepository;
-import com.developersbreach.xyzreader.repository.database.FavoriteEntity;
+import com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity;
 
 import java.util.List;
 
@@ -25,11 +25,11 @@ public class ArticleFavoritesViewModel extends AndroidViewModel {
         mFavoriteList = mRepository.getFavoriteList();
     }
 
-    LiveData<List<FavoriteEntity>> getFavoriteList() {
+    public LiveData<List<FavoriteEntity>> getFavoriteList() {
         return mFavoriteList;
     }
 
-    void deleteFavoriteData(FavoriteEntity favoriteEntity) {
+    public void deleteFavoriteData(FavoriteEntity favoriteEntity) {
         mRepository.deleteFavoriteArticle(favoriteEntity);
     }
 }

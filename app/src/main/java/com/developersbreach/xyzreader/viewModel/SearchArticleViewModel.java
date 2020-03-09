@@ -1,4 +1,4 @@
-package com.developersbreach.xyzreader.view.search;
+package com.developersbreach.xyzreader.viewModel;
 
 import android.app.Application;
 
@@ -12,7 +12,7 @@ import com.developersbreach.xyzreader.XYZReaderApp;
 import com.developersbreach.xyzreader.model.Article;
 import com.developersbreach.xyzreader.repository.AppExecutors;
 import com.developersbreach.xyzreader.repository.ArticleRepository;
-import com.developersbreach.xyzreader.repository.database.ArticleEntity;
+import com.developersbreach.xyzreader.repository.database.entity.ArticleEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +49,7 @@ public class SearchArticleViewModel extends AndroidViewModel {
         });
     }
 
-    LiveData<List<Article>> getArticleList() {
+    public LiveData<List<Article>> getArticleList() {
         return mArticleList;
     }
 
@@ -65,7 +65,7 @@ public class SearchArticleViewModel extends AndroidViewModel {
         });
     }
 
-    MutableLiveData<List<Article>> onFilterChanged(String filterQuery) {
+    public MutableLiveData<List<Article>> onFilterChanged(String filterQuery) {
         onQueryChanged(filterQuery);
         return mSearchList;
     }

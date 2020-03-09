@@ -1,4 +1,4 @@
-package com.developersbreach.xyzreader.repository.database;
+package com.developersbreach.xyzreader.repository.database.entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -59,27 +59,27 @@ public class FavoriteEntity implements Parcelable {
 
     ////////////////////// Setters ///////////////////////////////////////
 
-    void setArticleId(int id) {
+    public void setArticleId(int id) {
         this.mArticleId = id;
     }
 
-    void setArticleTitle(String articleTitle) {
+    public void setArticleTitle(String articleTitle) {
         this.mArticleTitle = articleTitle;
     }
 
-    void setArticleAuthorName(String authorName) {
+    public void setArticleAuthorName(String authorName) {
         this.mArticleAuthorName = authorName;
     }
 
-    void setArticleBody(String articleBody) {
+    public void setArticleBody(String articleBody) {
         this.mArticleBody = articleBody;
     }
 
-    void setArticleThumbnail(String articleThumbnail) {
+    public void setArticleThumbnail(String articleThumbnail) {
         this.mArticleThumbnail = articleThumbnail;
     }
 
-    void setArticlePublishedDate(String articlePublishedDate) {
+    public void setArticlePublishedDate(String articlePublishedDate) {
         this.mArticlePublishedDate = articlePublishedDate;
     }
 

@@ -7,7 +7,7 @@
     <data>
         <variable
             name="favoriteArticle"
-            type="com.developersbreach.xyzreader.repository.database.FavoriteEntity" />
+            type="com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
