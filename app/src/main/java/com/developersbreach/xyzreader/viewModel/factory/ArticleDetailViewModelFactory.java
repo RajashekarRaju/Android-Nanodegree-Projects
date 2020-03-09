@@ -21,6 +21,7 @@ public class ArticleDetailViewModelFactory extends ViewModelProvider.AndroidView
     private final Application mApplication;
     // Parcel model class Recipe as argument.
     private final Article mArticle;
+    private final String mFragmentName;
 
     /**
      * Creates a {@link ViewModelProvider.AndroidViewModelFactory}
@@ -28,10 +29,11 @@ public class ArticleDetailViewModelFactory extends ViewModelProvider.AndroidView
      * @param application parameter to pass in {@link AndroidViewModel}
      * @param article        a user selected Recipe object to pass in {@link AndroidViewModel}
      */
-    public ArticleDetailViewModelFactory(@NonNull Application application, Article article) {
+    public ArticleDetailViewModelFactory(@NonNull Application application, Article article, String fragmentName) {
         super(application);
         this.mApplication = application;
         this.mArticle = article;
+        this.mFragmentName = fragmentName;
     }
 
     /**
@@ -44,7 +46,7 @@ public class ArticleDetailViewModelFactory extends ViewModelProvider.AndroidView
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(ArticleDetailViewModel.class)) {
             //noinspection unchecked
-            return (T) new ArticleDetailViewModel(mApplication, mArticle);
+            return (T) new ArticleDetailViewModel(mApplication, mArticle, mFragmentName);
         }
         throw new IllegalArgumentException("Cannot create Instance for ArticleDetailViewModel class");
     }

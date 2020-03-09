@@ -52,16 +52,16 @@ public class ArticleDetailFragment extends Fragment {
         // objects for this class using NavigationComponent library.
         // get arguments with name and receive arguments from bundle.
         Article articleArgs = ArticleDetailFragmentArgs.fromBundle(args).getDetailFragmentArgs();
+        String fragmentNameArgs = ArticleDetailFragmentArgs.fromBundle(args).getFragmentNameArgs();
 
         // Call factory for creating new instance of ViewModel for this fragment to observe data.
         // Pass application context and recipe object to the factory.
         ArticleDetailViewModelFactory factory =
-                new ArticleDetailViewModelFactory(application, articleArgs);
+                new ArticleDetailViewModelFactory(application, articleArgs, fragmentNameArgs);
         // Assign and get class ViewModel and pass fragment owner and factory to create instance
         // by calling ViewModelProviders.
 
         ArticleDetailViewModel viewModel = new ViewModelProvider(this, factory).get(ArticleDetailViewModel.class);
-
         viewModel.getMutableArticleList().observe(getViewLifecycleOwner(), articleList -> {
             DetailViewPagerAdapter adapter = new DetailViewPagerAdapter();
             adapter.submitList(articleList);
@@ -69,6 +69,9 @@ public class ArticleDetailFragment extends Fragment {
             viewModel.selectedArticle().observe(getViewLifecycleOwner(), article ->
                     mDetailViewPager.setCurrentItem(article.getArticleId() - 1, false));
         });
+
+        viewModel.getFragmentValue().observe(getViewLifecycleOwner(), fragmentValue ->
+                mDetailViewPager.setUserInputEnabled(fragmentValue));
     }
 
 }

@@ -11,8 +11,10 @@ import androidx.lifecycle.Transformations;
 import com.developersbreach.xyzreader.XYZReaderApp;
 import com.developersbreach.xyzreader.model.Article;
 import com.developersbreach.xyzreader.repository.ArticleRepository;
-import com.developersbreach.xyzreader.repository.database.ArticleEntity;
+import com.developersbreach.xyzreader.repository.database.entity.ArticleEntity;
+import com.developersbreach.xyzreader.view.favorite.ArticleFavoritesFragment;
 import com.developersbreach.xyzreader.view.list.ArticleListFragment;
+import com.developersbreach.xyzreader.view.search.SearchArticleFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,7 @@ public class ArticleDetailViewModel extends AndroidViewModel {
      */
     private MutableLiveData<Article> _mMutableArticle;
     private LiveData<List<Article>> _mMutableArticleList;
+    private MutableLiveData<Boolean> mFragmentValue;
 
     /**
      * fragment to observe changes. Data is observed once changes will be done internally.
@@ -38,17 +41,34 @@ public class ArticleDetailViewModel extends AndroidViewModel {
         return _mMutableArticleList;
     }
 
+    public MutableLiveData<Boolean> getFragmentValue() {
+        return mFragmentValue;
+    }
+
     /**
      * @param application provides application context for ViewModel.
      * @param article     parcel Recipe object with data for user selected recipe from
      *                    {@link ArticleListFragment}
+     * @param fragmentName name
      */
-    public ArticleDetailViewModel(@NonNull Application application, Article article) {
+    public ArticleDetailViewModel(@NonNull Application application, Article article, String fragmentName) {
         super(application);
         final ArticleRepository repository = ((XYZReaderApp) application).getRepository();
 
         getMutableArticleDetailsData(article);
         getMutableArticleDetailListData(repository);
+        getMutableFragmentNameData(fragmentName);
+    }
+
+    private void getMutableFragmentNameData(String fragmentName) {
+        mFragmentValue = new MutableLiveData<>();
+        if (fragmentName.equals(ArticleListFragment.class.getSimpleName())) {
+            mFragmentValue.postValue(true);
+        } else if (fragmentName.equals(SearchArticleFragment.class.getSimpleName())) {
+            mFragmentValue.postValue(false);
+        } else if (fragmentName.equals(ArticleFavoritesFragment.class.getSimpleName())) {
+            mFragmentValue.postValue(false);
+        }
     }
 
     private void getMutableArticleDetailListData(ArticleRepository repository) {

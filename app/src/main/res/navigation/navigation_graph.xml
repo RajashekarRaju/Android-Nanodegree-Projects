@@ -23,6 +23,9 @@
             android:name="detailFragmentArgs"
             app:argType="com.developersbreach.xyzreader.model.Article"
             app:nullable="true" />
+        <argument
+            android:name="fragmentNameArgs"
+            app:argType="string" />
     </fragment>
 
     <fragment
