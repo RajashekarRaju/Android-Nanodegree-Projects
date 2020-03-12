@@ -33,7 +33,6 @@ public class ArticleDetailFragment extends Fragment {
         FragmentArticleDetailBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_article_detail, container, false);
         mDetailViewPager = binding.detailViewPager;
-
         binding.setLifecycleOwner(this);
         return binding.getRoot();
     }

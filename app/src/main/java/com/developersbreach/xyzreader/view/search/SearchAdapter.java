@@ -1,7 +1,6 @@
 package com.developersbreach.xyzreader.view.search;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -16,28 +15,9 @@ import com.developersbreach.xyzreader.model.Article;
 
 public class SearchAdapter extends ListAdapter<Article, SearchAdapter.SearchViewHolder> {
 
-    /**
-     * The interface that receives onClick listener.
-     */
-    private final SearchAdapter.SearchAdapterListener mListener;
 
-    /**
-     * @param listener   create click listener on itemView.
-     */
-    SearchAdapter(SearchAdapter.SearchAdapterListener listener) {
+    SearchAdapter() {
         super(DIFF_ITEM_CALLBACK);
-        this.mListener = listener;
-    }
-
-    /**
-     * The interface that receives onClick listener.
-     */
-    public interface SearchAdapterListener {
-        /**
-         * @param article get recipes from selected list of recipes.
-         * @param view   used to create navigation with controller, which needs view.
-         */
-        void onSearchSelected(Article article, View view);
     }
 
     /**
@@ -77,10 +57,6 @@ public class SearchAdapter extends ListAdapter<Article, SearchAdapter.SearchView
     public void onBindViewHolder(@NonNull final SearchViewHolder holder, final int position) {
         final Article article = getItem(position);
         holder.bind(article);
-
-        // Set click listener on itemView and pass arguments recipe, view for selected recipe.
-        holder.itemView.setOnClickListener(
-                view -> mListener.onSearchSelected(article, view));
     }
 
     /**

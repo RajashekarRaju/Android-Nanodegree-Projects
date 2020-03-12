@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="searchArticle"
             type="com.developersbreach.xyzreader.model.Article" />
@@ -15,6 +16,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            searchArticleClickListener="@{searchArticle}"
             android:text="@{searchArticle.articleTitle}"
             android:id="@+id/article_name_search_item_text_view"
             android:layout_width="wrap_content"

@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="articleDetail"
+            name="article"
             type="com.developersbreach.xyzreader.model.Article" />
     </data>
 
@@ -19,6 +19,8 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/detail_appbarLayout"
+            collapsingToolbarLayout="@{detailCollapsingToolbarLayout}"
+            detailAppBarLayout="@{article}"
             android:layout_width="match_parent"
             android:layout_height="278dp"
             android:background="?attr/colorSurface"
@@ -38,19 +40,20 @@
 
                 <ImageView
                     android:id="@+id/detail_image"
-                    detailThumbnail="@{articleDetail.articleThumbnail}"
+                    detailThumbnail="@{article.articleThumbnail}"
                     android:layout_width="match_parent"
                     android:layout_height="278dp"
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
+                    android:transitionName="@{article.articleTitle}"
                     app:layout_collapseMode="parallax"
                     tools:ignore="ContentDescription" />
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/detail_toolbar"
                     android:layout_width="match_parent"
-                    android:background="@android:color/transparent"
                     android:layout_height="?attr/actionBarSize"
+                    android:background="@android:color/transparent"
                     app:layout_collapseMode="pin"
                     app:navigationIcon="@drawable/ic_up_button" />
 
@@ -65,44 +68,44 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp">
 
                 <TextView
                     android:id="@+id/article_author_detail_text_view"
-                    authorDetailName="@{articleDetail.articleAuthorName}"
+                    authorDetailName="@{article.articleAuthorName}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:fontFamily="@font/rubik_medium"
                     android:gravity="center"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:textColor="#FF0266"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="16dp"
-                    android:textColor="#FF0266"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="@string/app_name" />
 
                 <TextView
                     android:id="@+id/article_title_detail_text_view"
-                    titleDetailName="@{articleDetail.articleTitle}"
+                    titleDetailName="@{article.articleTitle}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/rubik_medium"
                     android:gravity="center"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                    android:textColor="@color/article_black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/article_black"
                     app:layout_constraintTop_toBottomOf="@id/article_author_detail_text_view"
                     tools:text="@string/app_name" />
 
                 <TextView
                     android:id="@+id/article_body_detail_text_view"
-                    asyncArticleBodyTitle="@{articleDetail.articleBody}"
+                    asyncArticleBodyTitle="@{article.articleBody}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -116,6 +119,18 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_share_article"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            fabClick="@{article}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:backgroundTint="?attr/colorSecondary"
+            android:src="@drawable/ic_share"
+            app:rippleColor="?attr/colorOnSecondary" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

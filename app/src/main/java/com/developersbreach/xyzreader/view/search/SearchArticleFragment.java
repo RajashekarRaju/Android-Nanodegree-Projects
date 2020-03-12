@@ -12,12 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.FragmentSearchArticleBinding;
-import com.developersbreach.xyzreader.model.Article;
 import com.developersbreach.xyzreader.viewModel.SearchArticleViewModel;
 
 import java.util.Locale;
@@ -42,7 +39,7 @@ public class SearchArticleFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(SearchArticleViewModel.class);
 
         mViewModel.getArticleList().observe(getViewLifecycleOwner(), articleList -> {
-            SearchAdapter adapter = new SearchAdapter(new SearchItemListener());
+            SearchAdapter adapter = new SearchAdapter();
             adapter.submitList(articleList);
             mBinding.searchRecyclerView.setAdapter(adapter);
         });
@@ -53,7 +50,7 @@ public class SearchArticleFragment extends Fragment {
     private void filterWithViewModel(String query) {
         mViewModel.onFilterChanged(query).observe(getViewLifecycleOwner(), articleList -> {
             if (!query.isEmpty()) {
-                SearchAdapter adapter = new SearchAdapter(new SearchItemListener());
+                SearchAdapter adapter = new SearchAdapter();
                 adapter.submitList(articleList);
                 mBinding.searchRecyclerView.setAdapter(adapter);
                 if (articleList.size() == 0) {
@@ -67,20 +64,6 @@ public class SearchArticleFragment extends Fragment {
         });
     }
 
-    private static class SearchItemListener implements SearchAdapter.SearchAdapterListener {
-        /**
-         * @param article get recipes from selected list of recipes.
-         * @param view    used to create navigation with controller, which needs view.
-         */
-        @Override
-        public void onSearchSelected(Article article, View view) {
-            NavDirections direction = SearchArticleFragmentDirections
-                    .actionSearchArticleFragmentToArticleDetailFragment(article, SearchArticleFragment.class.getSimpleName());
-            // Find NavController with view and navigate to destination using directions.
-            Navigation.findNavController(view).navigate(direction);
-        }
-    }
-
     private class SearchTextListener implements TextWatcher {
 
         @Override
@@ -89,8 +72,8 @@ public class SearchArticleFragment extends Fragment {
         }
 
         @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            filterWithViewModel(s.toString().toLowerCase(Locale.getDefault()));
+        public void onTextChanged(CharSequence query, int start, int before, int count) {
+            filterWithViewModel(query.toString().toLowerCase(Locale.getDefault()));
         }
 
         @Override

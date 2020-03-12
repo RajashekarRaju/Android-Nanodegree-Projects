@@ -1,7 +1,6 @@
 package com.developersbreach.xyzreader.view.favorite;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -13,24 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.ItemFavoriteBinding;
 import com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity;
+import com.developersbreach.xyzreader.viewModel.ArticleFavoritesViewModel;
 
 public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteAdapter.FavoriteViewHolder> {
 
-    private FavoriteDeleteAdapterListener mDeleteListener;
-    private FavoriteDetailAdapterListener mDetailListener;
+    private final ArticleFavoritesViewModel mViewModel;
+    private final ArticleFavoritesFragment mFragment;
 
-    FavoriteAdapter(FavoriteDeleteAdapterListener deleteListener, FavoriteDetailAdapterListener detailListener) {
+    FavoriteAdapter(ArticleFavoritesViewModel viewModel, ArticleFavoritesFragment fragment) {
         super(DIFF_ITEM_CALLBACK);
-        this.mDeleteListener = deleteListener;
-        this.mDetailListener = detailListener;
-    }
-
-    public interface FavoriteDeleteAdapterListener {
-        void onFavoriteClickedDelete(FavoriteEntity favoriteEntity);
-    }
-
-    public interface FavoriteDetailAdapterListener {
-        void onFavoriteClickedDetail(FavoriteEntity favoriteEntity, View view);
+        this.mViewModel = viewModel;
+        this.mFragment = fragment;
     }
 
     /**
@@ -46,8 +38,10 @@ public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteAdapter
             this.mBinding = binding;
         }
 
-        void bind(final FavoriteEntity article) {
+        void bind(final FavoriteEntity article, ArticleFavoritesViewModel viewModel, ArticleFavoritesFragment fragment) {
             mBinding.setFavoriteArticle(article);
+            mBinding.setViewModel(viewModel);
+            mBinding.setActivity(fragment.getActivity());
             // Force DataBinding to execute binding views immediately.
             mBinding.executePendingBindings();
         }
@@ -56,13 +50,7 @@ public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteAdapter
     @Override
     public void onBindViewHolder(@NonNull final FavoriteViewHolder holder, final int position) {
         final FavoriteEntity favoriteEntity = getItem(position);
-        holder.bind(favoriteEntity);
-
-        holder.mBinding.removeFavoriteImageView.setOnClickListener(
-                view -> mDeleteListener.onFavoriteClickedDelete(favoriteEntity));
-
-        holder.itemView.setOnClickListener(
-                view -> mDetailListener.onFavoriteClickedDetail(favoriteEntity, view));
+        holder.bind(favoriteEntity, mViewModel, mFragment);
     }
 
     @NonNull

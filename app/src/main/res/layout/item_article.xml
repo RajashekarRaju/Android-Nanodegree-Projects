@@ -9,10 +9,19 @@
         <variable
             name="article"
             type="com.developersbreach.xyzreader.model.Article" />
+
+        <variable
+            name="viewModel"
+            type="com.developersbreach.xyzreader.viewModel.ArticleListViewModel" />
+
+        <variable
+            name="activity"
+            type="android.app.Activity" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_view"
+        articleClickListener="@{article}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="4dp"
@@ -25,6 +34,7 @@
             <ImageView
                 android:id="@+id/article_thumbnail_item_image_view"
                 articleThumbnail="@{article.articleThumbnail}"
+                android:transitionName="@{article.articleTitle}"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleType="centerCrop"
@@ -98,6 +108,9 @@
                 tools:text="@string/app_name" />
 
             <ImageView
+                insertFavoriteClickListener="@{article}"
+                viewModel="@{viewModel}"
+                activity="@{activity}"
                 android:id="@+id/add_to_favorite_image_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

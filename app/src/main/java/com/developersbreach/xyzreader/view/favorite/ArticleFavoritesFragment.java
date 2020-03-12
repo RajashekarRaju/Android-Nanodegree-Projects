@@ -12,13 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.FragmentArticleFavoritesBinding;
-import com.developersbreach.xyzreader.model.Article;
-import com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity;
 import com.developersbreach.xyzreader.utils.SpaceItemDecoration;
 import com.developersbreach.xyzreader.viewModel.ArticleFavoritesViewModel;
 import com.developersbreach.xyzreader.viewModel.factory.FavoriteViewModelFactory;
@@ -51,13 +47,15 @@ public class ArticleFavoritesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         Activity activity = Objects.requireNonNull(getActivity());
         Application application = activity.getApplication();
+
         FavoriteViewModelFactory factory = new FavoriteViewModelFactory(application);
         mViewModel = new ViewModelProvider(this, factory).get(ArticleFavoritesViewModel.class);
 
         mViewModel.getFavoriteList().observe(getViewLifecycleOwner(), favoriteList -> {
-            FavoriteAdapter adapter = new FavoriteAdapter(new DeleteFavorite(), new DetailFavorite());
+            FavoriteAdapter adapter = new FavoriteAdapter(mViewModel, this);
             adapter.submitList(favoriteList);
             mBinding.favoritesRecyclerView.setAdapter(adapter);
             if (favoriteList.size() == 0) {
@@ -68,31 +66,5 @@ public class ArticleFavoritesFragment extends Fragment {
                 mBinding.noFavoritesFoundText.setVisibility(View.INVISIBLE);
             }
         });
-    }
-
-    private class DeleteFavorite implements FavoriteAdapter.FavoriteDeleteAdapterListener {
-        @Override
-        public void onFavoriteClickedDelete(FavoriteEntity favoriteEntity) {
-            mViewModel.deleteFavoriteData(favoriteEntity);
-        }
-    }
-
-    private static class DetailFavorite implements FavoriteAdapter.FavoriteDetailAdapterListener {
-        @Override
-        public void onFavoriteClickedDetail(FavoriteEntity favoriteEntity, View view) {
-
-            Article article = new Article(
-                    favoriteEntity.getArticleId(),
-                    favoriteEntity.getArticleTitle(),
-                    favoriteEntity.getArticleAuthorName(),
-                    favoriteEntity.getArticleBody(),
-                    favoriteEntity.getArticleThumbnail(),
-                    favoriteEntity.getArticlePublishedDate());
-
-            NavDirections direction = ArticleFavoritesFragmentDirections
-                    .actionArticleFavoritesFragmentToArticleDetailFragment(article, ArticleFavoritesFragment.class.getSimpleName());
-            // Find NavController with view and navigate to destination using directions.
-            Navigation.findNavController(view).navigate(direction);
-        }
     }
 }

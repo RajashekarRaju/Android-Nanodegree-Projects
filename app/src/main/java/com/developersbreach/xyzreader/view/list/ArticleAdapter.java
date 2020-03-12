@@ -1,7 +1,6 @@
 package com.developersbreach.xyzreader.view.list;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.ItemArticleBinding;
 import com.developersbreach.xyzreader.model.Article;
+import com.developersbreach.xyzreader.viewModel.ArticleListViewModel;
 
 import static com.developersbreach.xyzreader.view.list.ArticleAdapter.ArticleViewHolder;
 
@@ -25,35 +25,14 @@ import static com.developersbreach.xyzreader.view.list.ArticleAdapter.ArticleVie
  */
 public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
 
-    /**
-     * The interface that receives onClick listener.
-     */
-    private final ArticleAdapterListener mListener;
-    private final FavoriteListener mFavoriteListener;
 
+    private final ArticleListViewModel mViewModel;
+    private final ArticleListFragment mFragment;
 
-    /**
-     * @param listener   create click listener on itemView.
-     */
-    ArticleAdapter(ArticleAdapterListener listener, FavoriteListener favoriteListener) {
+    ArticleAdapter(ArticleListViewModel viewModel, ArticleListFragment articleListFragment) {
         super(DIFF_ITEM_CALLBACK);
-        this.mListener = listener;
-        this.mFavoriteListener = favoriteListener;
-    }
-
-    /**
-     * The interface that receives onClick listener.
-     */
-    public interface ArticleAdapterListener {
-        /**
-         * @param article get recipes from selected list of recipes.
-         * @param view   used to create navigation with controller, which needs view.
-         */
-        void onArticleSelected(Article article, View view);
-    }
-
-    public interface FavoriteListener {
-        void onFavouriteSelected(Article article, View view);
+        this.mViewModel = viewModel;
+        this.mFragment = articleListFragment;
     }
 
     /**
@@ -71,10 +50,14 @@ public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
 
         /**
          * @param article pass object to set recipe for binding. This binding is accessed from layout
-         *               xml {@link com.developersbreach.xyzreader.R.layout#item_article}
+         *               xml {@link R.layout#item_article}
+         * @param viewModel model
+         * @param mFragment activity
          */
-        void bind(final Article article) {
+        void bind(final Article article, ArticleListViewModel viewModel, ArticleListFragment mFragment) {
             mBinding.setArticle(article);
+            mBinding.setViewModel(viewModel);
+            mBinding.setActivity(mFragment.getActivity());
             // Force DataBinding to execute binding views immediately.
             mBinding.executePendingBindings();
         }
@@ -92,14 +75,7 @@ public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final ArticleViewHolder holder, final int position) {
         final Article article = getItem(position);
-        holder.bind(article);
-
-        holder.mBinding.addToFavoriteImageView.setOnClickListener(view ->
-                mFavoriteListener.onFavouriteSelected(article, view));
-
-        // Set click listener on itemView and pass arguments recipe, view for selected recipe.
-        holder.itemView.setOnClickListener(
-                view -> mListener.onArticleSelected(article, view));
+        holder.bind(article, mViewModel, mFragment);
     }
 
     /**
