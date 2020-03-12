@@ -20,7 +20,7 @@ import java.util.List;
 public class ArticleListViewModel extends AndroidViewModel {
 
     private final LiveData<List<Article>> mArticleList;
-    private ArticleRepository mRepository;
+    private final ArticleRepository mRepository;
 
     public ArticleListViewModel(@NonNull Application application) {
         super(application);

@@ -12,7 +12,7 @@ import com.developersbreach.xyzreader.repository.database.ArticleDatabase;
 public class ArticleRefreshWorker extends Worker {
 
     public static final String WORKER_NAME = "ArticleRefreshWorker";
-    private ArticleRepository mRepository;
+    private final ArticleRepository mRepository;
 
     public ArticleRefreshWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
@@ -24,7 +24,7 @@ public class ArticleRefreshWorker extends Worker {
     @Override
     public Result doWork() {
         try {
-            mRepository.refreshArticleData();
+            mRepository.refreshData();
             return Result.success();
         } catch (Exception e) {
             e.printStackTrace();

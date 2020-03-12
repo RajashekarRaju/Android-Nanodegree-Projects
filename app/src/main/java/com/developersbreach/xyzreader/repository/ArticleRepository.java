@@ -61,7 +61,7 @@ public class ArticleRepository {
         AppExecutors.getInstance().databaseThread().execute(() -> mDatabase.favoriteDao().deleteFavorite(article));
     }
 
-    public void refreshArticleData() {
+    public void refreshData() {
         AppExecutors.getInstance().databaseThread().execute(() -> {
             try {
                 String responseString = ResponseBuilder.startResponse();

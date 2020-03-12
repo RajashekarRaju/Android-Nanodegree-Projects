@@ -7,8 +7,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.developersbreach.xyzreader.viewModel.ArticleFavoritesViewModel;
 import com.developersbreach.xyzreader.viewModel.ArticleDetailViewModel;
+import com.developersbreach.xyzreader.viewModel.ArticleFavoritesViewModel;
 
 public class FavoriteViewModelFactory extends ViewModelProvider.AndroidViewModelFactory {
 

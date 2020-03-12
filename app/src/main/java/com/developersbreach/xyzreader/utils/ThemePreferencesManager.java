@@ -31,6 +31,7 @@ public class ThemePreferencesManager {
         this.mContext = context;
     }
 
+    @SuppressWarnings("SameReturnValue")
     @SuppressLint("RestrictedApi")
     public void showThemePopUp(View view) {
         PopupMenu popupMenu = new PopupMenu(mContext, view);

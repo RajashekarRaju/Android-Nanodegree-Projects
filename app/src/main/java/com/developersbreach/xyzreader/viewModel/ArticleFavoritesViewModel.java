@@ -16,8 +16,8 @@ import java.util.List;
 
 public class ArticleFavoritesViewModel extends AndroidViewModel {
 
-    private MutableLiveData<List<FavoriteEntity>> mFavoriteList;
-    private ArticleRepository mRepository;
+    private final ArticleRepository mRepository;
+    private final MutableLiveData<List<FavoriteEntity>> mFavoriteList;
 
     public ArticleFavoritesViewModel(@NonNull Application application) {
         super(application);

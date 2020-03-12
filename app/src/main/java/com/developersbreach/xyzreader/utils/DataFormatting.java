@@ -13,14 +13,20 @@ import java.util.Locale;
 
 public class DataFormatting {
 
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss", Locale.getDefault());
-    private static SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-    private static GregorianCalendar START_OF_EPOCH = new GregorianCalendar(2, 1, 1);
+    private static final SimpleDateFormat dateFormat;
+    private static final SimpleDateFormat outputFormat;
+    private static final GregorianCalendar START_OF_EPOCH;
+
+    static {
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss", Locale.getDefault());
+        outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        START_OF_EPOCH = new GregorianCalendar(2, 1, 1);
+    }
 
     public static Spanned formatDate(String articlePublishedDate) {
         Spanned date;
 
-        Date publishedDate = parsePublishedDate(articlePublishedDate, dateFormat);
+        Date publishedDate = parsePublishedDate(articlePublishedDate);
 
         if (!publishedDate.before(START_OF_EPOCH.getTime())) {
 
@@ -38,9 +44,9 @@ public class DataFormatting {
         return date;
     }
 
-    private static Date parsePublishedDate(String articlePublishedDate, SimpleDateFormat dateFormat) {
+    private static Date parsePublishedDate(String articlePublishedDate) {
         try {
-            return dateFormat.parse(articlePublishedDate);
+            return DataFormatting.dateFormat.parse(articlePublishedDate);
         } catch (ParseException ex) {
             Log.e("DataFormatting", "parsePublishedDate", ex);
             return new Date();
