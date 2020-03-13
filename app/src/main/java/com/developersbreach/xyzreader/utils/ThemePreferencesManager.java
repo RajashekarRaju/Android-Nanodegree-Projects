@@ -30,7 +30,7 @@ public class ThemePreferencesManager {
     }
 
     @SuppressWarnings("SameReturnValue")
-    public void showThemePopUp(View view) {
+    public void showThemeSwitcherPopUp(View view) {
         PopupMenu popupMenu = new PopupMenu(mContext, view);
         popupMenu.inflate(R.menu.theme_menu);
         popupMenu.setOnMenuItemClickListener(item -> {
@@ -58,7 +58,7 @@ public class ThemePreferencesManager {
         return mContext.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
     }
 
-    public void applyTheme() {
+    public void applyDayNightTheme() {
         AppCompatDelegate.setDefaultNightMode(getNightMode());
     }
 

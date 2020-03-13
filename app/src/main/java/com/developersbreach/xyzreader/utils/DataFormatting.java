@@ -25,19 +25,14 @@ public class DataFormatting {
 
     public static Spanned formatDate(String articlePublishedDate) {
         Spanned date;
-
         Date publishedDate = parsePublishedDate(articlePublishedDate);
-
         if (!publishedDate.before(START_OF_EPOCH.getTime())) {
-
             date = Html.fromHtml(
                     DateUtils.getRelativeTimeSpanString(
                             publishedDate.getTime(),
                             System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
                             DateUtils.FORMAT_ABBREV_ALL).toString());
-
         } else {
-
             date = Html.fromHtml(
                     outputFormat.format(publishedDate));
         }

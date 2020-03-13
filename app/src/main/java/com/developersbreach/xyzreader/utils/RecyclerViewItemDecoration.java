@@ -1,16 +1,19 @@
 package com.developersbreach.xyzreader.utils;
 
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
+import com.developersbreach.xyzreader.R;
+
+public class RecyclerViewItemDecoration extends RecyclerView.ItemDecoration {
 
     private final int mItemOffset;
 
-    public SpaceItemDecoration(int itemOffset) {
+    private RecyclerViewItemDecoration(int itemOffset) {
         mItemOffset = itemOffset;
     }
 
@@ -19,5 +22,10 @@ public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
                                @NonNull RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         outRect.set(mItemOffset, mItemOffset, mItemOffset, mItemOffset);
+    }
+
+    public static void setItemSpacing(Resources resources, RecyclerView recyclerView) {
+        int spacingInPixels = resources.getDimensionPixelSize(R.dimen.recycler_view_spacing_dimen);
+        recyclerView.addItemDecoration(new RecyclerViewItemDecoration(spacingInPixels));
     }
 }

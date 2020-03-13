@@ -8,12 +8,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.ActivityMainBinding;
-import com.developersbreach.xyzreader.utils.CircularEffect;
+import com.developersbreach.xyzreader.utils.ArticleAnimations;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -28,13 +29,15 @@ public class MainActivity extends AppCompatActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mNavigationController = Navigation.findNavController(this, R.id.nav_host_fragment);
         mBinding.bottomNavigationView.setOnNavigationItemSelectedListener(new NavigationListener());
-        mNavigationController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (destination.getId() == R.id.articleDetailFragment) {
-                mBinding.bottomNavigationView.setVisibility(View.INVISIBLE);
-            } else {
-                mBinding.bottomNavigationView.setVisibility(View.VISIBLE);
-            }
-        });
+        mNavigationController.addOnDestinationChangedListener(this::onDestinationChanged);
+    }
+
+    private void onDestinationChanged(NavController controller, NavDestination destination, Bundle arguments) {
+        if (destination.getId() == R.id.articleDetailFragment) {
+            mBinding.bottomNavigationView.setVisibility(View.INVISIBLE);
+        } else {
+            mBinding.bottomNavigationView.setVisibility(View.VISIBLE);
+        }
     }
 
     private class NavigationListener implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.searchArticleFragment:
                 case R.id.articleFavoritesFragment:
                     NavigationUI.onNavDestinationSelected(item, mNavigationController);
-                    CircularEffect.startBottomCircularEffect(mBinding.mainRootView);
+                    ArticleAnimations.startBottomCircularEffect(mBinding.mainRootView);
                     break;
             }
             return true;

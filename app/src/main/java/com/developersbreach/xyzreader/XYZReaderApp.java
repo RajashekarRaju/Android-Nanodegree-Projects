@@ -17,10 +17,10 @@ public class XYZReaderApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        startWorker();
+        startArticleWorker();
     }
 
-    private void startWorker() {
+    private void startArticleWorker() {
         WorkManager.getInstance(getApplicationContext()).enqueueUniquePeriodicWork(
                 ArticleRefreshWorker.WORKER_NAME,
                 ExistingPeriodicWorkPolicy.KEEP,

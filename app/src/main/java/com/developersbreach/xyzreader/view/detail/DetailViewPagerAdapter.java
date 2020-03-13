@@ -53,8 +53,8 @@ public class DetailViewPagerAdapter extends ListAdapter<Article, ArticlePagerVie
     public ArticlePagerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         // Allow DataBinding to inflate the layout.
-        ItemArticleAdapterBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_article_adapter, parent,
-                false);
+        ItemArticleAdapterBinding binding = DataBindingUtil.inflate(inflater,
+                R.layout.item_article_adapter, parent, false);
         return new ArticlePagerViewHolder(binding);
     }
 
@@ -64,7 +64,8 @@ public class DetailViewPagerAdapter extends ListAdapter<Article, ArticlePagerVie
         holder.bind(article);
     }
 
-    private static final DiffUtil.ItemCallback<Article> DIFF_ITEM_CALLBACK = new DiffUtil.ItemCallback<Article>() {
+    private static final DiffUtil.ItemCallback<Article> DIFF_ITEM_CALLBACK = new DiffUtil
+            .ItemCallback<Article>() {
 
         @Override
         public boolean areItemsTheSame(@NonNull Article oldItem, @NonNull Article newItem) {

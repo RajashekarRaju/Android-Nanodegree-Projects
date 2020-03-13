@@ -14,10 +14,13 @@ import com.developersbreach.xyzreader.databinding.ItemFavoriteBinding;
 import com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity;
 import com.developersbreach.xyzreader.viewModel.ArticleFavoritesViewModel;
 
-public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteAdapter.FavoriteViewHolder> {
+import static com.developersbreach.xyzreader.view.favorite.FavoriteAdapter.*;
+
+public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteViewHolder> {
 
     private final ArticleFavoritesViewModel mViewModel;
     private final ArticleFavoritesFragment mFragment;
+
 
     FavoriteAdapter(ArticleFavoritesViewModel viewModel, ArticleFavoritesFragment fragment) {
         super(DIFF_ITEM_CALLBACK);
@@ -38,7 +41,8 @@ public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteAdapter
             this.mBinding = binding;
         }
 
-        void bind(final FavoriteEntity article, ArticleFavoritesViewModel viewModel, ArticleFavoritesFragment fragment) {
+        void bind(final FavoriteEntity article, ArticleFavoritesViewModel viewModel,
+                  ArticleFavoritesFragment fragment) {
             mBinding.setFavoriteArticle(article);
             mBinding.setFavoriteViewModel(viewModel);
             mBinding.setActivity(fragment.getActivity());
@@ -58,20 +62,23 @@ public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteAdapter
     public FavoriteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         // Allow DataBinding to inflate the layout.
-        ItemFavoriteBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_favorite, parent,
-                false);
+        ItemFavoriteBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_favorite,
+                parent, false);
         return new FavoriteViewHolder(binding);
     }
 
-    private static final DiffUtil.ItemCallback<FavoriteEntity> DIFF_ITEM_CALLBACK = new DiffUtil.ItemCallback<FavoriteEntity>() {
+    private static final DiffUtil.ItemCallback<FavoriteEntity> DIFF_ITEM_CALLBACK =
+            new DiffUtil.ItemCallback<FavoriteEntity>() {
 
         @Override
-        public boolean areItemsTheSame(@NonNull FavoriteEntity oldItem, @NonNull FavoriteEntity newItem) {
+        public boolean areItemsTheSame(@NonNull FavoriteEntity oldItem,
+                                       @NonNull FavoriteEntity newItem) {
             return oldItem == newItem;
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull FavoriteEntity oldItem, @NonNull FavoriteEntity newItem) {
+        public boolean areContentsTheSame(@NonNull FavoriteEntity oldItem,
+                                          @NonNull FavoriteEntity newItem) {
             return oldItem.getArticleId() == newItem.getArticleId();
         }
     };

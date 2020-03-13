@@ -1,6 +1,5 @@
 package com.developersbreach.xyzreader.repository;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
 import com.developersbreach.xyzreader.repository.database.ArticleDatabase;
@@ -15,19 +14,25 @@ import java.util.List;
 public class ArticleRepository {
 
     private static ArticleRepository sINSTANCE;
-    private static ArticleDatabase mDatabase;
-    private final MediatorLiveData<List<ArticleEntity>> mObservableArticles;
-    private final MediatorLiveData<List<FavoriteEntity>> mObservableFavoriteList;
+    private static ArticleDatabase sDatabase;
+    private MediatorLiveData<List<ArticleEntity>> mObservableArticleList;
+    private MediatorLiveData<List<FavoriteEntity>> mObservableFavoriteList;
 
     private ArticleRepository(ArticleDatabase database) {
-        mDatabase = database;
-        mObservableArticles = new MediatorLiveData<>();
+        sDatabase = database;
+        getObservableArticleData(database);
+        getObservableFavoriteData(database);
+    }
+
+    private void getObservableArticleData(ArticleDatabase database) {
+        mObservableArticleList = new MediatorLiveData<>();
+        mObservableArticleList.addSource(database.articleDao().loadAllArticles(),
+                mObservableArticleList::postValue);
+    }
+
+    private void getObservableFavoriteData(ArticleDatabase database) {
         mObservableFavoriteList = new MediatorLiveData<>();
-
-        mObservableArticles.addSource(database.articleDao().loadAllArticles(),
-                mObservableArticles::postValue);
-
-        mObservableFavoriteList.addSource(database.favoriteDao().loadFavouriteArticles(),
+        mObservableFavoriteList.addSource(database.favoriteDao().loadAllFavoriteArticles(),
                 mObservableFavoriteList::postValue);
     }
 
@@ -45,20 +50,22 @@ public class ArticleRepository {
     /**
      * Get the list of products from the database and get notified when the data changes.
      */
-    public LiveData<List<ArticleEntity>> getArticles() {
-        return mObservableArticles;
+    public MediatorLiveData<List<ArticleEntity>> getObservableArticleList() {
+        return mObservableArticleList;
     }
 
-    public MediatorLiveData<List<FavoriteEntity>> getFavoriteList() {
+    public MediatorLiveData<List<FavoriteEntity>> getObservableFavoriteList() {
         return mObservableFavoriteList;
     }
 
     public void insertFavoriteArticle(FavoriteEntity article) {
-        AppExecutors.getInstance().databaseThread().execute(() -> mDatabase.favoriteDao().insertFavorites(article));
+        AppExecutors.getInstance().databaseThread().execute(() ->
+                sDatabase.favoriteDao().insertFavoriteArticle(article));
     }
 
     public void deleteFavoriteArticle(FavoriteEntity article) {
-        AppExecutors.getInstance().databaseThread().execute(() -> mDatabase.favoriteDao().deleteFavorite(article));
+        AppExecutors.getInstance().databaseThread().execute(() ->
+                sDatabase.favoriteDao().deleteFavoriteArticle(article));
     }
 
     public void refreshData() {
@@ -66,9 +73,9 @@ public class ArticleRepository {
             try {
                 String responseString = ResponseBuilder.startResponse();
                 List<ArticleEntity> articleEntityList = JsonUtils.fetchArticleJsonData(responseString);
-                mDatabase.favoriteDao().deleteAllFavorites();
-                mDatabase.articleDao().deleteAllArticles();
-                mDatabase.articleDao().insertArticles(articleEntityList);
+                sDatabase.favoriteDao().deleteAllFavorites();
+                sDatabase.articleDao().deleteAllArticles();
+                sDatabase.articleDao().insertArticles(articleEntityList);
             } catch (IOException e) {
                 e.printStackTrace();
             }
