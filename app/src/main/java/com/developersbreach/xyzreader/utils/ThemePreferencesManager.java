@@ -1,6 +1,5 @@
 package com.developersbreach.xyzreader.utils;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.SparseIntArray;
@@ -8,7 +7,6 @@ import android.view.View;
 
 import androidx.annotation.IdRes;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.PopupMenu;
 
 import com.developersbreach.xyzreader.R;
@@ -32,15 +30,9 @@ public class ThemePreferencesManager {
     }
 
     @SuppressWarnings("SameReturnValue")
-    @SuppressLint("RestrictedApi")
     public void showThemePopUp(View view) {
         PopupMenu popupMenu = new PopupMenu(mContext, view);
         popupMenu.inflate(R.menu.theme_menu);
-        if (popupMenu.getMenu() instanceof MenuBuilder) {
-            MenuBuilder menuBuilder = (MenuBuilder) popupMenu.getMenu();
-            menuBuilder.setOptionalIconsVisible(true);
-        }
-
         popupMenu.setOnMenuItemClickListener(item -> {
             saveAndApplyTheme(item.getItemId());
             return false;
