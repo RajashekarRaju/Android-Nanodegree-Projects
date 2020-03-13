@@ -11,14 +11,17 @@
         android:name="com.developersbreach.xyzreader.view.list.ArticleListFragment"
         tools:layout="@layout/fragment_article_list">
         <action
-            android:id="@+id/action_articleListFragment_to_articleDetailFragment"
-            app:destination="@id/articleDetailFragment" />
+            android:id="@+id/articleList_to_articleDetailFragment"
+            app:destination="@id/articleDetailFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
     </fragment>
 
     <fragment
         android:id="@+id/articleDetailFragment"
-        android:name="com.developersbreach.xyzreader.view.detail.ArticleDetailFragment"
-        android:label="Article Detail">
+        android:name="com.developersbreach.xyzreader.view.detail.ArticleDetailFragment">
         <argument
             android:name="detailFragmentArgs"
             app:argType="com.developersbreach.xyzreader.model.Article"
@@ -33,17 +36,25 @@
         android:name="com.developersbreach.xyzreader.view.favorite.ArticleFavoritesFragment"
         tools:layout="@layout/fragment_article_favorites">
         <action
-            android:id="@+id/action_articleFavoritesFragment_to_articleDetailFragment"
-            app:destination="@id/articleDetailFragment" />
+            android:id="@+id/articleFavorites_to_articleDetailFragment"
+            app:destination="@id/articleDetailFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
     </fragment>
 
     <fragment
         android:id="@+id/searchArticleFragment"
         android:name="com.developersbreach.xyzreader.view.search.SearchArticleFragment"
-        tools:layout="@layout/fragment_search_article" >
+        tools:layout="@layout/fragment_search_article">
         <action
-            android:id="@+id/action_searchArticleFragment_to_articleDetailFragment"
-            app:destination="@id/articleDetailFragment" />
+            android:id="@+id/searchArticle_to_articleDetailFragment"
+            app:destination="@id/articleDetailFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
     </fragment>
 
 </navigation>
