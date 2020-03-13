@@ -11,7 +11,7 @@
             type="com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity" />
 
         <variable
-            name="viewModel"
+            name="favoriteViewModel"
             type="com.developersbreach.xyzreader.viewModel.ArticleFavoritesViewModel" />
 
         <variable
@@ -20,12 +20,12 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        favoriteArticleClickListener="@{favoriteArticle}"
-        android:id="@+id/favorite_card_view"
+        android:id="@+id/favorite_item_card_view"
+        favoriteListToDetailClickListener="@{favoriteArticle}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="4dp"
-        app:cardCornerRadius="0dp">
+        android:elevation="@dimen/card_elevation_article_item"
+        app:cardCornerRadius="@dimen/card_corner_radius_article_item">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,91 +33,90 @@
 
             <ImageView
                 android:id="@+id/favorite_article_thumbnail_item_image_view"
-                favoriteArticleThumbnail="@{favoriteArticle.articleThumbnail}"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                favoriteArticleItemThumbnail="@{favoriteArticle.articleThumbnail}"
+                android:layout_width="@dimen/article_item_layout_size"
+                android:layout_height="@dimen/article_item_layout_size"
+                android:contentDescription="@string/article_image_content_description"
                 android:scaleType="centerCrop"
                 app:layout_constraintDimensionRatio="2:3"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/published_date"
-                favoriteArticlePublishedDate="@{favoriteArticle.articlePublishedDate}"
+                android:id="@+id/favorite_article_published_date_item_text_view"
+                favoriteArticleItemPublishedDate="@{favoriteArticle.articlePublishedDate}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/layout_margin_16dp"
                 android:fontFamily="@font/rubik_light"
                 android:gravity="center"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@id/article_title_text_view"
+                android:textSize="@dimen/card_text_size_16sp"
+                app:layout_constraintBottom_toTopOf="@id/favorite_article_title_item_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/favorite_article_thumbnail_item_image_view" />
 
             <TextView
-                android:id="@+id/article_title_text_view"
-                favoriteArticleTitle="@{favoriteArticle.articleTitle}"
+                android:id="@+id/favorite_article_title_item_text_view"
+                favoriteArticleItemTitle="@{favoriteArticle.articleTitle}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_margin="@dimen/layout_margin_8dp"
                 android:fontFamily="@font/rubik_medium"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                app:layout_constraintBottom_toTopOf="@id/article_by_author"
+                app:layout_constraintBottom_toTopOf="@id/favorite_article_by_author_item_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/published_date"
-                tools:text="@string/app_name" />
+                app:layout_constraintTop_toBottomOf="@id/favorite_article_published_date_item_text_view"
+                tools:text="@string/article_title_tools_text" />
 
             <TextView
-                android:id="@+id/article_by_author"
+                android:id="@+id/favorite_article_by_author_item_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="@dimen/layout_margin_4dp"
                 android:fontFamily="@font/rubik_light"
                 android:gravity="center"
                 android:text="@string/by_author"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@id/article_author_item_image_view"
+                android:textSize="@dimen/author_title_text_size"
+                app:layout_constraintBottom_toTopOf="@id/favorite_article_author_item_image_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/article_title_text_view" />
+                app:layout_constraintTop_toBottomOf="@id/favorite_article_title_item_text_view" />
 
             <TextView
-                android:id="@+id/article_author_item_image_view"
-                favoriteAuthorName="@{favoriteArticle.articleAuthorName}"
+                android:id="@+id/favorite_article_author_item_image_view"
+                favoriteArticleItemAuthorName="@{favoriteArticle.articleAuthorName}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginStart="@dimen/layout_margin_8dp"
+                android:layout_marginEnd="@dimen/layout_margin_8dp"
+                android:layout_marginBottom="@dimen/layout_margin_8dp"
                 android:fontFamily="@font/rubik_light"
                 android:gravity="center"
-                android:textSize="16sp"
+                android:textSize="@dimen/card_text_size_16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/article_by_author"
-                tools:text="@string/app_name" />
+                app:layout_constraintTop_toBottomOf="@id/favorite_article_by_author_item_text_view"
+                tools:text="@string/author_name_tools_text" />
 
             <ImageView
+                android:id="@+id/remove_favorite_article_item_image_view"
+                activityFavoriteList="@{activity}"
                 deleteFavoriteClickListener="@{favoriteArticle}"
-                favoriteViewModel="@{viewModel}"
-                activityFavorite="@{activity}"
-                android:id="@+id/remove_favorite_image_view"
+                favoriteCardView="@{favoriteItemCardView}"
+                favoriteViewModel="@{favoriteViewModel}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:background="@drawable/background_ripple"
+                android:contentDescription="@string/delete_favorite_button_content_description"
+                android:padding="@dimen/card_text_size_16sp"
                 android:src="@drawable/ic_delete_favorite"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

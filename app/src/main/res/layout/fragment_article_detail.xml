@@ -9,8 +9,8 @@
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/detail_view_pager"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/no_layout_width"
+            android:layout_height="@dimen/no_layout_height"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

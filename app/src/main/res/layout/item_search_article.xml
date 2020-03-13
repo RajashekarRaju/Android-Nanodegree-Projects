@@ -7,7 +7,7 @@
     <data>
 
         <variable
-            name="searchArticle"
+            name="article"
             type="com.developersbreach.xyzreader.model.Article" />
     </data>
 
@@ -16,18 +16,18 @@
         android:layout_height="wrap_content">
 
         <TextView
-            searchArticleClickListener="@{searchArticle}"
-            android:text="@{searchArticle.articleTitle}"
+            articleSearchToDetailClickListener="@{article}"
+            android:text="@{article.articleTitle}"
             android:id="@+id/article_name_search_item_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:fontFamily="@font/rubik_medium"
-            android:padding="16dp"
+            android:padding="@dimen/padding_16dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Photography" />
+            tools:text="@string/article_search_item_tools_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

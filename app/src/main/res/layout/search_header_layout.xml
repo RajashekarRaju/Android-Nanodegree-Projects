@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -10,30 +9,28 @@
 
         <ImageView
             android:id="@+id/search_header_image_view"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/ic_search"
-            android:tint="#BCBCBC"
+            android:layout_width="@dimen/custom_vector_drawable_size"
+            android:layout_height="@dimen/custom_vector_drawable_size"
+            android:layout_marginStart="@dimen/layout_margin_8dp"
+            android:contentDescription="@string/static_article_search_button_content_description"
+            android:src="@drawable/ic_color_alpha_reduced"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/article_search_edit_text"
-            app:layout_constraintStart_toEndOf="@id/search_header_image_view"
-            app:layout_constraintBottom_toBottomOf="@id/search_header_image_view"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:fontFamily="@font/rubik"
+            android:layout_width="@dimen/no_layout_width"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_24dp"
             android:background="@android:color/transparent"
-            android:paddingTop="8dp"
-            android:textStyle="bold"
-            android:layout_marginStart="24dp"
-            app:layout_constraintHorizontal_weight="1"
+            android:fontFamily="@font/rubik"
             android:hint="@string/search_articles_hint"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:paddingTop="@dimen/padding_8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/search_header_image_view"
+            app:layout_constraintStart_toEndOf="@id/search_header_image_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

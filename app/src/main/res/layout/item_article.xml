@@ -11,7 +11,7 @@
             type="com.developersbreach.xyzreader.model.Article" />
 
         <variable
-            name="viewModel"
+            name="articleViewModel"
             type="com.developersbreach.xyzreader.viewModel.ArticleListViewModel" />
 
         <variable
@@ -20,12 +20,11 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_view"
-        articleClickListener="@{article}"
+        articleListToDetailClickListener="@{article}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="4dp"
-        app:cardCornerRadius="0dp">
+        android:elevation="@dimen/card_elevation_article_item"
+        app:cardCornerRadius="@dimen/card_corner_radius_article_item">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,92 +32,89 @@
 
             <ImageView
                 android:id="@+id/article_thumbnail_item_image_view"
-                articleThumbnail="@{article.articleThumbnail}"
-                android:transitionName="@{article.articleTitle}"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                articleItemThumbnail="@{article.articleThumbnail}"
+                android:layout_width="@dimen/article_item_layout_size"
+                android:layout_height="@dimen/article_item_layout_size"
+                android:contentDescription="@string/article_image_content_description"
                 android:scaleType="centerCrop"
                 app:layout_constraintDimensionRatio="2:3"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                articlePublishedDate="@{article.articlePublishedDate}"
-                android:id="@+id/published_date"
+                android:id="@+id/article_published_date_item_text_view"
+                articleItemPublishedDate="@{article.articlePublishedDate}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_margin_16dp"
                 android:fontFamily="@font/rubik_light"
-                android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@id/article_title_text_view"
+                android:textSize="@dimen/card_text_size_16sp"
+                app:layout_constraintBottom_toTopOf="@id/article_title_item_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/article_thumbnail_item_image_view" />
 
             <TextView
-                android:id="@+id/article_title_text_view"
-                articleTitle="@{article.articleTitle}"
+                android:id="@+id/article_title_item_text_view"
+                articleItemTitle="@{article.articleTitle}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_margin="@dimen/layout_margin_8dp"
                 android:fontFamily="@font/rubik_medium"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                app:layout_constraintBottom_toTopOf="@id/article_by_author"
+                app:layout_constraintBottom_toTopOf="@id/article_by_author_item_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/published_date"
-                tools:text="@string/app_name" />
+                app:layout_constraintTop_toBottomOf="@id/article_published_date_item_text_view"
+                tools:text="@string/article_title_tools_text" />
 
             <TextView
-                android:id="@+id/article_by_author"
+                android:id="@+id/article_by_author_item_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="@dimen/layout_margin_4dp"
                 android:fontFamily="@font/rubik_light"
                 android:gravity="center"
                 android:text="@string/by_author"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@id/article_author_item_image_view"
+                android:textSize="@dimen/author_title_text_size"
+                app:layout_constraintBottom_toTopOf="@id/article_author_item_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/article_title_text_view" />
+                app:layout_constraintTop_toBottomOf="@id/article_title_item_text_view" />
 
             <TextView
-                android:id="@+id/article_author_item_image_view"
-                authorName="@{article.articleAuthorName}"
+                android:id="@+id/article_author_item_text_view"
+                articleItemAuthorName="@{article.articleAuthorName}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginStart="@dimen/layout_margin_8dp"
+                android:layout_marginEnd="@dimen/layout_margin_8dp"
+                android:layout_marginBottom="@dimen/layout_margin_8dp"
                 android:fontFamily="@font/rubik_light"
                 android:gravity="center"
-                android:textSize="16sp"
+                android:textSize="@dimen/card_text_size_16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/article_by_author"
-                tools:text="@string/app_name" />
+                app:layout_constraintTop_toBottomOf="@id/article_by_author_item_text_view"
+                tools:text="@string/author_name_tools_text" />
 
             <ImageView
+                android:id="@+id/add_favorite_article_item_image_view"
+                activityArticleList="@{activity}"
                 insertFavoriteClickListener="@{article}"
-                viewModel="@{viewModel}"
-                activity="@{activity}"
-                android:id="@+id/add_to_favorite_image_view"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:padding="16dp"
-                android:src="@drawable/ic_add_favorite"
+                viewModelArticleList="@{articleViewModel}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:ignore="ContentDescription" />
+                android:background="@drawable/background_ripple"
+                android:contentDescription="@string/add_favorite_button_content_description"
+                android:padding="@dimen/padding_16dp"
+                android:src="@drawable/ic_add_favorite_filled"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

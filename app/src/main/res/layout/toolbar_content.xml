@@ -1,48 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/header_icon"
+            android:id="@+id/header_app_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="0dp"
+            android:layout_marginStart="@dimen/no_layout_margin"
+            android:contentDescription="@string/app_icon_content_description"
             android:src="@mipmap/ic_launcher"
-            tools:ignore="ContentDescription" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/header_title"
+            android:id="@+id/header_app_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/header_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/layout_margin_16dp"
+            android:alpha="0.5"
             android:fontFamily="@font/rubik_medium"
             android:text="@string/articles_header_title"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
-            android:textColor="@color/article_gray_50"
+            android:textColor="@android:color/white"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/header_app_icon"
+            app:layout_constraintTop_toTopOf="parent"
             app:textAllCaps="true" />
 
         <ImageView
-            android:id="@+id/theme_image_view"
+            android:id="@+id/header_theme_switcher_image_view"
+            android:layout_width="@dimen/custom_vector_drawable_size"
+            android:layout_height="@dimen/custom_vector_drawable_size"
+            android:layout_marginEnd="@dimen/layout_margin_16dp"
+            android:alpha="0.5"
+            android:background="@drawable/menu_ripple"
+            android:contentDescription="@string/change_app_theme_button_content_description"
             android:src="@drawable/ic_theme"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="16dp"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            tools:ignore="ContentDescription" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
