@@ -56,7 +56,7 @@ public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
          */
         void bind(final Article article, ArticleListViewModel viewModel, ArticleListFragment mFragment) {
             mBinding.setArticle(article);
-            mBinding.setViewModel(viewModel);
+            mBinding.setArticleViewModel(viewModel);
             mBinding.setActivity(mFragment.getActivity());
             // Force DataBinding to execute binding views immediately.
             mBinding.executePendingBindings();

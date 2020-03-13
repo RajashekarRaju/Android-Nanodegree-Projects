@@ -13,6 +13,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.ActivityMainBinding;
+import com.developersbreach.xyzreader.utils.CircularEffect;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -26,12 +27,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mNavigationController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        mBinding.bottomNavigation.setOnNavigationItemSelectedListener(new NavigationListener());
+        mBinding.bottomNavigationView.setOnNavigationItemSelectedListener(new NavigationListener());
         mNavigationController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() == R.id.articleDetailFragment) {
-                mBinding.bottomNavigation.setVisibility(View.INVISIBLE);
+                mBinding.bottomNavigationView.setVisibility(View.INVISIBLE);
             } else {
-                mBinding.bottomNavigation.setVisibility(View.VISIBLE);
+                mBinding.bottomNavigationView.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.searchArticleFragment:
                 case R.id.articleFavoritesFragment:
                     NavigationUI.onNavDestinationSelected(item, mNavigationController);
+                    CircularEffect.startBottomCircularEffect(mBinding.mainRootView);
                     break;
             }
             return true;

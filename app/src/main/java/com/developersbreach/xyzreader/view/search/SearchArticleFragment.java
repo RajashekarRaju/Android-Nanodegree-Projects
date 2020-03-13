@@ -44,7 +44,7 @@ public class SearchArticleFragment extends Fragment {
             mBinding.searchRecyclerView.setAdapter(adapter);
         });
 
-        mBinding.searchHeaderIncluded.articleSearchEditText.addTextChangedListener(new SearchTextListener());
+        mBinding.toolbarContentSearchHeader.articleSearchEditText.addTextChangedListener(new SearchTextListener());
     }
 
     private void filterWithViewModel(String query) {

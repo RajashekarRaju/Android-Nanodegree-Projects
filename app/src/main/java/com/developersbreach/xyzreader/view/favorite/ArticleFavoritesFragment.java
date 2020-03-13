@@ -33,15 +33,15 @@ public class ArticleFavoritesFragment extends Fragment {
         mBinding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_article_favorites, container, false);
 
-        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.rv_dimen);
+        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.recycler_view_spacing_dimen);
         mBinding.favoritesRecyclerView.addItemDecoration(new SpaceItemDecoration(spacingInPixels));
         setFragmentToolbar();
         return mBinding.getRoot();
     }
 
     private void setFragmentToolbar() {
-        mBinding.favoritesToolbarContent.headerTitle.setText(R.string.favorites_title);
-        mBinding.favoritesToolbarContent.themeImageView.setVisibility(View.GONE);
+        mBinding.toolbarContentFavoritesHeader.headerAppTitle.setText(R.string.favorites_title);
+        mBinding.toolbarContentFavoritesHeader.headerThemeSwitcherImageView.setVisibility(View.GONE);
     }
 
     @Override

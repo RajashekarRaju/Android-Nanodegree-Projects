@@ -33,7 +33,7 @@ public class DetailViewPagerAdapter extends ListAdapter<Article, ArticlePagerVie
             super(binding.getRoot());
             this.mBinding = binding;
 
-            mBinding.detailToolbar.setNavigationOnClickListener(
+            mBinding.articleDetailToolbar.setNavigationOnClickListener(
                     view -> Navigation.findNavController(view).navigateUp());
         }
 

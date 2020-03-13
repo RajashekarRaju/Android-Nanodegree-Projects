@@ -3,17 +3,17 @@
 
     <item
         android:id="@id/articleListFragment"
-        android:icon="@drawable/ic_article_icon"
-        android:title="@string/articles_header_title" />
+        android:icon="@drawable/ic_article"
+        android:title="@string/articles_menu_item_title" />
 
     <item
         android:id="@id/searchArticleFragment"
         android:icon="@drawable/ic_search"
-        android:title="@string/search_menu_item" />
+        android:title="@string/search_menu_item_title" />
 
     <item
         android:id="@id/articleFavoritesFragment"
         android:icon="@drawable/ic_add_favorite"
-        android:title="@string/favorites_menu_title" />
+        android:title="@string/favorites_menu_item_title" />
 
 </menu>

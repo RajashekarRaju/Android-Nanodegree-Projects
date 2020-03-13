@@ -40,7 +40,7 @@ public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteAdapter
 
         void bind(final FavoriteEntity article, ArticleFavoritesViewModel viewModel, ArticleFavoritesFragment fragment) {
             mBinding.setFavoriteArticle(article);
-            mBinding.setViewModel(viewModel);
+            mBinding.setFavoriteViewModel(viewModel);
             mBinding.setActivity(fragment.getActivity());
             // Force DataBinding to execute binding views immediately.
             mBinding.executePendingBindings();

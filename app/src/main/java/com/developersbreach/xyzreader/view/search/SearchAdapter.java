@@ -38,7 +38,7 @@ public class SearchAdapter extends ListAdapter<Article, SearchAdapter.SearchView
          *               xml {@link com.developersbreach.xyzreader.R.layout#item_article}
          */
         void bind(final Article article) {
-            mBinding.setSearchArticle(article);
+            mBinding.setArticle(article);
             // Force DataBinding to execute binding views immediately.
             mBinding.executePendingBindings();
         }
