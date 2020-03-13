@@ -12,8 +12,8 @@ import com.developersbreach.xyzreader.view.search.SearchArticleFragmentDirection
 
 public class SearchListBindingAdapter {
 
-    @BindingAdapter("articleSearchToDetailClickListener")
-    public static void bindSearchArticleItemClickListener(TextView textView, Article article) {
+    @BindingAdapter("searchArticleToDetailClickListener")
+    public static void bindSearchArticleToDetailClickListener(TextView textView, Article article) {
         textView.setOnClickListener(view -> {
             final String className = SearchArticleFragment.class.getSimpleName();
             NavDirections direction = SearchArticleFragmentDirections

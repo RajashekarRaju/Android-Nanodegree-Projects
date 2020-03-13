@@ -16,7 +16,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            articleSearchToDetailClickListener="@{article}"
+            searchArticleToDetailClickListener="@{article}"
             android:text="@{article.articleTitle}"
             android:id="@+id/article_name_search_item_text_view"
             android:layout_width="match_parent"
