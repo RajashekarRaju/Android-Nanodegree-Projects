@@ -1,6 +1,9 @@
 package com.developersbreach.xyzreader.model;
 
 import com.developersbreach.xyzreader.repository.database.entity.ArticleEntity;
+import com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity;
+
+import java.util.List;
 
 public class Article extends ArticleEntity {
 
@@ -51,5 +54,39 @@ public class Article extends ArticleEntity {
     @Override
     public String getArticlePublishedDate() {
         return mArticlePublishedDate;
+    }
+
+    public static Article favoriteArticleToArticle(FavoriteEntity favoriteEntity) {
+        return new Article(
+                favoriteEntity.getArticleId(),
+                favoriteEntity.getArticleTitle(),
+                favoriteEntity.getArticleAuthorName(),
+                favoriteEntity.getArticleBody(),
+                favoriteEntity.getArticleThumbnail(),
+                favoriteEntity.getArticlePublishedDate());
+    }
+
+    public static void articleEntityToArticle(List<ArticleEntity> articleEntityList, List<Article> articleList) {
+        for (ArticleEntity articleEntity : articleEntityList) {
+            articleList.add(new Article(
+                    articleEntity.getArticleId(),
+                    articleEntity.getArticleTitle(),
+                    articleEntity.getArticleAuthorName(),
+                    articleEntity.getArticleBody(),
+                    articleEntity.getArticleThumbnail(),
+                    articleEntity.getArticlePublishedDate()
+            ));
+        }
+    }
+
+    public static FavoriteEntity articleToFavoriteArticle(Article article) {
+        return new FavoriteEntity(
+                article.getArticleId(),
+                article.getArticleTitle(),
+                article.getArticleAuthorName(),
+                article.getArticleBody(),
+                article.getArticleThumbnail(),
+                article.getArticlePublishedDate()
+        );
     }
 }
