@@ -15,17 +15,17 @@ import com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity;
 public abstract class ArticleDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "Article_Database";
+    private static ArticleDatabase sINSTANCE;
 
     public abstract ArticleDao articleDao();
     public abstract FavoriteDao favoriteDao();
-
-    private static ArticleDatabase sINSTANCE;
 
     public static ArticleDatabase getDatabaseInstance(final Context context) {
         if (sINSTANCE == null) {
             synchronized (ArticleDatabase.class) {
                 if (sINSTANCE == null) {
-                    sINSTANCE = Room.databaseBuilder(context, ArticleDatabase.class, DATABASE_NAME).build();
+                    sINSTANCE = Room.databaseBuilder(context, ArticleDatabase.class, DATABASE_NAME)
+                            .build();
                 }
             }
         }

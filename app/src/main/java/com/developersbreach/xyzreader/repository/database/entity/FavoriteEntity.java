@@ -9,7 +9,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 
-@Entity(tableName = "favourite_table")
+@Entity(tableName = "favorites_table")
 public class FavoriteEntity implements Parcelable {
 
     @PrimaryKey

@@ -14,15 +14,15 @@ import java.util.List;
 @Dao
 public interface FavoriteDao {
 
-    @Query("SELECT * FROM favourite_table")
-    LiveData<List<FavoriteEntity>> loadFavouriteArticles();
+    @Query("SELECT * FROM favorites_table")
+    LiveData<List<FavoriteEntity>> loadAllFavoriteArticles();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertFavorites(FavoriteEntity article);
+    void insertFavoriteArticle(FavoriteEntity article);
 
     @Delete
-    void deleteFavorite(FavoriteEntity article);
+    void deleteFavoriteArticle(FavoriteEntity article);
 
-    @Query("DELETE FROM favourite_table")
+    @Query("DELETE FROM favorites_table")
     void deleteAllFavorites();
 }
