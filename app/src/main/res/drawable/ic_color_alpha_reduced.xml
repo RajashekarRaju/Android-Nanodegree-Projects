@@ -2,6 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="@dimen/drawable_vector_width"
     android:height="@dimen/drawable_vector_height"
+    android:alpha="0.5"
     android:viewportWidth="24.0"
     android:viewportHeight="24.0">
 
