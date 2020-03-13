@@ -15,8 +15,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.databinding.FragmentSearchArticleBinding;
+import com.developersbreach.xyzreader.model.Article;
+import com.developersbreach.xyzreader.utils.ArticleAnimations;
 import com.developersbreach.xyzreader.viewModel.SearchArticleViewModel;
 
+import java.util.List;
 import java.util.Locale;
 
 
@@ -34,34 +37,23 @@ public class SearchArticleFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(SearchArticleViewModel.class);
-
-        mViewModel.getArticleList().observe(getViewLifecycleOwner(), articleList -> {
-            SearchAdapter adapter = new SearchAdapter();
-            adapter.submitList(articleList);
-            mBinding.searchRecyclerView.setAdapter(adapter);
-        });
-
-        mBinding.toolbarContentSearchHeader.articleSearchEditText.addTextChangedListener(new SearchTextListener());
     }
 
-    private void filterWithViewModel(String query) {
-        mViewModel.onFilterChanged(query).observe(getViewLifecycleOwner(), articleList -> {
-            if (!query.isEmpty()) {
-                SearchAdapter adapter = new SearchAdapter();
-                adapter.submitList(articleList);
-                mBinding.searchRecyclerView.setAdapter(adapter);
-                if (articleList.size() == 0) {
-                    mBinding.searchRecyclerView.setVisibility(View.INVISIBLE);
-                    mBinding.noSearchResultsFoundText.setVisibility(View.VISIBLE);
-                } else {
-                    mBinding.searchRecyclerView.setVisibility(View.VISIBLE);
-                    mBinding.noSearchResultsFoundText.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel.articles().observe(getViewLifecycleOwner(), this::onListChanged);
+        mBinding.toolbarContentSearchHeader.articleSearchEditText.addTextChangedListener(
+                new SearchTextListener());
+    }
+
+    private void onListChanged(List<Article> articleList) {
+        SearchAdapter adapter = new SearchAdapter();
+        adapter.submitList(articleList);
+        mBinding.searchRecyclerView.setAdapter(adapter);
     }
 
     private class SearchTextListener implements TextWatcher {
@@ -80,5 +72,32 @@ public class SearchArticleFragment extends Fragment {
         public void afterTextChanged(Editable s) {
 
         }
+    }
+
+    private void filterWithViewModel(String query) {
+        mViewModel.filter(query).observe(getViewLifecycleOwner(), articleList -> {
+            if (!query.isEmpty()) {
+                SearchAdapter adapter = new SearchAdapter();
+                adapter.submitList(articleList);
+                mBinding.searchRecyclerView.setAdapter(adapter);
+                toggleRecyclerView(articleList);
+            }
+        });
+    }
+
+    private void toggleRecyclerView(List<Article> articleList) {
+        if (articleList.size() == 0) {
+            mBinding.searchRecyclerView.setVisibility(View.INVISIBLE);
+            mBinding.noSearchResultsFoundText.setVisibility(View.VISIBLE);
+        } else {
+            mBinding.searchRecyclerView.setVisibility(View.VISIBLE);
+            mBinding.noSearchResultsFoundText.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ArticleAnimations.startLinearAnimation(mBinding.searchRecyclerView);
     }
 }

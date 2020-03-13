@@ -17,19 +17,23 @@ import java.util.List;
 public class ArticleFavoritesViewModel extends AndroidViewModel {
 
     private final ArticleRepository mRepository;
-    private final MutableLiveData<List<FavoriteEntity>> mFavoriteList;
+    private final MutableLiveData<List<FavoriteEntity>> _mMutableFavoriteList;
+
+    public LiveData<List<FavoriteEntity>> favorites() {
+        return getFavoriteList();
+    }
 
     public ArticleFavoritesViewModel(@NonNull Application application) {
         super(application);
         mRepository = ((XYZReaderApp) application).getRepository();
-        mFavoriteList = mRepository.getFavoriteList();
+        _mMutableFavoriteList = mRepository.getObservableFavoriteList();
     }
 
-    public LiveData<List<FavoriteEntity>> getFavoriteList() {
-        return mFavoriteList;
+    private LiveData<List<FavoriteEntity>> getFavoriteList() {
+        return _mMutableFavoriteList;
     }
 
-    public void deleteFavoriteData(FavoriteEntity favoriteEntity) {
+    public void deleteFavoriteArticleData(FavoriteEntity favoriteEntity) {
         mRepository.deleteFavoriteArticle(favoriteEntity);
     }
 }

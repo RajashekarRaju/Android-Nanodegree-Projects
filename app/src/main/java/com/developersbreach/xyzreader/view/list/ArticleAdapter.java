@@ -25,14 +25,14 @@ import static com.developersbreach.xyzreader.view.list.ArticleAdapter.ArticleVie
  */
 public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
 
-
     private final ArticleListViewModel mViewModel;
     private final ArticleListFragment mFragment;
 
-    ArticleAdapter(ArticleListViewModel viewModel, ArticleListFragment articleListFragment) {
+
+    ArticleAdapter(ArticleListViewModel viewModel, ArticleListFragment fragment) {
         super(DIFF_ITEM_CALLBACK);
         this.mViewModel = viewModel;
-        this.mFragment = articleListFragment;
+        this.mFragment = fragment;
     }
 
     /**
@@ -52,12 +52,12 @@ public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
          * @param article pass object to set recipe for binding. This binding is accessed from layout
          *               xml {@link R.layout#item_article}
          * @param viewModel model
-         * @param mFragment activity
+         * @param fragment activity
          */
-        void bind(final Article article, ArticleListViewModel viewModel, ArticleListFragment mFragment) {
+        void bind(final Article article, ArticleListViewModel viewModel, ArticleListFragment fragment) {
             mBinding.setArticle(article);
             mBinding.setArticleViewModel(viewModel);
-            mBinding.setActivity(mFragment.getActivity());
+            mBinding.setActivity(fragment.getActivity());
             // Force DataBinding to execute binding views immediately.
             mBinding.executePendingBindings();
         }

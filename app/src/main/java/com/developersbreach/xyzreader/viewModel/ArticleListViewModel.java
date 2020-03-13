@@ -19,47 +19,33 @@ import java.util.List;
 
 public class ArticleListViewModel extends AndroidViewModel {
 
-    private final LiveData<List<Article>> mArticleList;
+    private final LiveData<List<Article>> _mMutableArticleList;
     private final ArticleRepository mRepository;
+
+    public LiveData<List<Article>> articles() {
+        return getArticleList();
+    }
 
     public ArticleListViewModel(@NonNull Application application) {
         super(application);
         mRepository = ((XYZReaderApp) application).getRepository();
-        LiveData<List<ArticleEntity>> liveArticleEntityData = mRepository.getArticles();
+        LiveData<List<ArticleEntity>> source = mRepository.getObservableArticleList();
 
-        mArticleList = Transformations.switchMap(liveArticleEntityData, input -> {
-            MutableLiveData<List<Article>> listLiveData = new MutableLiveData<>();
+        _mMutableArticleList = Transformations.switchMap(source, articleEntityList -> {
+            MutableLiveData<List<Article>> mutableArticlesLiveData = new MutableLiveData<>();
             List<Article> articleList = new ArrayList<>();
-            for (ArticleEntity article : input) {
-                articleList.add(new Article(
-                        article.getArticleId(),
-                        article.getArticleTitle(),
-                        article.getArticleAuthorName(),
-                        article.getArticleBody(),
-                        article.getArticleThumbnail(),
-                        article.getArticlePublishedDate()
-                ));
-            }
-
-            listLiveData.postValue(articleList);
-
-            return listLiveData;
+            Article.articleEntityToArticle(articleEntityList, articleList);
+            mutableArticlesLiveData.postValue(articleList);
+            return mutableArticlesLiveData;
         });
     }
 
-    public LiveData<List<Article>> getArticleList() {
-        return mArticleList;
+    private LiveData<List<Article>> getArticleList() {
+        return _mMutableArticleList;
     }
 
-    public void insertFavoriteData(Article article) {
-        FavoriteEntity entity = new FavoriteEntity(
-                article.getArticleId(),
-                article.getArticleTitle(),
-                article.getArticleAuthorName(),
-                article.getArticleBody(),
-                article.getArticleThumbnail(),
-                article.getArticlePublishedDate()
-        );
+    public void insertFavoriteArticleData(Article article) {
+        FavoriteEntity entity = Article.articleToFavoriteArticle(article);
         mRepository.insertFavoriteArticle(entity);
     }
 }

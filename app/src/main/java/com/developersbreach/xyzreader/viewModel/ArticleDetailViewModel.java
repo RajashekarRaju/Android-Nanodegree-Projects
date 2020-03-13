@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 
@@ -26,23 +27,20 @@ public class ArticleDetailViewModel extends AndroidViewModel {
      * changed we will be updating StepsDetail with new values. And any externally exposed LiveData
      * can observe this changes.
      */
-    private MutableLiveData<Article> _mMutableArticle;
     private LiveData<List<Article>> _mMutableArticleList;
-    private MutableLiveData<Boolean> mFragmentValue;
+    private MutableLiveData<Boolean> _mMutableFragmentName;
+    private MutableLiveData<Article> _mMutableSelectedArticle;
 
-    /**
-     * fragment to observe changes. Data is observed once changes will be done internally.
-     */
+    public LiveData<List<Article>> articles() {
+        return getMutableArticleList();
+    }
+
+    public LiveData<Boolean> fragmentName() {
+        return getMutableFragmentName();
+    }
+
     public LiveData<Article> selectedArticle() {
-        return _mMutableArticle;
-    }
-
-    public LiveData<List<Article>> getMutableArticleList() {
-        return _mMutableArticleList;
-    }
-
-    public MutableLiveData<Boolean> getFragmentValue() {
-        return mFragmentValue;
+        return getSelectedArticle();
     }
 
     /**
@@ -54,41 +52,31 @@ public class ArticleDetailViewModel extends AndroidViewModel {
     public ArticleDetailViewModel(@NonNull Application application, Article article, String fragmentName) {
         super(application);
         final ArticleRepository repository = ((XYZReaderApp) application).getRepository();
-
-        getMutableArticleDetailsData(article);
         getMutableArticleDetailListData(repository);
         getMutableFragmentNameData(fragmentName);
-    }
-
-    private void getMutableFragmentNameData(String fragmentName) {
-        mFragmentValue = new MutableLiveData<>();
-        if (fragmentName.equals(ArticleListFragment.class.getSimpleName())) {
-            mFragmentValue.postValue(true);
-        } else if (fragmentName.equals(SearchArticleFragment.class.getSimpleName())) {
-            mFragmentValue.postValue(false);
-        } else if (fragmentName.equals(ArticleFavoritesFragment.class.getSimpleName())) {
-            mFragmentValue.postValue(false);
-        }
+        getMutableSelectedArticleDetailsData(article);
     }
 
     private void getMutableArticleDetailListData(ArticleRepository repository) {
-        _mMutableArticleList = Transformations.switchMap(repository.getArticles(), input -> {
-            MutableLiveData<List<Article>> listLiveData = new MutableLiveData<>();
+        final MediatorLiveData<List<ArticleEntity>> source = repository.getObservableArticleList();
+        _mMutableArticleList = Transformations.switchMap(source, articleEntityList -> {
+            MutableLiveData<List<Article>> mutableArticlesLiveData = new MutableLiveData<>();
             List<Article> articleList = new ArrayList<>();
-            for (ArticleEntity articleEntity : input) {
-                articleList.add(new Article(
-                        articleEntity.getArticleId(),
-                        articleEntity.getArticleTitle(),
-                        articleEntity.getArticleAuthorName(),
-                        articleEntity.getArticleBody(),
-                        articleEntity.getArticleThumbnail(),
-                        articleEntity.getArticlePublishedDate()
-                ));
-            }
-
-            listLiveData.postValue(articleList);
-            return listLiveData;
+            Article.articleEntityToArticle(articleEntityList, articleList);
+            mutableArticlesLiveData.postValue(articleList);
+            return mutableArticlesLiveData;
         });
+    }
+
+    private void getMutableFragmentNameData(String fragmentName) {
+        _mMutableFragmentName = new MutableLiveData<>();
+        if (fragmentName.equals(ArticleListFragment.class.getSimpleName())) {
+            _mMutableFragmentName.postValue(true);
+        } else if (fragmentName.equals(SearchArticleFragment.class.getSimpleName())) {
+            _mMutableFragmentName.postValue(false);
+        } else if (fragmentName.equals(ArticleFavoritesFragment.class.getSimpleName())) {
+            _mMutableFragmentName.postValue(false);
+        }
     }
 
     /**
@@ -97,11 +85,26 @@ public class ArticleDetailViewModel extends AndroidViewModel {
      *
      * @param article has data for user selected Recipe with id.
      */
-    private void getMutableArticleDetailsData(Article article) {
-        if (_mMutableArticle == null) {
-            _mMutableArticle = new MutableLiveData<>();
+    private void getMutableSelectedArticleDetailsData(Article article) {
+        if (_mMutableSelectedArticle == null) {
+            _mMutableSelectedArticle = new MutableLiveData<>();
             // Add list to internally exposed data of RecipeDetails by calling postValue.
-            _mMutableArticle.postValue(article);
+            _mMutableSelectedArticle.postValue(article);
         }
+    }
+
+    /**
+     * fragment to observe changes. Data is observed once changes will be done internally.
+     */
+
+    private LiveData<List<Article>> getMutableArticleList() {
+        return _mMutableArticleList;
+    }
+
+    private MutableLiveData<Boolean> getMutableFragmentName() {
+        return _mMutableFragmentName;
+    }
+    private LiveData<Article> getSelectedArticle() {
+        return _mMutableSelectedArticle;
     }
 }
