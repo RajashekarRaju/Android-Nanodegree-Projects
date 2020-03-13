@@ -12,11 +12,12 @@ import com.developersbreach.xyzreader.view.search.SearchArticleFragmentDirection
 
 public class SearchListBindingAdapter {
 
-    @BindingAdapter("searchArticleClickListener")
-    public static void bindSearchArticleClickListener(TextView textView, Article article) {
+    @BindingAdapter("articleSearchToDetailClickListener")
+    public static void bindSearchArticleItemClickListener(TextView textView, Article article) {
         textView.setOnClickListener(view -> {
+            final String className = SearchArticleFragment.class.getSimpleName();
             NavDirections direction = SearchArticleFragmentDirections
-                    .actionSearchArticleFragmentToArticleDetailFragment(article, SearchArticleFragment.class.getSimpleName());
+                    .searchArticleToArticleDetailFragment(article, className);
             // Find NavController with view and navigate to destination using directions.
             Navigation.findNavController(view).navigate(direction);
         });

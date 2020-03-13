@@ -25,26 +25,26 @@ public class ArticleListBindingAdapter {
      * When recipeName is used on TextView, the method bindRecipeName is called.
      *
      * @param textView   a view which we use to set a String value to it.
-     * @param authorName contains String value to be set to TextView.
+     * @param title contains String value to be set to TextView.
      */
-    @BindingAdapter("authorName")
-    public static void bindAuthorName(TextView textView, String authorName) {
-        textView.setText(authorName);
-    }
-
-    @BindingAdapter("articleTitle")
-    public static void bindArticleTitle(TextView textView, String title) {
+    @BindingAdapter("articleItemTitle")
+    public static void bindArticleItemTitle(TextView textView, String title) {
         textView.setText(title);
     }
 
-    @BindingAdapter("articlePublishedDate")
-    public static void bindArticlePublishedDate(TextView textView, String publishedDate) {
+    @BindingAdapter("articleItemAuthorName")
+    public static void bindArticleItemAuthorName(TextView textView, String authorName) {
+        textView.setText(authorName);
+    }
+
+    @BindingAdapter("articleItemPublishedDate")
+    public static void bindArticleItemPublishedDate(TextView textView, String publishedDate) {
         Spanned result = DataFormatting.formatDate(publishedDate);
         textView.setText(result);
     }
 
-    @BindingAdapter("articleThumbnail")
-    public static void bindThumbnail(ImageView imageView, String thumbnail) {
+    @BindingAdapter("articleItemThumbnail")
+    public static void bindArticleItemThumbnail(ImageView imageView, String thumbnail) {
 
         Glide.with(imageView.getContext())
                 .asBitmap()
@@ -52,22 +52,23 @@ public class ArticleListBindingAdapter {
                 .into(imageView);
     }
 
-    @BindingAdapter("articleClickListener")
-    public static void bindArticleClickListener(MaterialCardView cardView, Article article) {
-        cardView.setOnClickListener(v -> {
-            NavDirections direction = ArticleListFragmentDirections
-                    .actionArticleListFragmentToArticleDetailFragment(article, ArticleListFragment.class.getSimpleName());
-            Navigation.findNavController(cardView).navigate(direction);
-        });
-    }
-
-    @BindingAdapter(value = {"insertFavoriteClickListener", "viewModel", "activity"})
+    @BindingAdapter(value = {"insertFavoriteClickListener", "viewModelArticleList", "activityArticleList"})
     public static void bindArticleFavoriteClickListener(ImageView imageView, Article article,
                                                         ArticleListViewModel viewModel, Activity activity) {
         imageView.setOnClickListener(view -> {
             viewModel.insertFavoriteData(article);
             View rootView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
             Snackbar.make(rootView, article.getArticleAuthorName(), Snackbar.LENGTH_SHORT).show();
+        });
+    }
+
+    @BindingAdapter("articleListToDetailClickListener")
+    public static void bindArticleClickListener(MaterialCardView cardView, Article article) {
+        cardView.setOnClickListener(v -> {
+            final String className = ArticleListFragment.class.getSimpleName();
+            NavDirections direction = ArticleListFragmentDirections
+                    .articleListToArticleDetailFragment(article, className);
+            Navigation.findNavController(cardView).navigate(direction);
         });
     }
 }

@@ -24,20 +24,21 @@ public class ArticleDetailBindingAdapter {
      * When recipeName is used on TextView, the method bindRecipeName is called.
      *
      * @param textView         a view which we use to set a String value to it.
-     * @param authorDetailName contains String value to be set to TextView.
+     * @param titleDetailName contains String value to be set to TextView.
      */
-    @BindingAdapter("authorDetailName")
-    public static void bindAuthorDetailName(TextView textView, String authorDetailName) {
-        textView.setText(authorDetailName);
-    }
 
-    @BindingAdapter("titleDetailName")
-    public static void bindTitleDetailName(TextView textView, String titleDetailName) {
+    @BindingAdapter("articleDetailItemTitle")
+    public static void bindArticleDetailItemTitle(TextView textView, String titleDetailName) {
         textView.setText(titleDetailName);
     }
 
-    @BindingAdapter("detailThumbnail")
-    public static void bindDetailThumbnail(ImageView imageView, String thumbnail) {
+    @BindingAdapter("articleDetailItemAuthorName")
+    public static void bindArticleDetailItemAuthorName(TextView textView, String authorDetailName) {
+        textView.setText(authorDetailName);
+    }
+
+    @BindingAdapter("articleDetailItemThumbnail")
+    public static void bindArticleDetailItemThumbnail(ImageView imageView, String thumbnail) {
 
         Glide.with(imageView.getContext())
                 .asBitmap()
@@ -45,7 +46,7 @@ public class ArticleDetailBindingAdapter {
                 .into(imageView);
     }
 
-    @BindingAdapter("asyncArticleBodyTitle")
+    @BindingAdapter("asyncArticleDetailItemBody")
     public static void bindBodyDetailName(TextView textView, String articleBodyTitle) {
 
         AppExecutors.getInstance().backgroundThread().execute(() -> {
@@ -69,18 +70,19 @@ public class ArticleDetailBindingAdapter {
         });
     }
 
-    @BindingAdapter("fabClick")
+    @BindingAdapter("fabClickListener")
     public static void bindFabClick(FloatingActionButton fab, Article article) {
         fab.setOnClickListener(v -> {
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
-            String body = "Title: " + article.getArticleTitle() + "\n" + "By: " + article.getArticleAuthorName();
+            String body = "Title: " + article.getArticleTitle() + "\n" + "By: " +
+                    article.getArticleAuthorName();
             sharingIntent.putExtra(Intent.EXTRA_TEXT, body);
             fab.getContext().startActivity(sharingIntent);
         });
     }
 
-    @BindingAdapter(value = {"detailAppBarLayout", "collapsingToolbarLayout"})
+    @BindingAdapter(value = {"detailAppBarLayout", "detailCollapsingToolbarLayout"})
     public static void bindDetailAppBarLayout(AppBarLayout appBarLayout, Article article,
                                               CollapsingToolbarLayout collapsingToolbarLayout) {
         // Using a listener to get state of CollapsingToolbar and Toolbar to set properties.
