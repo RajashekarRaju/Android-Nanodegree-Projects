@@ -12,7 +12,6 @@
         <item name="colorPrimaryDark">@color/article_green_700</item>
         <!--  A color that passes accessibility guidelines for text/iconography when drawn on top
         of the surface color.-->
-        <item name="colorOnSurface">@color/article_black</item>
         <item name="colorAccent">@color/article_green_700</item>
         <!--  Surface colors affect surfaces of components, such as cards, sheets, and menus.-->
         <item name="colorSurface">@color/article_gray_50</item>
@@ -20,7 +19,6 @@
         <item name="colorSecondary">@color/article_yellow_500</item>
         <!--        The background color appears behind scrollable content.-->
         <item name="android:colorBackground">@color/article_green_500</item>
-
     </style>
 
     <style name="Theme.Article" parent="Base.Theme.Article">
@@ -36,6 +34,15 @@
 
     <style name="TextAppearance.Article.Toolbar.Text" parent="TextAppearance.MaterialComponents.Headline6" >
         <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="MainBottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="itemTextColor">@color/menu_selection_highlighter</item>
+        <item name="itemIconTint">@color/menu_selection_highlighter</item>
+        <item name="labelVisibilityMode">selected</item>
     </style>
 
 </resources>

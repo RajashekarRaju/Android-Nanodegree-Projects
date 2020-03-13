@@ -5,7 +5,6 @@
         <item name="colorPrimary">@color/article_green_900</item>
         <item name="colorOnPrimary">@color/article_yellow_300</item>
         <item name="colorPrimaryDark">@color/article_gray_50_a600</item>
-        <item name="colorOnSurface">@color/article_white</item>
         <item name="colorAccent">@color/article_green_300</item>
         <item name="colorSurface">@color/article_green_900</item>
         <item name="colorSecondary">@color/article_yellow_300</item>
