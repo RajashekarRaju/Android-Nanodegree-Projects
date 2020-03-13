@@ -1,4 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="rv_dimen">6dp</dimen>
+
+    <!--  Drawables  -->
+    <dimen name="drawable_vector_width">24dp</dimen>
+    <dimen name="drawable_vector_height">24dp</dimen>
+    <dimen name="theme_ripple_radius">24dp</dimen>
+
+    <!--    Article List & Favorite Fragment    -->
+    <dimen name="app_bar_height_article_list">96dp</dimen>
+    <dimen name="app_bar_elevation_article_list">0dp</dimen>
+
+    <!--    RecyclerView     -->
+    <dimen name="recycler_view_margin_start">8dp</dimen>
+    <dimen name="recycler_view_margin_end">8dp</dimen>
+    <dimen name="recycler_view_spacing_dimen">6dp</dimen>
+
+    <!--    item_article, favorite, search-->
+    <dimen name="card_elevation_article_item">4dp</dimen>
+    <dimen name="card_corner_radius_article_item">0dp</dimen>
+    <dimen name="article_item_layout_size">0dp</dimen>
+    <dimen name="custom_vector_drawable_size">28dp</dimen>
+    <dimen name="no_layout_width">0dp</dimen>
+    <dimen name="no_layout_height">0dp</dimen>
+    <dimen name="detail_appbar_layout_height">278dp</dimen>
+
+    <!--  Text Size  -->
+    <dimen name="card_text_size_16sp">16sp</dimen>
+    <dimen name="author_title_text_size">12sp</dimen>
+    <dimen name="article_body_text_size">20sp</dimen>
+
+    <!--  Layout Margin, Padding  -->
+    <dimen name="layout_margin_12dp">12dp</dimen>
+    <dimen name="layout_margin_28dp">28dp</dimen>
+    <dimen name="layout_margin_24dp">24dp</dimen>
+    <dimen name="layout_margin_16dp">16dp</dimen>
+    <dimen name="layout_margin_20dp">20dp</dimen>
+    <dimen name="layout_margin_8dp">8dp</dimen>
+    <dimen name="layout_margin_4dp">4dp</dimen>
+    <dimen name="no_layout_margin">0dp</dimen>
+    <dimen name="padding_8dp">8dp</dimen>
+    <dimen name="padding_16dp">16dp</dimen>
+
 </resources>
