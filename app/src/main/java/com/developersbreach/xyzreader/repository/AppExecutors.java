@@ -72,7 +72,7 @@ public class AppExecutors {
     }
 
     // This execute does database operations.
-    public Executor databaseThread() {
+    Executor databaseThread() {
         return mDatabaseThread;
     }
 }

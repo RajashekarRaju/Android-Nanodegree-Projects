@@ -1,14 +1,39 @@
 <resources>
     <string name="app_name">XYZReader</string>
+
+    <!--  Bottom Navigation View Menu Titles  -->
+    <string name="articles_menu_item_title">Articles</string>
+    <string name="search_menu_item_title">Search</string>
+    <string name="favorites_menu_item_title">Favorites</string>
+
+    <!--  Dark Theme Switcher Menu Titles -->
+    <string name="light_menu_item_title">Light</string>
+    <string name="dark_menu_item_title">Dark</string>
+    <string name="default_menu_item_title">Default</string>
+
+    <!--    Content Description-->
+    <string name="article_image_content_description">Article Image</string>
+    <string name="add_favorite_button_content_description">Add Article To Favorites Button</string>
+    <string name="delete_favorite_button_content_description">Delete Article From Favorites Button</string>
+    <string name="app_icon_content_description">App Icon</string>
+    <string name="change_app_theme_button_content_description">Change App Theme Button</string>
+    <string name="static_article_search_button_content_description">Static Article Search Button</string>
+
+    <!--    Favorite Fragment-->
     <string name="articles_header_title">Articles</string>
-    <string name="by_author">By</string>
-    <string name="favorites_menu_title">Favorites</string>
-    <string name="search_menu_item">Search</string>
-    <string name="light_menu_title">Light</string>
-    <string name="dark_menu_title">Dark</string>
-    <string name="default_menu_title">Default</string>
-    <string name="search_articles_hint">Search Articles</string>
     <string name="favorites_title">Favorites</string>
-    <string name="no_search_results_found">No Results Found</string>
     <string name="no_favorites_found">No Favorites Found</string>
+
+    <!--  Card Text  -->
+    <string name="by_author">By</string>
+
+    <!--  Search Fragment  -->
+    <string name="no_search_results_found">No Results Found</string>
+    <string name="search_articles_hint">Search Articles</string>
+
+    <!--    Tools Text-->
+    <string name="article_title_tools_text">Article Title</string>
+    <string name="author_name_tools_text">Author Name</string>
+    <string name="article_search_item_tools_text">The Son Of The Wolf</string>
+    <string name="article_body_tools_text">Article Body</string>
 </resources>
