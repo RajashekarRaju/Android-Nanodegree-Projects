@@ -21,11 +21,8 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/favorite_item_card_view"
-        favoriteListToDetailClickListener="@{favoriteArticle}"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="@dimen/card_elevation_article_item"
-        app:cardCornerRadius="@dimen/card_corner_radius_article_item">
+        style="@style/ItemMaterialCardViewStyle"
+        favoriteListToDetailClickListener="@{favoriteArticle}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -88,7 +85,7 @@
 
             <TextView
                 android:id="@+id/favorite_article_author_item_image_view"
-                favoriteArticleItemAuthorName="@{favoriteArticle.articleAuthorName}"
+                favoriteArticleItemAuthor="@{favoriteArticle.articleAuthorName}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/layout_margin_8dp"
@@ -106,7 +103,7 @@
             <ImageView
                 android:id="@+id/remove_favorite_article_item_image_view"
                 activityFavoriteList="@{activity}"
-                deleteFavoriteClickListener="@{favoriteArticle}"
+                deleteFavoriteArticleClickListener="@{favoriteArticle}"
                 favoriteCardView="@{favoriteItemCardView}"
                 favoriteViewModel="@{favoriteViewModel}"
                 android:layout_width="wrap_content"

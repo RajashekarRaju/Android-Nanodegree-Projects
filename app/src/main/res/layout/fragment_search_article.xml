@@ -51,13 +51,9 @@
 
             <TextView
                 android:id="@+id/no_search_results_found_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/rubik_medium"
                 android:text="@string/no_search_results_found"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                android:visibility="invisible" />
+                android:visibility="invisible"
+                style="@style/ResultsNotFountTextStyle" />
 
         </FrameLayout>
 

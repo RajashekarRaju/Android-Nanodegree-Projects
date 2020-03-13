@@ -18,6 +18,7 @@
     <!--    item_article, favorite, search-->
     <dimen name="card_elevation_article_item">4dp</dimen>
     <dimen name="card_corner_radius_article_item">0dp</dimen>
+    <dimen name="no_stroke_width">0dp</dimen>
     <dimen name="article_item_layout_size">0dp</dimen>
     <dimen name="custom_vector_drawable_size">28dp</dimen>
     <dimen name="no_layout_width">0dp</dimen>

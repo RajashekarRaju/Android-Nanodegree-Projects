@@ -19,17 +19,25 @@
     <string name="change_app_theme_button_content_description">Change App Theme Button</string>
     <string name="static_article_search_button_content_description">Static Article Search Button</string>
 
-    <!--    Favorite Fragment-->
+    <!--    Articles List Fragment-->
     <string name="articles_header_title">Articles</string>
+
+    <!--    Favorite Fragment-->
     <string name="favorites_title">Favorites</string>
     <string name="no_favorites_found">No Favorites Found</string>
-
-    <!--  Card Text  -->
-    <string name="by_author">By</string>
+    <string name="added_to_favorites">Added to Favorites</string>
+    <string name="removed_favorite">Removed From Favorites</string>
 
     <!--  Search Fragment  -->
     <string name="no_search_results_found">No Results Found</string>
     <string name="search_articles_hint">Search Articles</string>
+
+    <!--  Detail Fragment Binding  -->
+    <string name="fab_body_builder_title">Title :</string>
+    <string name="fab_body_builder_by">By :</string>
+
+    <!--  Card Text  -->
+    <string name="by_author">By</string>
 
     <!--    Tools Text-->
     <string name="article_title_tools_text">Article Title</string>

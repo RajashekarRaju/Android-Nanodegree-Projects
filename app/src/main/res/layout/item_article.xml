@@ -20,11 +20,8 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        articleListToDetailClickListener="@{article}"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="@dimen/card_elevation_article_item"
-        app:cardCornerRadius="@dimen/card_corner_radius_article_item">
+        style="@style/ItemMaterialCardViewStyle"
+        articleListToDetailClickListener="@{article}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -105,7 +102,7 @@
             <ImageView
                 android:id="@+id/add_favorite_article_item_image_view"
                 activityArticleList="@{activity}"
-                insertFavoriteClickListener="@{article}"
+                insertFavoriteArticleClickListener="@{article}"
                 viewModelArticleList="@{articleViewModel}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

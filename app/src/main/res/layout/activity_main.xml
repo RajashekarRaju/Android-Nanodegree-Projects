@@ -22,7 +22,7 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation_view"
-            style="@style/MainBottomNavigationView"
+            style="@style/MainBottomNavigationViewStyle"
             app:menu="@menu/bottom_navigation_menu" />
 
     </FrameLayout>

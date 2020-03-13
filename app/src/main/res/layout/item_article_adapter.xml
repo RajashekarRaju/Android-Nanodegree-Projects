@@ -119,13 +119,8 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_share_article"
-            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            style="@style/ShareFloatingActionButton"
             fabClickListener="@{article}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="@dimen/layout_margin_16dp"
-            android:backgroundTint="?attr/colorSecondaryVariant"
             android:src="@drawable/ic_share"
             app:rippleColor="?attr/colorOnSecondary" />
 
