@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="article_gray_50">#fafafa</color>
-    <color name="article_gray_50_a600">#99fafafa</color>
-    <color name="article_green_300">#7986cb</color>
-    <color name="article_green_500">#3f51b5</color>
-    <color name="article_green_700">#303f9f</color>
-    <color name="article_green_900">#1a237e</color>
-    <color name="article_yellow_300">#f8f99f</color>
-    <color name="article_yellow_500">#ffff63</color>
+    <color name="colorSurface">#fafafa</color>
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorSecondary">#ffff63</color>
+    <color name="colorPrimaryDark">#303f9f</color>
+    <color name="colorOnPrimary">#ffff63</color>
+    <color name="colorAccent">#303f9f</color>
+    <color name="colorBackground">#3f51b5</color>
 </resources>
