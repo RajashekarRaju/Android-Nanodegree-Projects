@@ -7,22 +7,45 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.developersbreach.xyzreader.repository.database.ArticleDatabase;
 import com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity;
 
 import java.util.List;
 
+
+/**
+ * Separate dao interface class for table named "favorites_table". It is recommended to use separate
+ * dao class for each table declared in database.
+ * <p>
+ * Mark this class {@link Dao} for accessing Data Objects from app database {@link ArticleDatabase}.
+ * We access objects from database table named as "favorites_table".
+ *
+ * @see FavoriteEntity for table declaration.
+ */
 @Dao
 public interface FavoriteDao {
 
+    /**
+     * @return queries list of  favorite articles of type {@link LiveData} from favorites_table.
+     */
     @Query("SELECT * FROM favorites_table")
     LiveData<List<FavoriteEntity>> loadAllFavoriteArticles();
 
+    /**
+     * @param article inserts single favorite article into table favorites_table.
+     */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertFavoriteArticle(FavoriteEntity article);
 
+    /**
+     * @param article deletes single favorite article into table favorites_table.
+     */
     @Delete
     void deleteFavoriteArticle(FavoriteEntity article);
 
+    /**
+     * Queries all data from favorites_table to perform delete operation.
+     */
     @Query("DELETE FROM favorites_table")
     void deleteAllFavorites();
 }

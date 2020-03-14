@@ -8,10 +8,31 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.developersbreach.xyzreader.repository.database.ArticleDatabase;
+import com.developersbreach.xyzreader.repository.database.dao.FavoriteDao;
 
+
+/**
+ * This class will have a mapping SQLite "favorites_table" in the {@link ArticleDatabase}.
+ * This class fields are persisted once it is annotated with {@link Entity} and used as columns
+ * in databases based on type of annotation they are assigned with. We pass this class entity into
+ * database class with name.
+ *
+ * @see FavoriteDao which uses this class table for queries.
+ */
 @Entity(tableName = "favorites_table")
 public class FavoriteEntity implements Parcelable {
 
+    /**
+     * Each entity class requires at-least one primary key.
+     * Fields need to be annotated as {@link ColumnInfo} with a name to generate rows and columns
+     * inside the database properly.
+     * <p>
+     * Fields can be annotated as {@link Ignore} for not being used by room.
+     *
+     * This entity class table column names are differed by {@link ArticleEntity} with replacing
+     * "column_article_id" to "column_favorite_id".
+     */
     @PrimaryKey
     @ColumnInfo(name = "column_favorite_id")
     private int mArticleId;
@@ -85,9 +106,15 @@ public class FavoriteEntity implements Parcelable {
 
     ///////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * Each entity must either have a no-arg public constructor.
+     */
     public FavoriteEntity() {
     }
 
+    /**
+     * Let room know not to use this constructor by annotating with ignore.
+     */
     @Ignore
     public FavoriteEntity(int id, String title, String authorName, String body, String thumbnail,
                           String publishedDate) {
@@ -97,17 +124,6 @@ public class FavoriteEntity implements Parcelable {
         this.mArticleBody = body;
         this.mArticleThumbnail = thumbnail;
         this.mArticlePublishedDate = publishedDate;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////
-
-    public FavoriteEntity(Parcel in) {
-        mArticleId = in.readInt();
-        mArticleTitle = in.readString();
-        mArticleAuthorName = in.readString();
-        mArticleBody = in.readString();
-        mArticleThumbnail = in.readString();
-        mArticlePublishedDate = in.readString();
     }
 
     public static final Creator<FavoriteEntity> CREATOR = new Creator<FavoriteEntity>() {
@@ -121,6 +137,15 @@ public class FavoriteEntity implements Parcelable {
             return new FavoriteEntity[size];
         }
     };
+
+    public FavoriteEntity(Parcel in) {
+        mArticleId = in.readInt();
+        mArticleTitle = in.readString();
+        mArticleAuthorName = in.readString();
+        mArticleBody = in.readString();
+        mArticleThumbnail = in.readString();
+        mArticlePublishedDate = in.readString();
+    }
 
     /**
      * Describe the kinds of special objects contained in this Parcelable

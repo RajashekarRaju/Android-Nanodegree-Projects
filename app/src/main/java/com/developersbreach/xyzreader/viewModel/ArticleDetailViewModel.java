@@ -96,7 +96,6 @@ public class ArticleDetailViewModel extends AndroidViewModel {
     /**
      * fragment to observe changes. Data is observed once changes will be done internally.
      */
-
     private LiveData<List<Article>> getMutableArticleList() {
         return _mMutableArticleList;
     }
