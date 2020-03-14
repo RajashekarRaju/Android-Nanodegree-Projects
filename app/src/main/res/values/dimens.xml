@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--  Drawables  -->
-    <dimen name="drawable_vector_width">24dp</dimen>
-    <dimen name="drawable_vector_height">24dp</dimen>
-    <dimen name="theme_ripple_radius">24dp</dimen>
-
     <!--    Article List & Favorite Fragment    -->
     <dimen name="app_bar_height_article_list">96dp</dimen>
     <dimen name="app_bar_elevation_article_list">0dp</dimen>
@@ -24,6 +19,11 @@
     <dimen name="no_layout_width">0dp</dimen>
     <dimen name="no_layout_height">0dp</dimen>
     <dimen name="detail_appbar_layout_height">278dp</dimen>
+
+    <!--  Drawables  -->
+    <dimen name="drawable_vector_width">24dp</dimen>
+    <dimen name="drawable_vector_height">24dp</dimen>
+    <dimen name="theme_ripple_radius">24dp</dimen>
 
     <!--  Text Size  -->
     <dimen name="card_text_size_16sp">16sp</dimen>
