@@ -7,14 +7,18 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.developersbreach.xyzreader.viewModel.ArticleDetailViewModel;
+import com.developersbreach.xyzreader.view.favorite.ArticleFavoritesFragment;
 import com.developersbreach.xyzreader.viewModel.ArticleFavoritesViewModel;
 
+
+/**
+ * A AndroidViewModelFactory for creating a instance of {@link ArticleFavoritesViewModel}
+ * AndroidViewModel for fragment class {@link ArticleFavoritesFragment} with a constructor.
+ */
 public class FavoriteViewModelFactory extends ViewModelProvider.AndroidViewModelFactory {
 
     // Needs to to be passed as parameter for AndroidViewModel class.
     private final Application mApplication;
-    // Parcel model class Recipe as argument.
 
     /**
      * Creates a {@link ViewModelProvider.AndroidViewModelFactory}
@@ -27,8 +31,8 @@ public class FavoriteViewModelFactory extends ViewModelProvider.AndroidViewModel
     }
 
     /**
-     * @param modelClass to check if our {@link ArticleDetailViewModel} model class is assignable.
-     * @param <T>        type of generic class
+     * @param modelClass to check if our {@link ArticleFavoritesViewModel} model class is assignable.
+     * @param <T>        type of generic class.
      * @return returns the ViewModel class with passing parameters if instance is created.
      */
     @NonNull

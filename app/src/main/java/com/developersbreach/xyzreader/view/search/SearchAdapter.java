@@ -10,32 +10,49 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.developersbreach.xyzreader.R;
+import com.developersbreach.xyzreader.R.layout;
+import com.developersbreach.xyzreader.bindingAdapter.SearchListBindingAdapter;
 import com.developersbreach.xyzreader.databinding.ItemSearchArticleBinding;
 import com.developersbreach.xyzreader.model.Article;
 
+
+/**
+ * This class implements a {@link RecyclerView} extends to {@link ListAdapter} which uses Data
+ * Binding to present list data, including computing diffs between lists.
+ * <p>
+ * {@link Article} type of list this adapter will receive.
+ * {@link SearchAdapter.SearchViewHolder} class that extends ViewHolder that will be used by the adapter.
+ * This adapter is associated with {@link SearchArticleFragment} class.
+ * Views inside recyclerView items are bind in class {@link SearchListBindingAdapter} with layout
+ * reference to {@link R.layout#item_search_article}.
+ */
 public class SearchAdapter extends ListAdapter<Article, SearchAdapter.SearchViewHolder> {
 
-
+    // Empty constructor with DIFF_ITEM_CALLBACK.
     SearchAdapter() {
         super(DIFF_ITEM_CALLBACK);
     }
 
     /**
-     * RecipeViewHolder class creates child view Recipe properties.
+     * SearchViewHolder class creates child view Article properties.
+     * Class also calls setters for binding objects from inflated layout.
      */
     static class SearchViewHolder extends RecyclerView.ViewHolder {
 
         // Get access to binding the views in layout
         private final ItemSearchArticleBinding mBinding;
 
+        /**
+         * @param binding binds each properties in {@link Article} list
+         */
         private SearchViewHolder(final ItemSearchArticleBinding binding) {
             super(binding.getRoot());
             this.mBinding = binding;
         }
 
         /**
-         * @param article pass object to set recipe for binding. This binding is accessed from layout
-         *               xml {@link com.developersbreach.xyzreader.R.layout#item_article}
+         * @param article pass object to set article for binding. This binding is accessed from layout
+         *                xml {@link layout#item_article}
          */
         void bind(final Article article) {
             mBinding.setArticle(article);
@@ -78,6 +95,10 @@ public class SearchAdapter extends ListAdapter<Article, SearchAdapter.SearchView
         return new SearchViewHolder(binding);
     }
 
+    /**
+     * Allows the RecyclerView to determine which items have changed when the list of {@link Article}
+     * has been updated.
+     */
     private static final DiffUtil.ItemCallback<Article> DIFF_ITEM_CALLBACK = new DiffUtil.ItemCallback<Article>() {
 
         @Override

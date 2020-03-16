@@ -6,12 +6,9 @@
     <dimen name="app_bar_elevation_article_list">0dp</dimen>
 
     <!--    RecyclerView     -->
-    <dimen name="recycler_view_margin_start">8dp</dimen>
-    <dimen name="recycler_view_margin_end">8dp</dimen>
     <dimen name="recycler_view_spacing_dimen">6dp</dimen>
 
     <!--    item_article, favorite, search-->
-    <dimen name="card_elevation_article_item">4dp</dimen>
     <dimen name="card_corner_radius_article_item">0dp</dimen>
     <dimen name="no_stroke_width">0dp</dimen>
     <dimen name="article_item_layout_size">0dp</dimen>
