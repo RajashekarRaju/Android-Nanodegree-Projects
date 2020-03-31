@@ -85,37 +85,6 @@ public class ArticleListBindingAdapter {
     }
 
     /**
-     * When value insertFavoriteArticleClickListener is used as attribute on ImageView, the method
-     * bindArticleFavoriteClickListener is called. When user clicks this view, we insert the article
-     * data into separate database table called [favorite_table] see {@link FavoriteEntity} class
-     * for table name declaration with value.
-     * <p>
-     * With value viewModelArticleList is being called on attribute, we call viewModel class
-     * {@link ArticleListViewModel} as setter which is passed in adapter class {@link ArticleAdapter}
-     * with binding variable.
-     * <p>
-     * With value activityArticleList is being called on attribute, we call {@link Activity} from
-     * fragment class {@link ArticleListFragment} which behaves as {@link FragmentActivity}.
-     *
-     * @param imageView view which represents to add article to favorites.
-     * @param article   contains data for selected article value to add into favorites table.
-     * @param viewModel we need this declaration so that we can access viewModel class to call
-     *                  method {@link ArticleListViewModel#insertFavoriteArticleData(Article)} for
-     *                  adding article to favorites.
-     * @param activity  get access to current fragments window to show {@link Snackbar} which shows
-     *                  message that favorites have been added to table after the view being clicked.
-     */
-    @BindingAdapter({"insertFavoriteArticleClickListener", "viewModelArticleList", "activityArticleList"})
-    public static void bindArticleFavoriteClickListener(
-            ImageView imageView, Article article, ArticleListViewModel viewModel, Activity activity) {
-        imageView.setOnClickListener(view -> {
-            viewModel.insertFavoriteArticleData(article);
-            View rootView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
-            Snackbar.make(rootView, R.string.added_to_favorites, Snackbar.LENGTH_SHORT).show();
-        });
-    }
-
-    /**
      * When value articleListToDetailClickListener is used as attribute on MaterialCardView, the
      * method bindArticleListToDetailClickListener is called. This navigates user to other fragment,
      * {@link ArticleListFragment} to {@link ArticleDetailFragment} using a action declared in
@@ -144,5 +113,62 @@ public class ArticleListBindingAdapter {
             // Find NavController with view and navigate to destination using directions.
             Navigation.findNavController(view).navigate(direction);
         });
+    }
+
+
+    /**
+     * When value insertFavoriteArticleClickListener is used as attribute on ImageView, the method
+     * bindArticleFavoriteClickListener is called. When user clicks this view, we insert the article
+     * data into separate database table called [favorite_table] see {@link FavoriteEntity} class
+     * for table name declaration with value.
+     * <p>
+     * With value viewModelArticleList is being called on attribute, we call viewModel class
+     * {@link ArticleListViewModel} as setter which is passed in adapter class {@link ArticleAdapter}
+     * with binding variable.
+     * <p>
+     * With value activityArticleList is being called on attribute, we call {@link Activity} from
+     * fragment class {@link ArticleListFragment} which behaves as {@link FragmentActivity}.
+     *
+     * @param imageView view which represents to add article to favorites.
+     * @param article   contains data for selected article value to add into favorites table.
+     * @param viewModel we need this declaration so that we can access viewModel class to call
+     *                  method {@link ArticleListViewModel#insertFavoriteArticleData(Article)} for
+     *                  adding article to favorites.
+     * @param activity  get access to current fragments window to show {@link Snackbar} which shows
+     *                  message that favorites have been added to table after the view being clicked.
+     */
+    @BindingAdapter({"insertFavoriteArticleClickListener", "viewModelArticleList", "activityArticleList"})
+    public static void bindArticleFavoriteClickListener(
+            ImageView imageView, Article article, ArticleListViewModel viewModel, Activity activity) {
+        imageView.setOnClickListener(view -> {
+
+            boolean isFavorite = viewModel.isFavorite(article.getArticleId());
+
+            //final int favorite = viewModel.getFavorite(article.getArticleId());
+            if (!isFavorite) {
+                viewModel.insertFavoriteArticleData(article);
+                imageView.setImageResource(R.drawable.ic_delete_favorite);
+            } else {
+                viewModel.deleteFavoriteArticleData(article);
+                imageView.setImageResource(R.drawable.ic_add_favorite_filled);
+            }
+
+            View rootView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
+            Snackbar.make(rootView, R.string.added_to_favorites, Snackbar.LENGTH_SHORT);
+        });
+    }
+
+
+    @BindingAdapter({"imageViewState", "viewModelArticleLists"})
+    public static void bindImageViewState(
+            ImageView imageView, Article article, ArticleListViewModel viewModel) {
+
+        final int favorite = viewModel.getFavorite(article.getArticleId() + 1);
+        if (favorite == 9) {
+            imageView.setImageResource(R.drawable.ic_delete_favorite);
+        } else if ((favorite == 10)){
+            imageView.setImageResource(R.drawable.ic_add_favorite_filled);
+        }
+
     }
 }

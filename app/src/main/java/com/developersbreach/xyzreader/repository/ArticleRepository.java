@@ -90,6 +90,20 @@ public class ArticleRepository {
         return mObservableFavoriteList;
     }
 
+
+    private int ID;
+    public int getFavorites(int id) {
+        AppExecutors.getInstance().databaseThread().execute(() -> {
+            int favoriteById = sDatabase.favoriteDao().getFavoriteById(id);
+            if (id == favoriteById) {
+                ID = 9;
+            } else {
+                ID = 10;
+            }
+        });
+        return ID;
+    }
+
     /**
      * @param favoriteEntity contains data for article to insert a new article in to favorites table.
      *                       Only insert the data in background database thread without blocking the
@@ -135,5 +149,14 @@ public class ArticleRepository {
                 e.printStackTrace();
             }
         });
+    }
+
+    private boolean b;
+    public boolean isFavorite(int articleId) {
+        AppExecutors.getInstance().databaseThread().execute(() -> {
+            final int favorite = sDatabase.favoriteDao().getFavoriteById(articleId);
+            b = favorite != 0;
+        });
+        return b;
     }
 }

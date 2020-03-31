@@ -31,17 +31,20 @@ public interface FavoriteDao {
     @Query("SELECT * FROM favorites_table")
     LiveData<List<FavoriteEntity>> loadAllFavoriteArticles();
 
-    /**
-     * @param article inserts single favorite article into table favorites_table.
-     */
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertFavoriteArticle(FavoriteEntity article);
+    @Query("SELECT * FROM favorites_table WHERE column_favorite_id = :favoriteId")
+    int getFavoriteById(int favoriteId);
 
     /**
-     * @param article deletes single favorite article into table favorites_table.
+     * @param favoriteEntity inserts single favorite article into table favorites_table.
+     */
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertFavoriteArticle(FavoriteEntity favoriteEntity);
+
+    /**
+     * @param favoriteEntity deletes single favorite article into table favorites_table.
      */
     @Delete
-    void deleteFavoriteArticle(FavoriteEntity article);
+    void deleteFavoriteArticle(FavoriteEntity favoriteEntity);
 
     /**
      * Queries all data from favorites_table to perform delete operation.
