@@ -101,6 +101,8 @@
 
             <ImageView
                 android:id="@+id/add_favorite_article_item_image_view"
+                imageViewState="@{article}"
+                viewModelArticleLists="@{articleViewModel}"
                 activityArticleList="@{activity}"
                 insertFavoriteArticleClickListener="@{article}"
                 viewModelArticleList="@{articleViewModel}"
@@ -109,7 +111,6 @@
                 android:background="@drawable/background_ripple"
                 android:contentDescription="@string/add_favorite_button_content_description"
                 android:padding="@dimen/padding_16dp"
-                android:src="@drawable/ic_add_favorite_filled"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
