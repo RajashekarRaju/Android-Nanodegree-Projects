@@ -189,7 +189,7 @@ public class FavoriteListBindingAdapter {
             public void onAnimationEnd(Animation animation) {
                 viewModel.deleteFavoriteArticleData(favoriteEntity);
                 View rootView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
-                Snackbar.make(rootView, R.string.removed_favorite, Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(rootView, R.string.removed_favorite, Snackbar.LENGTH_SHORT);
             }
 
             /**

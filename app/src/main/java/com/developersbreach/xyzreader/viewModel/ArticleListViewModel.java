@@ -100,4 +100,17 @@ public class ArticleListViewModel extends AndroidViewModel {
         FavoriteEntity favoriteEntity = Article.articleToFavoriteArticle(article);
         mRepository.insertFavoriteArticle(favoriteEntity);
     }
+
+    public void deleteFavoriteArticleData(Article article) {
+        FavoriteEntity favoriteEntity = Article.articleToFavoriteArticle(article);
+        mRepository.deleteFavoriteArticle(favoriteEntity);
+    }
+
+    public int getFavorite(int id) {
+        return mRepository.getFavorites(id);
+    }
+
+    public boolean isFavorite(int articleId) {
+        return mRepository.isFavorite(articleId);
+    }
 }

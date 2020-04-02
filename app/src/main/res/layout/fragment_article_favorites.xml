@@ -43,6 +43,7 @@
                 style="@style/StaggeredRecyclerViewStyle"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="6"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_favorite" />
 
             <TextView
