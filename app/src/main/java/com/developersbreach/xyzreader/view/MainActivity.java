@@ -1,5 +1,7 @@
 package com.developersbreach.xyzreader.view;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private NavController mNavigationController;
     // Inflate activity layout using DataBinding library.
     private ActivityMainBinding mBinding;
+    public static final String LOTTIE_PREFERENCE_KEY = "XYZ_NAME";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +46,23 @@ public class MainActivity extends AppCompatActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         // NavigationController to set default NavHost as nav_host_fragment.
         mNavigationController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
+        launchFragmentWithPreference();
+
         // Set BottomNavigationView and attach a item selected navigation listener.
         mBinding.bottomNavigationView.setOnNavigationItemSelectedListener(new NavigationListener());
         // Change behaviour of destination view or content based on type of destination is user at.
         mNavigationController.addOnDestinationChangedListener(this::onDestinationChanged);
+    }
+
+    private void launchFragmentWithPreference() {
+        SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
+        final boolean preferencesBoolean = preferences.getBoolean(LOTTIE_PREFERENCE_KEY, false);
+        if (preferencesBoolean) {
+            mNavigationController.navigate(R.id.articleListFragment);
+        } else {
+            mNavigationController.navigate(R.id.XYZReaderFragment);
+        }
     }
 
     /**
@@ -57,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         // Check for destination ArticleDetailFragment, if true hide the navigation view.
         if (destination.getId() == R.id.articleDetailFragment) {
             mBinding.bottomNavigationView.setVisibility(View.INVISIBLE);
+        } else if (destination.getId() == R.id.XYZReaderFragment) {
+            mBinding.bottomNavigationView.setVisibility(View.GONE);
         } else {
             // If not valid destination, don;t hide view.
             mBinding.bottomNavigationView.setVisibility(View.VISIBLE);
