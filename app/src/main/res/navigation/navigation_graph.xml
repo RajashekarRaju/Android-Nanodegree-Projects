@@ -4,7 +4,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph.xml"
-    app:startDestination="@id/articleListFragment">
+    app:startDestination="@id/XYZReaderFragment">
+
+    <fragment
+        android:id="@+id/XYZReaderFragment"
+        android:name="com.developersbreach.xyzreader.view.XYZReaderFragment"
+        tools:layout="@layout/fragment_xyz_reader">
+        <action
+            android:id="@+id/action_XYZReaderFragment_to_articleListFragment"
+            app:destination="@id/articleListFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit"
+            app:popUpTo="@id/XYZReaderFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/articleListFragment"
