@@ -1,6 +1,8 @@
 package com.developersbreach.xyzreader.view.list;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,9 @@ import com.developersbreach.xyzreader.utils.ThemePreferencesManager;
 import com.developersbreach.xyzreader.viewModel.ArticleListViewModel;
 
 import java.util.List;
+import java.util.Objects;
+
+import static com.developersbreach.xyzreader.view.MainActivity.LOTTIE_PREFERENCE_KEY;
 
 
 /**
@@ -58,8 +63,18 @@ public class ArticleListFragment extends Fragment {
         RecyclerViewItemDecoration.setItemSpacing(getResources(), mBinding.articlesRecyclerView);
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment.
         mBinding.setLifecycleOwner(this);
+
+        hideLottieWithPreferences(Objects.requireNonNull(getActivity()));
+
         // Return root binding view.
         return mBinding.getRoot();
+    }
+
+    private void hideLottieWithPreferences(Activity activity) {
+        SharedPreferences preferences = activity.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(LOTTIE_PREFERENCE_KEY, true);
+        editor.apply();
     }
 
     @Override
