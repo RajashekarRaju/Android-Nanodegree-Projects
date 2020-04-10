@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +19,6 @@ import com.developersbreach.xyzreader.databinding.FragmentArticleListBinding;
 import com.developersbreach.xyzreader.model.Article;
 import com.developersbreach.xyzreader.utils.ArticleAnimations;
 import com.developersbreach.xyzreader.utils.RecyclerViewItemDecoration;
-import com.developersbreach.xyzreader.utils.ThemePreferencesManager;
 import com.developersbreach.xyzreader.viewModel.ArticleListViewModel;
 
 import java.util.List;
@@ -47,8 +45,6 @@ public class ArticleListFragment extends Fragment {
     private ArticleListViewModel mViewModel;
     // Get binding reference for this fragment.
     private FragmentArticleListBinding mBinding;
-    // To manage day/night theme preference in the fragment.
-    private ThemePreferencesManager mPreferenceManager;
 
 
     @Override
@@ -57,8 +53,6 @@ public class ArticleListFragment extends Fragment {
         // Get reference to binding and inflate this class layout.
         mBinding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_article_list, container, false);
-        // Set this class toolbar.
-        setToolbar(getContext(), mBinding.toolbarContentArticlesHeader.headerThemeSwitcherImageView);
         // Set item decoration for items inside recycler view.
         RecyclerViewItemDecoration.setItemSpacing(getResources(), mBinding.articlesRecyclerView);
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment.
@@ -106,19 +100,6 @@ public class ArticleListFragment extends Fragment {
         adapter.submitList(articleList);
         // Set adapter with recyclerView.
         mBinding.articlesRecyclerView.setAdapter(adapter);
-    }
-
-    /**
-     * @param context                to pass context for preferenceManager.
-     * @param themeSwitcherImageView view which implements click listener to show popUp menu for
-     *                               selecting theme. By default we set theme to use dark mode.
-     * @see ThemePreferencesManager#showThemeSwitcherPopUp(View)
-     */
-    public void setToolbar(Context context, ImageView themeSwitcherImageView) {
-        mPreferenceManager = new ThemePreferencesManager(context);
-        mPreferenceManager.applyDayNightTheme();
-        themeSwitcherImageView.setOnClickListener(view ->
-                mPreferenceManager.showThemeSwitcherPopUp(themeSwitcherImageView));
     }
 
     /**

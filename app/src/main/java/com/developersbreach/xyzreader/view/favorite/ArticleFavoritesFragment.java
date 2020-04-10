@@ -2,12 +2,10 @@ package com.developersbreach.xyzreader.view.favorite;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +18,6 @@ import com.developersbreach.xyzreader.databinding.FragmentArticleFavoritesBindin
 import com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity;
 import com.developersbreach.xyzreader.utils.ArticleAnimations;
 import com.developersbreach.xyzreader.utils.RecyclerViewItemDecoration;
-import com.developersbreach.xyzreader.utils.ThemePreferencesManager;
 import com.developersbreach.xyzreader.viewModel.ArticleFavoritesViewModel;
 import com.developersbreach.xyzreader.viewModel.factory.FavoriteViewModelFactory;
 import com.google.android.material.textview.MaterialTextView;
@@ -48,8 +45,6 @@ public class ArticleFavoritesFragment extends Fragment {
     private FragmentArticleFavoritesBinding mBinding;
     // Get this class fragment associated ViewModel.
     private ArticleFavoritesViewModel mViewModel;
-    // To manage day/night theme preference in the fragment.
-    private ThemePreferencesManager mPreferenceManager;
 
 
     @Override
@@ -59,8 +54,7 @@ public class ArticleFavoritesFragment extends Fragment {
         mBinding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_article_favorites, container, false);
         // Set this class toolbar.
-        setToolbar(getContext(), mBinding.toolbarContentFavoritesHeader.headerAppTitle,
-                mBinding.toolbarContentFavoritesHeader.headerThemeSwitcherImageView);
+        setToolbar( mBinding.toolbarContentFavoritesHeader.headerAppTitle);
         // Set item decoration for items inside recycler view.
         RecyclerViewItemDecoration.setItemSpacing(getResources(), mBinding.favoritesRecyclerView);
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment.
@@ -110,18 +104,11 @@ public class ArticleFavoritesFragment extends Fragment {
     }
 
     /**
-     * @param context                to pass context for preferenceManager.
      * @param title                  shows the title for fragment in toolbar.
-     * @param themeSwitcherImageView view which implements click listener to show popUp menu for
      *                               selecting theme. By default we set theme to use dark mode.
-     * @see ThemePreferencesManager#showThemeSwitcherPopUp(View)
      */
-    private void setToolbar(Context context, MaterialTextView title, ImageView themeSwitcherImageView) {
+    private void setToolbar(MaterialTextView title) {
         title.setText(R.string.favorites_title);
-        mPreferenceManager = new ThemePreferencesManager(context);
-        mPreferenceManager.applyDayNightTheme();
-        themeSwitcherImageView.setOnClickListener(view ->
-                mPreferenceManager.showThemeSwitcherPopUp(themeSwitcherImageView));
     }
 
     /**

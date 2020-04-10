@@ -34,19 +34,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:textAllCaps="true" />
 
-        <ImageView
-            android:id="@+id/header_theme_switcher_image_view"
-            android:layout_width="@dimen/custom_vector_drawable_size"
-            android:layout_height="@dimen/custom_vector_drawable_size"
-            android:layout_marginEnd="@dimen/layout_margin_16dp"
-            android:alpha="0.5"
-            android:background="@drawable/menu_ripple"
-            android:contentDescription="@string/change_app_theme_button_content_description"
-            android:src="@drawable/ic_theme"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
