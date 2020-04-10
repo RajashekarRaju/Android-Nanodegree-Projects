@@ -51,4 +51,7 @@ public interface FavoriteDao {
      */
     @Query("DELETE FROM favorites_table")
     void deleteAllFavorites();
+
+    @Query("SELECT * FROM favorites_table")
+    List<FavoriteEntity> getFavoriteList();
 }

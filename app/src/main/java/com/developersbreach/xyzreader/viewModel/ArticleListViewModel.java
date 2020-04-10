@@ -106,10 +106,6 @@ public class ArticleListViewModel extends AndroidViewModel {
         mRepository.deleteFavoriteArticle(favoriteEntity);
     }
 
-    public int getFavorite(int id) {
-        return mRepository.getFavorites(id);
-    }
-
     public boolean isFavorite(int articleId) {
         return mRepository.isFavorite(articleId);
     }

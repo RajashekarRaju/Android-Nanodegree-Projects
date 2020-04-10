@@ -101,8 +101,6 @@
 
             <ImageView
                 android:id="@+id/add_favorite_article_item_image_view"
-                imageViewState="@{article}"
-                viewModelArticleLists="@{articleViewModel}"
                 activityArticleList="@{activity}"
                 insertFavoriteArticleClickListener="@{article}"
                 viewModelArticleList="@{articleViewModel}"

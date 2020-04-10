@@ -1,8 +1,10 @@
 package com.developersbreach.xyzreader.repository.database.entity;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -10,6 +12,8 @@ import androidx.room.PrimaryKey;
 
 import com.developersbreach.xyzreader.repository.database.ArticleDatabase;
 import com.developersbreach.xyzreader.repository.database.dao.FavoriteDao;
+
+import java.util.Objects;
 
 
 /**
@@ -21,7 +25,7 @@ import com.developersbreach.xyzreader.repository.database.dao.FavoriteDao;
  * @see FavoriteDao which uses this class table for queries.
  */
 @Entity(tableName = "favorites_table")
-public class FavoriteEntity implements Parcelable {
+public class FavoriteEntity extends ArticleEntity {
 
     /**
      * Each entity class requires at-least one primary key.
@@ -29,7 +33,7 @@ public class FavoriteEntity implements Parcelable {
      * inside the database properly.
      * <p>
      * Fields can be annotated as {@link Ignore} for not being used by room.
-     *
+     * <p>
      * This entity class table column names are differed by {@link ArticleEntity} with replacing
      * "column_article_id" to "column_favorite_id".
      */
@@ -54,52 +58,64 @@ public class FavoriteEntity implements Parcelable {
 
     /////////////////// Getters /////////////////////
 
+    @Override
     public int getArticleId() {
         return mArticleId;
     }
 
+    @Override
     public String getArticleTitle() {
         return mArticleTitle;
     }
 
+    @Override
     public String getArticleAuthorName() {
         return mArticleAuthorName;
     }
 
+    @Override
     public String getArticleBody() {
         return mArticleBody;
     }
 
+    @Override
     public String getArticleThumbnail() {
         return mArticleThumbnail;
     }
 
+    @Override
     public String getArticlePublishedDate() {
         return mArticlePublishedDate;
     }
 
     ////////////////////// Setters ///////////////////////////////////////
 
+    @Override
     public void setArticleId(int id) {
         this.mArticleId = id;
     }
 
+    @Override
     public void setArticleTitle(String articleTitle) {
         this.mArticleTitle = articleTitle;
     }
 
+    @Override
     public void setArticleAuthorName(String authorName) {
         this.mArticleAuthorName = authorName;
     }
 
+    @Override
     public void setArticleBody(String articleBody) {
         this.mArticleBody = articleBody;
     }
 
+    @Override
     public void setArticleThumbnail(String articleThumbnail) {
         this.mArticleThumbnail = articleThumbnail;
     }
 
+    @Override
     public void setArticlePublishedDate(String articlePublishedDate) {
         this.mArticlePublishedDate = articlePublishedDate;
     }
@@ -178,4 +194,37 @@ public class FavoriteEntity implements Parcelable {
         dest.writeString(mArticleThumbnail);
         dest.writeString(mArticlePublishedDate);
     }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        FavoriteEntity favoriteEntity = (FavoriteEntity) obj;
+        return Objects.equals(mArticleId, favoriteEntity.mArticleId)
+                && Objects.equals(mArticleTitle, favoriteEntity.mArticleTitle)
+                && Objects.equals(mArticleAuthorName, favoriteEntity.mArticleAuthorName)
+                && Objects.equals(mArticleBody, favoriteEntity.mArticleBody)
+                && Objects.equals(mArticleThumbnail, favoriteEntity.mArticleThumbnail)
+                && Objects.equals(mArticlePublishedDate, favoriteEntity.mArticlePublishedDate);
+    }
+
+    /**
+     * Allows the RecyclerView to determine which items have changed when the list of
+     * {@link FavoriteEntity} has been updated.
+     */
+    public static final DiffUtil.ItemCallback<FavoriteEntity> DIFF_ITEM_CALLBACK =
+            new DiffUtil.ItemCallback<FavoriteEntity>() {
+
+                @Override
+                public boolean areItemsTheSame(
+                        @NonNull FavoriteEntity oldItem, @NonNull FavoriteEntity newItem) {
+                    return oldItem.equals(newItem);
+                }
+
+                @Override
+                public boolean areContentsTheSame(
+                        @NonNull FavoriteEntity oldItem, @NonNull FavoriteEntity newItem) {
+                    return oldItem.getArticleId() == newItem.getArticleId();
+                }
+            };
 }

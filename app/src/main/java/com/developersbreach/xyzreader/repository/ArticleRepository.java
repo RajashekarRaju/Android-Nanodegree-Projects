@@ -28,6 +28,8 @@ public class ArticleRepository {
     // List of FavoriteEntity data of type MediatorLiveData to observe values from database.
     private MediatorLiveData<List<FavoriteEntity>> mObservableFavoriteList;
 
+    private boolean mFavoriteItemsSize;
+
     /**
      * @param database to get access to abstract dao from the database class.
      */
@@ -90,18 +92,13 @@ public class ArticleRepository {
         return mObservableFavoriteList;
     }
 
-
-    private int ID;
-    public int getFavorites(int id) {
+    private boolean b;
+    public boolean isFavorite(int articleId) {
         AppExecutors.getInstance().databaseThread().execute(() -> {
-            int favoriteById = sDatabase.favoriteDao().getFavoriteById(id);
-            if (id == favoriteById) {
-                ID = 9;
-            } else {
-                ID = 10;
-            }
+            final int favorite = sDatabase.favoriteDao().getFavoriteById(articleId);
+            b = favorite != 0;
         });
-        return ID;
+        return b;
     }
 
     /**
@@ -122,6 +119,19 @@ public class ArticleRepository {
     public void deleteFavoriteArticle(FavoriteEntity favoriteEntity) {
         AppExecutors.getInstance().databaseThread().execute(() ->
                 sDatabase.favoriteDao().deleteFavoriteArticle(favoriteEntity));
+    }
+
+    public void deleteAllFavoriteArticle() {
+        AppExecutors.getInstance().databaseThread().execute(() ->
+                sDatabase.favoriteDao().deleteAllFavorites());
+    }
+
+    public boolean getTotalFavoriteItems() {
+        AppExecutors.getInstance().databaseThread().execute(() -> {
+            final List<FavoriteEntity> list = sDatabase.favoriteDao().getFavoriteList();
+            mFavoriteItemsSize = list.size() >= 1;
+        });
+        return mFavoriteItemsSize;
     }
 
     /**
@@ -149,14 +159,5 @@ public class ArticleRepository {
                 e.printStackTrace();
             }
         });
-    }
-
-    private boolean b;
-    public boolean isFavorite(int articleId) {
-        AppExecutors.getInstance().databaseThread().execute(() -> {
-            final int favorite = sDatabase.favoriteDao().getFavoriteById(articleId);
-            b = favorite != 0;
-        });
-        return b;
     }
 }
