@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:key="@string/preference_category_key_theme"
+        app:title="@string/preference_category_title_theme">
+
+        <ListPreference
+            app:defaultValue="dark"
+            app:dialogTitle="@string/preference_list_theme_dialog_title"
+            app:entries="@array/themeListArray"
+            app:entryValues="@array/themeEntryArray"
+            app:icon="@drawable/ic_theme"
+            app:key="DayNightThemeKey"
+            app:title="@string/preference_list_theme_dialog_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="@string/preference_category_key_article"
+        app:title="@string/preference_category_title_article">
+
+        <Preference
+            app:icon="@drawable/ic_refresh"
+            app:key="RefreshArticlesKey"
+            app:summary="@string/preference_summary_article_refresh"
+            app:title="@string/preference_article_title_refresh" />
+
+        <Preference
+            app:icon="@drawable/ic_delete_all"
+            app:key="DeleteAllFavoritesKey"
+            app:summary="@string/preference_summary_article_delete"
+            app:title="@string/preference_article_title_delete" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
