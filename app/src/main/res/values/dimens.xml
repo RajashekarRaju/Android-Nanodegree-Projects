@@ -20,7 +20,6 @@
     <!--  Drawables  -->
     <dimen name="drawable_vector_width">24dp</dimen>
     <dimen name="drawable_vector_height">24dp</dimen>
-    <dimen name="theme_ripple_radius">24dp</dimen>
 
     <!--  Text Size  -->
     <dimen name="card_text_size_16sp">16sp</dimen>

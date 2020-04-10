@@ -1,30 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">पाठक</string>
+
+    <!--  Bottom Navigation View Menu Titles  -->
     <string name="articles_menu_item_title">लेख</string>
     <string name="search_menu_item_title">खोज</string>
     <string name="favorites_menu_item_title">पसंदीदा</string>
-    <string name="light_menu_item_title">रोशनी</string>
-    <string name="dark_menu_item_title">अंधेरा</string>
-    <string name="default_menu_item_title">"चूक "</string>
+    <string name="settings_menu_title_settings">सेटिंग्स</string>
+
+    <!--    Content Description-->
     <string name="article_image_content_description">"लेख की छवि "</string>
     <string name="add_favorite_button_content_description">" पसंदीदा बटन पर अनुच्छेद जोड़ें"</string>
     <string name="delete_favorite_button_content_description">" पसंदीदा बटन से अनुच्छेद हटाएं"</string>
     <string name="app_icon_content_description">"ऐप आइकन "</string>
-    <string name="change_app_theme_button_content_description">"ऐप थीम बटन बदलें "</string>
     <string name="static_article_search_button_content_description">"स्टेटिक आर्टिकल सर्च बटन "</string>
+
+    <!--    Articles List Fragment-->
     <string name="articles_header_title">लेख</string>
+
+    <!--    Favorite Fragment-->
     <string name="favorites_title">पसंदीदा</string>
     <string name="no_favorites_found">"कोई पसंदीदा नहीं मिला "</string>
-    <string name="added_to_favorites">"पसंदीदा में जोड़ा गया "</string>
-    <string name="removed_favorite">"पसंदीदा से हटाया गया "</string>
+
+    <!--  Search Fragment  -->
     <string name="no_search_results_found">"कोई परिणाम नहीं मिला "</string>
     <string name="search_articles_hint">"लेख खोजें "</string>
+
+    <!--  Detail Fragment Binding  -->
     <string name="fab_body_builder_title">"शीर्षक: "</string>
     <string name="fab_body_builder_by">"द्वारा : "</string>
+
+    <!--  Card Text  -->
     <string name="by_author">द्वारा</string>
+
+    <!--    Tools Text-->
     <string name="article_title_tools_text">"लेख का शीर्षक "</string>
     <string name="author_name_tools_text">"लेखक का नाम "</string>
     <string name="article_search_item_tools_text">भेड़िया का बेटा</string>
     <string name="article_body_tools_text">"लेख शरीर "</string>
+
+    <!--  SettingsFragment Preferences  -->
+    <!-- Category Key Values  -->
+    <string name="preference_category_title_theme">थीम</string>
+    <string name="preference_category_title_article">लेख</string>
+    <!--  Category Title  -->
+    <string name="preference_list_theme_dialog_title">थीम चुनें</string>
+    <!--  Preference Article Summary -->
+    <string name="preference_summary_article_refresh">"सर्वर से नए डेटा के साथ अद्यतन रहता है "</string>
+    <string name="preference_summary_article_delete">"यह आपके सभी पसंदीदा लेखों को हटा देगा। "</string>
+    <!--  Preference Article Title -->
+    <string name="preference_article_title_refresh">"ताज़ा करना "</string>
+    <string name="preference_article_title_delete">"लेख हटाएँ "</string>
+    <!--  Dialog Refresh Article  -->
+    <string name="refresh_article_dialog_title">"पसंदीदा ताज़ा करें? "</string>
+    <string name="refresh_article_dialog_message">"नए सिरे से चुनना नए लेख के साथ सभी लेख डेटा और अपडेट को हटा देगा। यह केवल एक बार एक दिन प्रदर्शन करें। "</string>
+    <string name="refresh_article_dialog_positive_button">"ताज़ा करना "</string>
+    <string name="refresh_article_dialog_negative_button">रद्द करना</string>
+    <!--  Dialog Delete Article  -->
+    <string name="delete_article_dialog_title">"पसंदीदा हटाएं? "</string>
+    <string name="delete_article_dialog_message">"हटाने का चयन आपके सभी पसंदीदा लेखों को हटा देगा। "</string>
+    <string name="delete_article_dialog_positive_button">"हटाएं "</string>
+    <string name="delete_article_dialog_negative_button">रद्द करना</string>
+
+    <!--  App Snackbar Message's  -->
+    <string name="snackbar_added_to_favorites_message">"पसंदीदा में जोड़ा गया "</string>
+    <string name="snackbar_removed_favorite_message">"पसंदीदा से हटाया गया "</string>
+    <string name="snackbar_refresh_articles_message">"रिफ्रेश पूरा हुआ "</string>
+    <string name="snackbar_delete_articles_message">हटाए गए सभी लेख</string>
 </resources>
