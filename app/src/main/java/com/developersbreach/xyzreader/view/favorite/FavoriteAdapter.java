@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +18,7 @@ import com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity;
 import com.developersbreach.xyzreader.viewModel.ArticleFavoritesViewModel;
 import com.google.android.material.card.MaterialCardView;
 
+import static com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity.DIFF_ITEM_CALLBACK;
 import static com.developersbreach.xyzreader.view.favorite.FavoriteAdapter.FavoriteViewHolder;
 
 
@@ -60,7 +60,7 @@ public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteViewHol
     /**
      * @param viewModel takes associated viewModel.
      * @param fragment  takes associated fragment class.
-     * @see FavoriteAdapter#DIFF_ITEM_CALLBACK DiffUtil is a utility class that calculates the
+     * @see FavoriteEntity#DIFF_ITEM_CALLBACK DiffUtil is a utility class that calculates the
      * difference between two lists and outputs a list of update operations that converts the first
      * list into the second one.
      */
@@ -137,24 +137,4 @@ public class FavoriteAdapter extends ListAdapter<FavoriteEntity, FavoriteViewHol
                 parent, false);
         return new FavoriteViewHolder(binding);
     }
-
-    /**
-     * Allows the RecyclerView to determine which items have changed when the list of
-     * {@link FavoriteEntity} has been updated.
-     */
-    private static final DiffUtil.ItemCallback<FavoriteEntity> DIFF_ITEM_CALLBACK =
-            new DiffUtil.ItemCallback<FavoriteEntity>() {
-
-                @Override
-                public boolean areItemsTheSame(
-                        @NonNull FavoriteEntity oldItem, @NonNull FavoriteEntity newItem) {
-                    return oldItem == newItem;
-                }
-
-                @Override
-                public boolean areContentsTheSame(
-                        @NonNull FavoriteEntity oldItem, @NonNull FavoriteEntity newItem) {
-                    return oldItem.getArticleId() == newItem.getArticleId();
-                }
-            };
 }

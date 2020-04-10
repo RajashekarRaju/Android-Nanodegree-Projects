@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +13,8 @@ import com.developersbreach.xyzreader.R.layout;
 import com.developersbreach.xyzreader.bindingAdapter.SearchListBindingAdapter;
 import com.developersbreach.xyzreader.databinding.ItemSearchArticleBinding;
 import com.developersbreach.xyzreader.model.Article;
+
+import static com.developersbreach.xyzreader.model.Article.DIFF_ITEM_CALLBACK;
 
 
 /**
@@ -94,21 +95,4 @@ public class SearchAdapter extends ListAdapter<Article, SearchAdapter.SearchView
                 false);
         return new SearchViewHolder(binding);
     }
-
-    /**
-     * Allows the RecyclerView to determine which items have changed when the list of {@link Article}
-     * has been updated.
-     */
-    private static final DiffUtil.ItemCallback<Article> DIFF_ITEM_CALLBACK = new DiffUtil.ItemCallback<Article>() {
-
-        @Override
-        public boolean areItemsTheSame(@NonNull Article oldItem, @NonNull Article newItem) {
-            return oldItem == newItem;
-        }
-
-        @Override
-        public boolean areContentsTheSame(@NonNull Article oldItem, @NonNull Article newItem) {
-            return oldItem.getArticleId() == newItem.getArticleId();
-        }
-    };
 }

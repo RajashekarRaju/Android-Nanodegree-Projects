@@ -127,8 +127,7 @@ public class ArticleDetailBindingAdapter {
             // Get context for getting resources.
             final Resources resources = fab.getContext().getResources();
             // Format the data which we send to other apps.
-            String body = resources.getString(R.string.fab_body_builder_title) +
-                    article.getArticleTitle() + "\n" +
+            String body = resources.getString(R.string.fab_body_builder_title) + article.getArticleTitle() + "\n" +
                     resources.getString(R.string.fab_body_builder_by) + article.getArticleAuthorName();
             sharingIntent.putExtra(Intent.EXTRA_TEXT, body);
             // Start the intent.

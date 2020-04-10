@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +17,7 @@ import com.developersbreach.xyzreader.databinding.ItemArticleBinding;
 import com.developersbreach.xyzreader.model.Article;
 import com.developersbreach.xyzreader.viewModel.ArticleListViewModel;
 
+import static com.developersbreach.xyzreader.model.Article.DIFF_ITEM_CALLBACK;
 import static com.developersbreach.xyzreader.view.list.ArticleAdapter.ArticleViewHolder;
 
 
@@ -57,7 +57,7 @@ public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
     /**
      * @param viewModel takes associated viewModel.
      * @param fragment  takes associated fragment class.
-     * @see ArticleAdapter#DIFF_ITEM_CALLBACK DiffUtil is a utility class that calculates the
+     * @see Article#DIFF_ITEM_CALLBACK DiffUtil is a utility class that calculates the
      * difference between two lists and outputs a list of update operations that converts the first
      * list into the second one.
      */
@@ -133,22 +133,4 @@ public class ArticleAdapter extends ListAdapter<Article, ArticleViewHolder> {
                 false);
         return new ArticleViewHolder(binding);
     }
-
-    /**
-     * Allows the RecyclerView to determine which items have changed when the list of {@link Article}
-     * has been updated.
-     */
-    private static final DiffUtil.ItemCallback<Article> DIFF_ITEM_CALLBACK =
-            new DiffUtil.ItemCallback<Article>() {
-
-        @Override
-        public boolean areItemsTheSame(@NonNull Article oldItem, @NonNull Article newItem) {
-            return oldItem == newItem;
-        }
-
-        @Override
-        public boolean areContentsTheSame(@NonNull Article oldItem, @NonNull Article newItem) {
-            return oldItem.getArticleId() == newItem.getArticleId();
-        }
-    };
 }
