@@ -36,11 +36,11 @@
 
     <fragment
         android:id="@+id/articleDetailFragment"
-        android:name="com.developersbreach.xyzreader.view.detail.ArticleDetailFragment">
+        android:name="com.developersbreach.xyzreader.view.detail.ArticleDetailFragment"
+        tools:layout="@layout/fragment_article_detail">
         <argument
             android:name="detailFragmentArgs"
-            app:argType="com.developersbreach.xyzreader.model.Article"
-            app:nullable="true" />
+            app:argType="com.developersbreach.xyzreader.model.Article" />
         <argument
             android:name="fragmentNameArgs"
             app:argType="string" />
@@ -71,5 +71,17 @@
             app:popEnterAnim="@anim/fragment_fade_enter"
             app:popExitAnim="@anim/fragment_fade_exit" />
     </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.developersbreach.xyzreader.view.settings.SettingsFragment"
+        android:label="Settings Fragment"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/settingsCompatFragment"
+        tools:layout="@xml/preferences"
+        android:name="com.developersbreach.xyzreader.view.settings.SettingsCompatFragment"
+        android:label="Settings Compat Fragment" />
 
 </navigation>

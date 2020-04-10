@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.articleListFragment:
                 case R.id.searchArticleFragment:
                 case R.id.articleFavoritesFragment:
+                case R.id.settingsFragment:
                     // Call selected destination on object NavigationUI with selected item
                     // and controller to manage the navigation.
                     NavigationUI.onNavDestinationSelected(item, mNavigationController);
