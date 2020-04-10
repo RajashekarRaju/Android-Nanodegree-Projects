@@ -2,7 +2,6 @@ package com.developersbreach.xyzreader.bindingAdapter;
 
 import android.app.Activity;
 import android.text.Spanned;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +15,7 @@ import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.model.Article;
 import com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity;
 import com.developersbreach.xyzreader.utils.DataFormatting;
+import com.developersbreach.xyzreader.utils.SnackbarBuilder;
 import com.developersbreach.xyzreader.view.detail.ArticleDetailFragment;
 import com.developersbreach.xyzreader.view.list.ArticleAdapter;
 import com.developersbreach.xyzreader.view.list.ArticleListFragment;
@@ -140,11 +140,16 @@ public class ArticleListBindingAdapter {
     @BindingAdapter({"insertFavoriteArticleClickListener", "viewModelArticleList", "activityArticleList"})
     public static void bindArticleFavoriteClickListener(
             ImageView imageView, Article article, ArticleListViewModel viewModel, Activity activity) {
+
+        final int ID = article.getArticleId() + 1;
+        final boolean isFavorite = viewModel.isFavorite(ID);
+        if (isFavorite) {
+            imageView.setImageResource(R.drawable.ic_delete_favorite);
+        } else {
+            imageView.setImageResource(R.drawable.ic_add_favorite_filled);
+        }
+
         imageView.setOnClickListener(view -> {
-
-            boolean isFavorite = viewModel.isFavorite(article.getArticleId());
-
-            //final int favorite = viewModel.getFavorite(article.getArticleId());
             if (!isFavorite) {
                 viewModel.insertFavoriteArticleData(article);
                 imageView.setImageResource(R.drawable.ic_delete_favorite);
@@ -153,22 +158,8 @@ public class ArticleListBindingAdapter {
                 imageView.setImageResource(R.drawable.ic_add_favorite_filled);
             }
 
-            View rootView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
-            Snackbar.make(rootView, R.string.added_to_favorites, Snackbar.LENGTH_SHORT);
+            final String message = imageView.getContext().getString(R.string.snackbar_added_to_favorites_message);
+            SnackbarBuilder.showSnackBar(message, activity);
         });
-    }
-
-
-    @BindingAdapter({"imageViewState", "viewModelArticleLists"})
-    public static void bindImageViewState(
-            ImageView imageView, Article article, ArticleListViewModel viewModel) {
-
-        final int favorite = viewModel.getFavorite(article.getArticleId() + 1);
-        if (favorite == 9) {
-            imageView.setImageResource(R.drawable.ic_delete_favorite);
-        } else if ((favorite == 10)){
-            imageView.setImageResource(R.drawable.ic_add_favorite_filled);
-        }
-
     }
 }

@@ -2,7 +2,6 @@ package com.developersbreach.xyzreader.bindingAdapter;
 
 import android.app.Activity;
 import android.text.Spanned;
-import android.view.View;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +17,7 @@ import com.developersbreach.xyzreader.model.Article;
 import com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity;
 import com.developersbreach.xyzreader.utils.ArticleAnimations;
 import com.developersbreach.xyzreader.utils.DataFormatting;
+import com.developersbreach.xyzreader.utils.SnackbarBuilder;
 import com.developersbreach.xyzreader.view.detail.ArticleDetailFragment;
 import com.developersbreach.xyzreader.view.favorite.ArticleFavoritesFragment;
 import com.developersbreach.xyzreader.view.favorite.ArticleFavoritesFragmentDirections;
@@ -153,22 +153,22 @@ public class FavoriteListBindingAdapter {
             // removed after clicking the imageView.
             final Animation animation = ArticleAnimations
                     .fadeOutCardAnimation(cardView.getContext(), cardView);
-            deleteAfterAnimation(animation, viewModel, favoriteEntity, activity);
+            deleteAfterAnimation(animation, viewModel, favoriteEntity, activity, imageView);
         });
     }
 
     /**
      * Let the delete operation only take place once animation is being finished.
      * If first we call delete method, there will be no view to perform animation on.
-     *
-     * @param cardFadeOutAnimation this is view which has article and needs to be animated.
+     *  @param cardFadeOutAnimation this is view which has article and needs to be animated.
      * @param viewModel gets delete method from class.
      * @param favoriteEntity gets article data to work with.
      * @param activity gets reference to fragment for showing snackBar.
+     * @param imageView get context from view
      */
     private static void deleteAfterAnimation(
             Animation cardFadeOutAnimation, ArticleFavoritesViewModel viewModel,
-            FavoriteEntity favoriteEntity, Activity activity) {
+            FavoriteEntity favoriteEntity, Activity activity, ImageView imageView) {
         // Set appropriate duration to animate.
         cardFadeOutAnimation.setDuration(500L);
         // Attach a listener and perform delete operation.
@@ -188,8 +188,8 @@ public class FavoriteListBindingAdapter {
             @Override
             public void onAnimationEnd(Animation animation) {
                 viewModel.deleteFavoriteArticleData(favoriteEntity);
-                View rootView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
-                Snackbar.make(rootView, R.string.removed_favorite, Snackbar.LENGTH_SHORT);
+                final String message = imageView.getContext().getString(R.string.snackbar_removed_favorite_message);
+                SnackbarBuilder.showSnackBar(message, activity);
             }
 
             /**
