@@ -1,13 +1,17 @@
 package com.developersbreach.xyzreader;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 
+import androidx.preference.PreferenceManager;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
 import com.developersbreach.xyzreader.repository.ArticleRepository;
 import com.developersbreach.xyzreader.repository.database.ArticleDatabase;
+import com.developersbreach.xyzreader.view.settings.ThemeHelper;
 import com.developersbreach.xyzreader.worker.ArticleRefreshWorker;
 
 import java.util.concurrent.TimeUnit;
@@ -28,6 +32,7 @@ public class XYZReaderApp extends Application {
     public void onCreate() {
         super.onCreate();
         startArticleWorker();
+        applyDayNightTheme(this);
     }
 
     /**
@@ -61,5 +66,12 @@ public class XYZReaderApp extends Application {
      */
     public ArticleRepository getRepository() {
         return ArticleRepository.getRepositoryInstance(getDatabase());
+    }
+
+    private void applyDayNightTheme(Context context) {
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(context);
+        String themePref = sharedPreferences.getString("themePref", ThemeHelper.DARK_MODE);
+        ThemeHelper.applyTheme(themePref);
     }
 }
