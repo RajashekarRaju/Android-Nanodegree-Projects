@@ -31,9 +31,6 @@ public interface FavoriteDao {
     @Query("SELECT * FROM favorites_table")
     LiveData<List<FavoriteEntity>> loadAllFavoriteArticles();
 
-    @Query("SELECT * FROM favorites_table WHERE column_favorite_id = :favoriteId")
-    int getFavoriteById(int favoriteId);
-
     /**
      * @param favoriteEntity inserts single favorite article into table favorites_table.
      */

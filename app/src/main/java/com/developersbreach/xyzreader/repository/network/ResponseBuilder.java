@@ -21,19 +21,12 @@ import java.util.Scanner;
 public class ResponseBuilder {
 
     // Strings which hold path to create a standard URI object.
-    //https://raw.githubusercontent.com/SuperAwesomeness/XYZReader/master/data.json
-//    private static final String SCHEME_AUTHORITY = "https://d17h27t6h515a5.cloudfront.net";
-//    private static final String APPEND_PATH_TOPHER = "topher";
-//    private static final String APPEND_PATH_YEAR = "2017";
-//    private static final String APPEND_PATH_MONTH = "March";
-//    private static final String APPEND_PATH_ID = "58c5d68f_xyz-reader";
-//    private static final String APPEND_PATH_TYPE = "xyz-reader.json";
-
-    private static final String SCHEME_AUTHORITY = "https://raw.githubusercontent.com";
-    private static final String APPEND_PATH_TOPHER = "SuperAwesomeness";
-    private static final String APPEND_PATH_YEAR = "XYZReader";
-    private static final String APPEND_PATH_MONTH = "master";
-    private static final String APPEND_PATH_ID = "data.json";
+    private static final String SCHEME_AUTHORITY = "https://d17h27t6h515a5.cloudfront.net";
+    private static final String APPEND_PATH_TOPHER = "topher";
+    private static final String APPEND_PATH_YEAR = "2017";
+    private static final String APPEND_PATH_MONTH = "March";
+    private static final String APPEND_PATH_ID = "58c5d68f_xyz-reader";
+    private static final String APPEND_PATH_TYPE = "xyz-reader.json";
 
     /**
      * @return returns a string URL created to make JSON request in background see class
@@ -54,15 +47,15 @@ public class ResponseBuilder {
      * https://d17h27t6h515a5.cloudfront.net/topher/2017/March/58c5d68f_xyz-reader/xyz-reader.json
      */
     private static String uriBuilder() {
-        Uri baseUri = Uri.parse("https://d17h27t6h515a5.cloudfront.net");
+        Uri baseUri = Uri.parse(SCHEME_AUTHORITY);
         // Constructs a new Builder.
         Uri.Builder uriBuilder = baseUri.buildUpon();
         uriBuilder
-                .appendPath("topher")
-                .appendPath("2017")
-                .appendPath("March")
-                .appendPath("58c5d68f_xyz-reader")
-                .appendPath("xyz-reader.json");
+                .appendPath(APPEND_PATH_TOPHER)
+                .appendPath(APPEND_PATH_YEAR)
+                .appendPath(APPEND_PATH_MONTH)
+                .appendPath(APPEND_PATH_ID)
+                .appendPath(APPEND_PATH_TYPE);
         // Returns a string representation of the object.
         return uriBuilder.build().toString();
     }

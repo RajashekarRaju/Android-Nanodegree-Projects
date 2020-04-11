@@ -11,6 +11,7 @@ import androidx.lifecycle.Transformations;
 import com.developersbreach.xyzreader.R.layout;
 import com.developersbreach.xyzreader.XYZReaderApp;
 import com.developersbreach.xyzreader.model.Article;
+import com.developersbreach.xyzreader.model.DataObjectConverter;
 import com.developersbreach.xyzreader.repository.ArticleRepository;
 import com.developersbreach.xyzreader.repository.database.entity.ArticleEntity;
 import com.developersbreach.xyzreader.repository.database.entity.FavoriteEntity;
@@ -74,7 +75,7 @@ public class ArticleListViewModel extends AndroidViewModel {
             // Declare a new array list to add values from source using maps.
             List<Article> articleList = new ArrayList<>();
             // Convert objects from ArticleEntityList to ArticleList.
-            Article.articleEntityToArticle(articleEntityList, articleList);
+            DataObjectConverter.articleEntityToArticle(articleEntityList, articleList);
             // Since the value has been changed after mapping list. Pass the result for liveData.
             mutableArticlesLiveData.postValue(articleList);
             // Return the new list of articles of type MutableLiveData.
@@ -91,22 +92,14 @@ public class ArticleListViewModel extends AndroidViewModel {
 
     /**
      * @param article has data for single article where user has selected. With that data we add
-     *                article to FavoriteEntity with {@link Article#articleToFavoriteArticle(Article)}
+     *                article to FavoriteEntity with
+     *                {@link DataObjectConverter#articleToFavoriteArticle(Article)}
      *                method. Later we call repository for inserting that data into database
      *                which takes favorite article.
      * @see ArticleRepository#insertFavoriteArticle(FavoriteEntity) for implementation.
      */
     public void insertFavoriteArticleData(Article article) {
-        FavoriteEntity favoriteEntity = Article.articleToFavoriteArticle(article);
+        FavoriteEntity favoriteEntity = DataObjectConverter.articleToFavoriteArticle(article);
         mRepository.insertFavoriteArticle(favoriteEntity);
-    }
-
-    public void deleteFavoriteArticleData(Article article) {
-        FavoriteEntity favoriteEntity = Article.articleToFavoriteArticle(article);
-        mRepository.deleteFavoriteArticle(favoriteEntity);
-    }
-
-    public boolean isFavorite(int articleId) {
-        return mRepository.isFavorite(articleId);
     }
 }

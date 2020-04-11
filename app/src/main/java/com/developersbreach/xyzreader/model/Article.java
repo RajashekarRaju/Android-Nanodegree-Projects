@@ -1,5 +1,6 @@
 package com.developersbreach.xyzreader.model;
 
+import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
@@ -40,7 +41,7 @@ import java.util.Objects;
  * {@link Article} to {@link FavoriteEntity}. using with or without
  * {@link Transformations#switchMap(LiveData, Function)}
  */
-public class Article extends ArticleEntity {
+public class Article implements Parcelable {
 
     // Article property of type int with unique article id.
     private final int mArticleId;
@@ -60,7 +61,6 @@ public class Article extends ArticleEntity {
      */
     public Article(int id, String title, String authorName, String body, String thumbnail,
                    String publishedDate) {
-        super(id, title, authorName, body, thumbnail, publishedDate);
         this.mArticleId = id;
         this.mArticleTitle = title;
         this.mArticleAuthorName = authorName;
@@ -75,66 +75,28 @@ public class Article extends ArticleEntity {
      * @return returns data of each article property which are generated here since we extended this
      * class from {@link ArticleEntity}
      */
-    @Override
     public int getArticleId() {
         return mArticleId;
     }
 
-    @Override
     public String getArticleTitle() {
         return mArticleTitle;
     }
 
-    @Override
     public String getArticleAuthorName() {
         return mArticleAuthorName;
     }
 
-    @Override
     public String getArticleBody() {
         return mArticleBody;
     }
 
-    @Override
     public String getArticleThumbnail() {
         return mArticleThumbnail;
     }
 
-    @Override
     public String getArticlePublishedDate() {
         return mArticlePublishedDate;
-    }
-
-    ////////////////////////// SETTERS ///////////////////////////////
-
-    @Override
-    public void setArticleId(int id) {
-        super.setArticleId(id);
-    }
-
-    @Override
-    public void setArticleTitle(String articleTitle) {
-        super.setArticleTitle(articleTitle);
-    }
-
-    @Override
-    public void setArticleAuthorName(String authorName) {
-        super.setArticleAuthorName(authorName);
-    }
-
-    @Override
-    public void setArticleBody(String articleBody) {
-        super.setArticleBody(articleBody);
-    }
-
-    @Override
-    public void setArticleThumbnail(String articleThumbnail) {
-        super.setArticleThumbnail(articleThumbnail);
-    }
-
-    @Override
-    public void setArticlePublishedDate(String articlePublishedDate) {
-        super.setArticlePublishedDate(articlePublishedDate);
     }
 
     @Override
@@ -154,68 +116,70 @@ public class Article extends ArticleEntity {
      * Allows the RecyclerView to determine which items have changed when the list of {@link Article}
      * has been updated.
      */
-    public static final DiffUtil.ItemCallback<Article> DIFF_ITEM_CALLBACK =
-            new DiffUtil.ItemCallback<Article>() {
+    public static final DiffUtil.ItemCallback<Article>
+            DIFF_ITEM_CALLBACK = new DiffUtil.ItemCallback<Article>() {
 
-                @Override
-                public boolean areItemsTheSame(@NonNull Article oldItem, @NonNull Article newItem) {
-                    return oldItem.equals(newItem);
-                }
-
-                @Override
-                public boolean areContentsTheSame(@NonNull Article oldItem, @NonNull Article newItem) {
-                    return oldItem.getArticleId() == newItem.getArticleId();
-                }
-            };
-
-    /**
-     * @param favoriteEntity takes class {@link FavoriteEntity} to get access for all objects inside.
-     * @return returns new Object values for this existing class.
-     * {@link FavoriteEntity} to {@link Article}.
-     */
-    public static Article favoriteArticleToArticle(FavoriteEntity favoriteEntity) {
-        return new Article(
-                favoriteEntity.getArticleId(),
-                favoriteEntity.getArticleTitle(),
-                favoriteEntity.getArticleAuthorName(),
-                favoriteEntity.getArticleBody(),
-                favoriteEntity.getArticleThumbnail(),
-                favoriteEntity.getArticlePublishedDate());
-    }
-
-    /**
-     * @param articleEntityList takes list of {@link ArticleEntity} to get access for all objects.
-     * @param articleList       takes list of {@link Article} to get access for all objects.
-     *                          {@link List<ArticleEntity>} to {@link List<Article>}. This method
-     *                          won't return any value.
-     */
-    public static void articleEntityToArticle(List<ArticleEntity> articleEntityList,
-                                              List<Article> articleList) {
-        for (ArticleEntity articleEntity : articleEntityList) {
-            articleList.add(new Article(
-                    articleEntity.getArticleId(),
-                    articleEntity.getArticleTitle(),
-                    articleEntity.getArticleAuthorName(),
-                    articleEntity.getArticleBody(),
-                    articleEntity.getArticleThumbnail(),
-                    articleEntity.getArticlePublishedDate()
-            ));
+        @Override
+        public boolean areItemsTheSame(@NonNull Article oldItem, @NonNull Article newItem) {
+            return oldItem.equals(newItem);
         }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Article oldItem, @NonNull Article newItem) {
+            return oldItem.getArticleId() == newItem.getArticleId();
+        }
+    };
+
+    private Article(Parcel in) {
+        mArticleId = in.readInt();
+        mArticleTitle = in.readString();
+        mArticleAuthorName = in.readString();
+        mArticleBody = in.readString();
+        mArticleThumbnail = in.readString();
+        mArticlePublishedDate = in.readString();
+    }
+
+    public static final Creator<Article> CREATOR = new Creator<Article>() {
+        @Override
+        public Article createFromParcel(Parcel in) {
+            return new Article(in);
+        }
+
+        @Override
+        public Article[] newArray(int size) {
+            return new Article[size];
+        }
+    };
+
+    /**
+     * Describe the kinds of special objects contained in this Parcelable
+     * instance's marshaled representation. For example, if the object will
+     * include a file descriptor in the output of {@link #writeToParcel(Parcel, int)},
+     * the return value of this method must include the
+     * {@link #CONTENTS_FILE_DESCRIPTOR} bit.
+     *
+     * @return a bitmask indicating the set of special object types marshaled
+     * by this Parcelable object instance.
+     */
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     /**
-     * @param article takes class {@link Article} to get access for all objects inside.
-     * @return returns new Object values from this existing class to {@link FavoriteEntity}.
-     * {@link Article} to {@link FavoriteEntity}.
+     * Flatten this object in to a Parcel.
+     *
+     * @param dest  The Parcel in which the object should be written.
+     * @param flags Additional flags about how the object should be written.
+     *              May be 0 or {@link #PARCELABLE_WRITE_RETURN_VALUE}.
      */
-    public static FavoriteEntity articleToFavoriteArticle(Article article) {
-        return new FavoriteEntity(
-                article.getArticleId(),
-                article.getArticleTitle(),
-                article.getArticleAuthorName(),
-                article.getArticleBody(),
-                article.getArticleThumbnail(),
-                article.getArticlePublishedDate()
-        );
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mArticleId);
+        dest.writeString(mArticleTitle);
+        dest.writeString(mArticleAuthorName);
+        dest.writeString(mArticleBody);
+        dest.writeString(mArticleThumbnail);
+        dest.writeString(mArticlePublishedDate);
     }
 }
