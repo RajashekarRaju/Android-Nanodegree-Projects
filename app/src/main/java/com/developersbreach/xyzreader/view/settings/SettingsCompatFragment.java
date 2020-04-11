@@ -11,6 +11,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.developersbreach.xyzreader.R;
+import com.developersbreach.xyzreader.repository.network.NetworkManager;
 import com.developersbreach.xyzreader.utils.SnackbarBuilder;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -95,9 +96,14 @@ public class SettingsCompatFragment extends PreferenceFragmentCompat {
 
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            mViewModel.refreshData();
-            final FragmentActivity activity = Objects.requireNonNull(mFragmentView.getActivity());
-            SnackbarBuilder.showSnackBar(getString(R.string.snackbar_refresh_articles_message), activity);
+            if (NetworkManager.checkNetwork(Objects.requireNonNull(getContext()))) {
+                mViewModel.refreshData();
+                final FragmentActivity activity = Objects.requireNonNull(mFragmentView.getActivity());
+                SnackbarBuilder.showSnackBar(getString(R.string.snackbar_refresh_articles_message), activity);
+            } else {
+                final FragmentActivity activity = Objects.requireNonNull(mFragmentView.getActivity());
+                SnackbarBuilder.showSnackBar("No Internet", activity);
+            }
         }
     }
 
