@@ -12,6 +12,7 @@ import androidx.lifecycle.Transformations;
 import com.developersbreach.xyzreader.R;
 import com.developersbreach.xyzreader.XYZReaderApp;
 import com.developersbreach.xyzreader.model.Article;
+import com.developersbreach.xyzreader.model.DataObjectConverter;
 import com.developersbreach.xyzreader.repository.AppExecutors;
 import com.developersbreach.xyzreader.repository.ArticleRepository;
 import com.developersbreach.xyzreader.repository.database.entity.ArticleEntity;
@@ -98,7 +99,7 @@ public class SearchArticleViewModel extends AndroidViewModel {
             // Declare a new array list to add values from source using maps.
             List<Article> articleList = new ArrayList<>();
             // Convert objects from ArticleEntityList to ArticleList.
-            Article.articleEntityToArticle(articleEntityList, articleList);
+            DataObjectConverter.articleEntityToArticle(articleEntityList, articleList);
             // Store the data temporarily in new array list to perform search query later.
             mArticleList = articleList;
             // Since the value has been changed after mapping list. Pass the result for liveData.
