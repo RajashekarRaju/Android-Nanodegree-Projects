@@ -92,15 +92,6 @@ public class ArticleRepository {
         return mObservableFavoriteList;
     }
 
-    private boolean b;
-    public boolean isFavorite(int articleId) {
-        AppExecutors.getInstance().databaseThread().execute(() -> {
-            final int favorite = sDatabase.favoriteDao().getFavoriteById(articleId);
-            b = favorite != 0;
-        });
-        return b;
-    }
-
     /**
      * @param favoriteEntity contains data for article to insert a new article in to favorites table.
      *                       Only insert the data in background database thread without blocking the

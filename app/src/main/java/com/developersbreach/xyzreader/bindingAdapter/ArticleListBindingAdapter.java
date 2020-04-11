@@ -115,7 +115,6 @@ public class ArticleListBindingAdapter {
         });
     }
 
-
     /**
      * When value insertFavoriteArticleClickListener is used as attribute on ImageView, the method
      * bindArticleFavoriteClickListener is called. When user clicks this view, we insert the article
@@ -141,23 +140,9 @@ public class ArticleListBindingAdapter {
     public static void bindArticleFavoriteClickListener(
             ImageView imageView, Article article, ArticleListViewModel viewModel, Activity activity) {
 
-        final int ID = article.getArticleId() + 1;
-        final boolean isFavorite = viewModel.isFavorite(ID);
-        if (isFavorite) {
-            imageView.setImageResource(R.drawable.ic_delete_favorite);
-        } else {
-            imageView.setImageResource(R.drawable.ic_add_favorite_filled);
-        }
-
+        imageView.setImageResource(R.drawable.ic_add_favorite_filled);
         imageView.setOnClickListener(view -> {
-            if (!isFavorite) {
-                viewModel.insertFavoriteArticleData(article);
-                imageView.setImageResource(R.drawable.ic_delete_favorite);
-            } else {
-                viewModel.deleteFavoriteArticleData(article);
-                imageView.setImageResource(R.drawable.ic_add_favorite_filled);
-            }
-
+            viewModel.insertFavoriteArticleData(article);
             final String message = imageView.getContext().getString(R.string.snackbar_added_to_favorites_message);
             SnackbarBuilder.showSnackBar(message, activity);
         });
