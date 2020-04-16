@@ -21,6 +21,9 @@
             tools:ignore="FragmentTagUsage" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:id="@+id/bottom_navigation_view"
             style="@style/MainBottomNavigationViewStyle"
             app:menu="@menu/bottom_navigation_menu" />
