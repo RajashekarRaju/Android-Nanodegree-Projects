@@ -11,17 +11,20 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:fitsSystemWindows="true"
-            android:theme="@style/Theme.Article.AppBarOverlay">
+            android:layout_height="wrap_content"
+            app:liftOnScroll="true"
+            app:liftOnScrollTargetViewId="@id/settings_fragment_compact_container">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_settings"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_collapseMode="pin"
-                app:title="Settings" />
+                android:layout_height="wrap_content"
+                android:minHeight="80dp"
+                android:paddingStart="16dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:titleTextAppearance="@style/TextAppearance.Article.Toolbar.Title"
+                app:layout_scrollFlags="scroll|enterAlways"
+                tools:ignore="RtlSymmetry"
+                app:title="@string/settings_toolbar_title" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -29,6 +32,7 @@
             android:id="@+id/settings_fragment_compact_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="?actionBarSize"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
