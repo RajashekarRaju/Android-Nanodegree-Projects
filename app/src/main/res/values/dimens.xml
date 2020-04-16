@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--    Article List & Favorite Fragment    -->
-    <dimen name="app_bar_height_article_list">96dp</dimen>
-    <dimen name="app_bar_elevation_article_list">0dp</dimen>
-
     <!--    RecyclerView     -->
     <dimen name="recycler_view_spacing_dimen">6dp</dimen>
 
@@ -34,7 +30,6 @@
     <dimen name="layout_margin_20dp">20dp</dimen>
     <dimen name="layout_margin_8dp">8dp</dimen>
     <dimen name="layout_margin_4dp">4dp</dimen>
-    <dimen name="no_layout_margin">0dp</dimen>
     <dimen name="padding_8dp">8dp</dimen>
     <dimen name="padding_16dp">16dp</dimen>
 

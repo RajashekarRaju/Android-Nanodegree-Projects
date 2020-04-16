@@ -12,7 +12,6 @@
     <string name="article_image_content_description">"लेख की छवि "</string>
     <string name="add_favorite_button_content_description">" पसंदीदा बटन पर अनुच्छेद जोड़ें"</string>
     <string name="delete_favorite_button_content_description">" पसंदीदा बटन से अनुच्छेद हटाएं"</string>
-    <string name="app_icon_content_description">"ऐप आइकन "</string>
     <string name="static_article_search_button_content_description">"स्टेटिक आर्टिकल सर्च बटन "</string>
 
     <!--    Articles List Fragment-->
@@ -67,4 +66,6 @@
     <string name="snackbar_removed_favorite_message">"पसंदीदा से हटाया गया "</string>
     <string name="snackbar_refresh_articles_message">"रिफ्रेश पूरा हुआ "</string>
     <string name="snackbar_delete_articles_message">हटाए गए सभी लेख</string>
+    <string name="no_internet_connection">"कोई इंटरनेट कनेक्शन नहीं "</string>
+    <string name="settings_toolbar_title">सेटिंग्स</string>
 </resources>
