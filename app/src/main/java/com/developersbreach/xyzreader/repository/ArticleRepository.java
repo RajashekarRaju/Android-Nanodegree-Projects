@@ -143,7 +143,6 @@ public class ArticleRepository {
             try {
                 String responseString = ResponseBuilder.startResponse();
                 List<ArticleEntity> articleEntityList = JsonUtils.fetchArticleJsonData(responseString);
-                sDatabase.favoriteDao().deleteAllFavorites();
                 sDatabase.articleDao().deleteAllArticles();
                 sDatabase.articleDao().insertArticles(articleEntityList);
             } catch (IOException e) {

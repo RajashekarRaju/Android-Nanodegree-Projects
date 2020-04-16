@@ -20,7 +20,6 @@ import com.developersbreach.xyzreader.utils.ArticleAnimations;
 import com.developersbreach.xyzreader.utils.RecyclerViewItemDecoration;
 import com.developersbreach.xyzreader.viewModel.ArticleFavoritesViewModel;
 import com.developersbreach.xyzreader.viewModel.factory.FavoriteViewModelFactory;
-import com.google.android.material.textview.MaterialTextView;
 
 import java.util.List;
 import java.util.Objects;
@@ -53,8 +52,6 @@ public class ArticleFavoritesFragment extends Fragment {
         // Get reference to binding and inflate this class layout.
         mBinding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_article_favorites, container, false);
-        // Set this class toolbar.
-        setToolbar( mBinding.toolbarContentFavoritesHeader.headerAppTitle);
         // Set item decoration for items inside recycler view.
         RecyclerViewItemDecoration.setItemSpacing(getResources(), mBinding.favoritesRecyclerView);
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment.
@@ -101,14 +98,6 @@ public class ArticleFavoritesFragment extends Fragment {
         mBinding.favoritesRecyclerView.setAdapter(adapter);
         // Change behaviour of recyclerView based on data available.
         toggleRecyclerView(favoriteList);
-    }
-
-    /**
-     * @param title                  shows the title for fragment in toolbar.
-     *                               selecting theme. By default we set theme to use dark mode.
-     */
-    private void setToolbar(MaterialTextView title) {
-        title.setText(R.string.favorites_title);
     }
 
     /**

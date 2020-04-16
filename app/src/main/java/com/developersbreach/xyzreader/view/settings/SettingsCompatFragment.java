@@ -102,7 +102,7 @@ public class SettingsCompatFragment extends PreferenceFragmentCompat {
                 SnackbarBuilder.showSnackBar(getString(R.string.snackbar_refresh_articles_message), activity);
             } else {
                 final FragmentActivity activity = Objects.requireNonNull(mFragmentView.getActivity());
-                SnackbarBuilder.showSnackBar("No Internet", activity);
+                SnackbarBuilder.showSnackBar(getString(R.string.no_internet_connection), activity);
             }
         }
     }
